@@ -17,6 +17,8 @@ bool isJumping;
 bool isSliding;
 wstring motion;
 
+extern bool pause;
+
 CPlayer::CPlayer()
 {
 	m_vecPos = Vector(0, 0);
@@ -65,41 +67,51 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-
-	switch (playerState)
+	if (pause == false)
 	{
 
-	case PlayerState::IdleRun:	// 기본(달리기 중)
-		SetColliderSize(Vector(70, 130), Vector(10, 70));
-		motion = L"IdleRun";
-		//RemoveCollider();
-
-		if (BUTTONDOWN(VK_SPACE)) // 점프
+		switch (playerState)
 		{
-			playerState = PlayerState::Jump;
-		}
 
-		if (BUTTONDOWN(VK_CONTROL)) // 슬라이드
-		{
-			playerState = PlayerState::Slide;
-		}
+		case PlayerState::IdleRun:	// 기본(달리기 중)
+			SetColliderSize(Vector(70, 130), Vector(10, 70));
+			motion = L"IdleRun";
+			//RemoveCollider();
 
-		break;
+			if (BUTTONDOWN(VK_SPACE)) // 점프
+			{
+				playerState = PlayerState::Jump;
+			}
 
-	case PlayerState::Jump:	// 1단 점프
-		SetColliderSize(Vector(70, 120), Vector(10, 70));
-		if (m_fJumpTimer > 0)
-		{
-			motion = L"Jump";
+			if (BUTTONDOWN(VK_CONTROL)) // 슬라이드
+			{
+				playerState = PlayerState::Slide;
+			}
 
-			m_fJumpTimer -= DT;
-			m_vecPos.y -= m_fSpeed * DT * 1.6;
-		}
+			break;
 
-		if (m_fJumpTimer < 0)
-		{
-			m_vecPos.y += m_fSpeed * DT * 2.3;
-			motion = L"JumpDown";
+		case PlayerState::Jump:	// 1단 점프
+			SetColliderSize(Vector(70, 120), Vector(10, 70));
+			if (m_fJumpTimer > 0)
+			{
+				motion = L"Jump";
+
+				m_fJumpTimer -= DT;
+				m_vecPos.y -= m_fSpeed * DT * 1.6;
+			}
+
+			if (m_fJumpTimer < 0)
+			{
+				m_vecPos.y += m_fSpeed * DT * 2.3;
+				motion = L"JumpDown";
+
+				if (BUTTONDOWN(VK_SPACE)) // 2단 점프
+				{
+					playerState = PlayerState::DoubleJump;
+					m_fJumpTimer = 0.2;
+					break;
+				}
+			}
 
 			if (BUTTONDOWN(VK_SPACE)) // 2단 점프
 			{
@@ -107,59 +119,52 @@ void CPlayer::Update()
 				m_fJumpTimer = 0.2;
 				break;
 			}
-		}
 
-		if (BUTTONDOWN(VK_SPACE)) // 2단 점프
-		{
-			playerState = PlayerState::DoubleJump;
-			m_fJumpTimer = 0.2;
 			break;
+
+
+
+		case PlayerState::DoubleJump:	// 2단 점프
+			SetColliderSize(Vector(70, 120), Vector(10, 70));
+			if (m_fJumpTimer > 0)
+			{
+				motion = L"DoubleJump";
+				m_fJumpTimer -= DT;
+				m_vecPos.y -= m_fSpeed * DT * 3.2;
+			}
+
+			if (m_fJumpTimer < 0)
+			{
+				m_vecPos.y += m_fSpeed * DT * 2.3;
+			}
+
+			break;
+
+		case PlayerState::Slide:	// 슬라이드
+
+			SetColliderSize(Vector(120, 65), Vector(10, 100));
+
+			motion = L"Slide";
+
+			if (BUTTONUP(VK_CONTROL)) // 컨트롤키를 떼면
+			{
+				playerState = PlayerState::IdleRun;
+			}
+
+			break;
+
+
+
 		}
 
-		break;
 
-		
+		//if (BUTTONDOWN(VK_SPACE))
+		//{
+		//	CreateMissile();
+		//}
 
-	case PlayerState::DoubleJump:	// 2단 점프
-		SetColliderSize(Vector(70, 120), Vector(10, 70));
-		if (m_fJumpTimer > 0)
-		{
-			motion = L"DoubleJump";
-			m_fJumpTimer -= DT;
-			m_vecPos.y -= m_fSpeed * DT * 3.2;
-		}
-
-		if (m_fJumpTimer < 0)
-		{
-			m_vecPos.y += m_fSpeed * DT * 2.3;
-		}
-
-		break;
-
-	case PlayerState::Slide:	// 슬라이드
-
-		SetColliderSize(Vector(120, 65), Vector(10, 100));
-
-		motion = L"Slide";
-
-		if (BUTTONUP(VK_CONTROL)) // 슬라이드
-		{
-			playerState = PlayerState::IdleRun;
-		}
-
-		break;
-
-
-
+		AnimatorUpdate();
 	}
-
-
-	//if (BUTTONDOWN(VK_SPACE))
-	//{
-	//	CreateMissile();
-	//}
-
-	AnimatorUpdate();
 }
 
 void CPlayer::Render()
@@ -211,16 +216,22 @@ void CPlayer::CreateMissile()
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	isGround = true;
+	if (pOtherCollider->GetObjName() == L"바닥")
+	{
+		isGround = true;
+	}
 
-	
+	if (pOtherCollider->GetObjName() == L"장애물")
+	{
+		Logger::Debug(L"플레이어가 장애물에 닿음");
+	}
 
-	if (BUTTONDOWN(VK_CONTROL)) // 슬라이드
+	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
 	{
 		playerState = PlayerState::Slide;
 	}
 
-	else
+	else if (pOtherCollider->GetObjName() == L"바닥")
 	{
 		playerState = PlayerState::IdleRun;
 	}
@@ -228,23 +239,24 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
-	isGround = true;
-	playerState = PlayerState::IdleRun;
 
-	if (pOtherCollider->GetObjName() == L"GroundTile")
+	/*if (pOtherCollider->GetObjName() == L"GroundTile")
 	{
 		Logger::Debug(L"플레이어가 땅에 닿음");
 		m_vecPos.y -= 1;
 		m_fJumpTimer = 0.4;
 
-	}
+	}*/
 
 	if (pOtherCollider->GetObjName() == L"바닥")
 	{
+		isGround = true;
+		playerState = PlayerState::IdleRun;
 		Logger::Debug(L"플레이어가 땅에 닿음");
 		m_vecPos.y -= 1;
 		m_fJumpTimer = 0.4;
 	}
+
 }
 
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)

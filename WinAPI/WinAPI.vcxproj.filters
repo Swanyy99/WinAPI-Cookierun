@@ -189,6 +189,12 @@
     <ClInclude Include="CBackground.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
+    <ClInclude Include="CObstacle.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CBottomCloud.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -306,6 +312,12 @@
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
     <ClCompile Include="CBackground.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CBottomCloud.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
   </ItemGroup>

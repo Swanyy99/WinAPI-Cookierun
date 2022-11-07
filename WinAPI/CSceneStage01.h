@@ -11,6 +11,9 @@ public:
 
 private:
 	CPlayer* pPlayer;
+	CImage* pauseImage;
+
+	float obstacleTimer;
 
 private:
 	void Init()		override;

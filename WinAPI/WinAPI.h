@@ -45,9 +45,12 @@ enum class Layer
 	GroundTile,
 	BackGround,
 	Floor,
+	BottomBackGround,
+	Obstacle,
 	Player,
 	Missile,
 	Monster,
+	OverlayBackGround,
 
 	Ui,
 	Size,

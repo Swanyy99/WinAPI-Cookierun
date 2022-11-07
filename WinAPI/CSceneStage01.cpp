@@ -16,13 +16,20 @@
 #include "CPanel.h"
 #include "CFloor.h"
 #include "CBackground.h"
+#include "CBottomCloud.h"
 
 #include "CImageObject.h"
 #include "CGameObject.h"
+#include "CObstacle.h"
+
+bool pause;
 
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
+	obstacleTimer = 0;
+	pause = false;
+	pauseImage = nullptr;
 }
 
 CSceneStage01::~CSceneStage01()
@@ -90,22 +97,65 @@ void CSceneStage01::Enter()
 	pBackground2->SetPos(WINSIZEX * 2, WINSIZEY * 0.5);
 	pBackground2->SetDir(Vector(1, 0));
 	AddGameObject(pBackground2);
+
+	CBottomCloud* pBottomBackground1 = new CBottomCloud();
+	pBottomBackground1->SetPos(WINSIZEX - 1280, WINSIZEY * 0.85);
+	pBottomBackground1->SetDir(Vector(1, 0));
+	AddGameObject(pBottomBackground1);
+
+	CBottomCloud* pBottomBackground2 = new CBottomCloud();
+	pBottomBackground2->SetPos(WINSIZEX, WINSIZEY * 0.85);
+	pBottomBackground2->SetDir(Vector(1, 0));
+	AddGameObject(pBottomBackground2);
+
+	CBottomCloud* pBottomBackground3 = new CBottomCloud();
+	pBottomBackground3->SetPos(WINSIZEX + 1280, WINSIZEY * 0.85);
+	pBottomBackground3->SetDir(Vector(1, 0));
+	AddGameObject(pBottomBackground3);
+
+
 }
 
 void CSceneStage01::Update()
 {
-	if (BUTTONDOWN(VK_ESCAPE))
+	if (BUTTONDOWN(VK_ESCAPE) && pause == false)
 	{
-		CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Title, 0.25f);
+		pause = true;
+		
+		/*CAMERA->FadeOut(0.25f);
+		DELAYCHANGESCENE(GroupScene::Title, 0.25f);*/
+	}
+	else if (BUTTONDOWN(VK_ESCAPE) && pause == true)
+	{
+		pause = false;
+
 	}
 
-	
+	obstacleTimer += DT;
+
+	if (obstacleTimer >= 2)
+	{
+		obstacleTimer -= 2;
+		CObstacle* pObstacle1 = new CObstacle();
+		pObstacle1->SetPos(WINSIZEX, WINSIZEY * 0.79);
+		AddGameObject(pObstacle1);
+
+
+		
+
+	}
 }
 
 void CSceneStage01::Render()
 {
+	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
 
+	if (pause == true)
+	{
+		RENDER->Image(
+			pauseImage,
+			WINSIZEX *0.4, WINSIZEY * 0.3, WINSIZEX * 0.6, WINSIZEY * 0.7);
+	}
 }
 
 void CSceneStage01::Exit()
