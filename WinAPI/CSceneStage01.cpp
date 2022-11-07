@@ -145,6 +145,8 @@ void CSceneStage01::Enter()
 
 void CSceneStage01::Update()
 {
+
+
 	if (BUTTONDOWN(VK_ESCAPE) && pause == false)
 	{
 		pause = true;
@@ -205,7 +207,7 @@ void CSceneStage01::Update()
 		if (HpTimer >= 0.2)
 		{
 			HpTimer -= 0.2;
-			playerHp -= 0.2;
+			playerHp -= 0.1;
 		}
 	}
 
@@ -235,27 +237,62 @@ void CSceneStage01::Render()
 	// HP Back 바
 	RENDER->Image(
 		HPBackBar,
-		WINSIZEX * 0.04, WINSIZEY * 0.075, WINSIZEX * 0.402, WINSIZEY * 0.095);
-	
+		70, 70, 572, 85);
+
 	// HP 바
 	RENDER->Image(
 		HPBar,
-		WINSIZEX * 0.04, WINSIZEY * 0.07, WINSIZEX * 0.4, WINSIZEY * 0.1);
+		70, 68, 570, 87);
 
 	// HP 프로그레스 바
 	RENDER->Image(
 		HPProgressBar,
-		WINSIZEX * (0.402 * playerHp / 100), WINSIZEY * 0.075, WINSIZEX * 0.402, WINSIZEY * 0.095);
+		70 + 500 * playerHp / 100, 70, 570, 85);
 
 	// HP 이펙트
 	RENDER->Image(
 		HPEffect,
-		WINSIZEX * (0.392 * playerHp / 100), WINSIZEY * 0.072, WINSIZEX * (0.408 * playerHp / 100), WINSIZEY * 0.098);
+		60 + 500 * playerHp / 100, 68, 80 + 500 * playerHp / 100, 87);
 
 	// HP 아이콘
 	RENDER->Image(
 		HPIcon,
-		WINSIZEX * 0.02, WINSIZEY * 0.05, WINSIZEX * 0.06, WINSIZEY * 0.12);
+		40, 50, 90, 100);
+
+	//// 슬라이드 버튼
+	//RENDER->Image(
+	//	slideImage,
+	//	WINSIZEX * 0.86, WINSIZEY * 0.8, WINSIZEX * 0.98, WINSIZEY * 0.95);
+
+	//// 점프 버튼
+	//RENDER->Image(
+	//	jumpImage,
+	//	WINSIZEX * 0.02, WINSIZEY * 0.8, WINSIZEX * 0.14, WINSIZEY * 0.95);
+
+	//// HP Back 바
+	//RENDER->Image(
+	//	HPBackBar,
+	//	WINSIZEX * 0.04, WINSIZEY * 0.075, WINSIZEX * 0.402, WINSIZEY * 0.095);
+	//
+	//// HP 바
+	//RENDER->Image(
+	//	HPBar,
+	//	WINSIZEX * 0.04, WINSIZEY * 0.07, WINSIZEX * 0.4, WINSIZEY * 0.1);
+
+	//// HP 프로그레스 바
+	//RENDER->Image(
+	//	HPProgressBar,
+	//	WINSIZEX * (0.402 * playerHp / 100), WINSIZEY * 0.075, WINSIZEX * 0.402, WINSIZEY * 0.095);
+
+	//// HP 이펙트
+	//RENDER->Image(
+	//	HPEffect,
+	//	WINSIZEX * (0.392 * playerHp / 100), WINSIZEY * 0.072, WINSIZEX * (0.408 * playerHp / 100), WINSIZEY * 0.098);
+
+	//// HP 아이콘
+	//RENDER->Image(
+	//	HPIcon,
+	//	WINSIZEX * 0.02, WINSIZEY * 0.05, WINSIZEX * 0.06, WINSIZEY * 0.12);
 
 }
 

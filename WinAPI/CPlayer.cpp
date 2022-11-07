@@ -64,7 +64,7 @@ void CPlayer::Init()
 
 	m_pAnimator->CreateAnimation(L"Slide", m_pJumpImage, Vector(2457, 0), Vector(273, 273), Vector(273, 0.f), 0.1f, 2);
 
-	m_pAnimator->CreateAnimation(L"Death", m_pDeathImage, Vector(1356, 1092), Vector(273, 273), Vector(273, 0.f), 0.1f, 5, false);
+	m_pAnimator->CreateAnimation(L"Death", m_pDeathImage, Vector(2457, 1092), Vector(273, 273), Vector(273, 0.f), 0.1f, 1, false);
 
 	m_pAnimator->Play(L"IdleRun", false);
 	AddComponent(m_pAnimator);
@@ -181,8 +181,11 @@ void CPlayer::Update()
 
 	if (playerHp <= 0)
 	{
+		playerHp = 0;
 		playerState = PlayerState::Death;
 	}
+
+	
 }
 
 void CPlayer::Render()
