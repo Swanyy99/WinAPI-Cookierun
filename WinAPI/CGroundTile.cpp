@@ -17,9 +17,14 @@ void CGroundTile::Init()
 {
 	CTile::Init();
 
+	m_strName = L"GroundTile";
+	m_layer = Layer::GroundTile;
+
 	AddCollider(ColliderType::Rect,
 		Vector(CTile::TILESIZE, CTile::TILESIZE),
 		Vector(CTile::TILESIZE / 2, CTile::TILESIZE / 2));
+
+
 }
 
 void CGroundTile::Update()

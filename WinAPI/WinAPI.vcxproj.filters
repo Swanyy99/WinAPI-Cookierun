@@ -183,6 +183,12 @@
     <ClInclude Include="CSoundManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CFloor.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
+    <ClInclude Include="CBackground.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -295,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="CSoundManager.cpp">
       <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CFloor.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackground.cpp">
+      <Filter>GameObject\Stage01</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

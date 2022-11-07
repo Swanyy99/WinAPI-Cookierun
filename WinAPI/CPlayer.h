@@ -13,13 +13,21 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pIdleImage;
-	CImage* m_pMoveImage;
+	CImage* m_pJumpImage;
+	CImage* m_pSlideImage;
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
 	bool m_bIsMove;
+	bool isGround;
+
+	enum class PlayerState { IdleRun, Jump, DoubleJump, Slide };
+	PlayerState playerState;
 
 	float m_fSpeed = 200.0f;
+	float m_fJumpTimer;
+
+	
 
 private:
 	void Init() override;

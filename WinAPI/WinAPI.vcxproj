@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="CAnimation.h" />
     <ClInclude Include="CAnimator.h" />
+    <ClInclude Include="CBackground.h" />
     <ClInclude Include="CButton.h" />
     <ClInclude Include="CCameraController.h" />
     <ClInclude Include="CCameraManager.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CEventManager.h" />
+    <ClInclude Include="CFloor.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGroundTile.h" />
     <ClInclude Include="CImageObject.h" />
@@ -186,6 +188,7 @@
   <ItemGroup>
     <ClCompile Include="CAnimation.cpp" />
     <ClCompile Include="CAnimator.cpp" />
+    <ClCompile Include="CBackground.cpp" />
     <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CCameraController.cpp" />
     <ClCompile Include="CCameraManager.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CEventManager.cpp" />
+    <ClCompile Include="CFloor.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGroundTile.cpp" />
     <ClCompile Include="CImageObject.cpp" />

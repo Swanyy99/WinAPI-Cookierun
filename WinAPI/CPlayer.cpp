@@ -13,6 +13,10 @@
 
 #include "CMissile.h"
 
+bool isJumping;
+bool isSliding;
+wstring motion;
+
 CPlayer::CPlayer()
 {
 	m_vecPos = Vector(0, 0);
@@ -21,11 +25,13 @@ CPlayer::CPlayer()
 	m_strName = L"플레이어";
 
 	m_pIdleImage = nullptr;
-	m_pMoveImage = nullptr;
+	m_pJumpImage = nullptr;
+	m_pSlideImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
 	m_bIsMove = false;
+	m_fJumpTimer = 0.4;
 }
 
 CPlayer::~CPlayer()
@@ -34,75 +40,124 @@ CPlayer::~CPlayer()
 
 void CPlayer::Init()
 {
-	m_pIdleImage = RESOURCE->LoadImg(L"PlayerIdle", L"Image\\PlayerIdle.png");
-	m_pMoveImage = RESOURCE->LoadImg(L"PlayerMove", L"Image\\PlayerMove.png");
+	m_pIdleImage = RESOURCE->LoadImg(L"PlayerAnimation", L"Image\\BraveCookie.png");
+	m_pJumpImage = RESOURCE->LoadImg(L"PlayerJump", L"Image\\BraveCookie.png");
+	m_pSlideImage = RESOURCE->LoadImg(L"PlayerSlide", L"Image\\BraveCookie.png");
 
 	m_pAnimator = new CAnimator;
-	m_pAnimator->CreateAnimation(L"IdleUp", m_pIdleImage, Vector(8.f, 0.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleRightUp", m_pIdleImage, Vector(8.f, 70.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleRight", m_pIdleImage, Vector(8.f, 140.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleRightDown", m_pIdleImage, Vector(8.f, 210.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleDown", m_pIdleImage, Vector(8.f, 280.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleLeftDown", m_pIdleImage, Vector(8.f, 350.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleLeft", m_pIdleImage, Vector(8.f, 420.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
-	m_pAnimator->CreateAnimation(L"IdleLeftUp", m_pIdleImage, Vector(8.f, 490.f), Vector(80.f, 70.f), Vector(80.f, 0.f), 0.1f, 7);
+	m_pAnimator->CreateAnimation(L"IdleRun", m_pIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
+	m_pAnimator->CreateAnimation(L"Dash", m_pIdleImage, Vector(0, 0), Vector(0, 75.f), Vector(84.f, 0.f), 0.05f, 16);
 
-	m_pAnimator->CreateAnimation(L"MoveUp", m_pMoveImage, Vector(0.f, 0.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveRightUp", m_pMoveImage, Vector(0.f, 79.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveRight", m_pMoveImage, Vector(0.f, 158.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveRightDown", m_pMoveImage, Vector(0.f, 237.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveDown", m_pMoveImage, Vector(0.f, 316.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveLeftDown", m_pMoveImage, Vector(0.f, 395.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveLeft", m_pMoveImage, Vector(0.f, 474.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->CreateAnimation(L"MoveLeftUp", m_pMoveImage, Vector(0.f, 553.f), Vector(80.f, 75.f), Vector(84.f, 0.f), 0.05f, 16);
-	m_pAnimator->Play(L"IdleDown", false);
+	m_pAnimator->CreateAnimation(L"Jump", m_pJumpImage, Vector(0, 0), Vector(273, 273), Vector(273, 0), 1, 1);
+	m_pAnimator->CreateAnimation(L"JumpDown", m_pJumpImage, Vector(2184, 546), Vector(273, 273), Vector(273, 0), 1, 1);
+	m_pAnimator->CreateAnimation(L"DoubleJump", m_pJumpImage, Vector(273, 0), Vector(273, 273), Vector(273, 0), 0.1f, 3);
+
+	m_pAnimator->CreateAnimation(L"Slide", m_pJumpImage, Vector(2457, 0), Vector(273, 273), Vector(273, 0.f), 0.1f, 2);
+
+	m_pAnimator->Play(L"IdleRun", false);
 	AddComponent(m_pAnimator);
 
-	AddCollider(ColliderType::Rect, Vector(90, 90), Vector(0, 0));
+	
+	playerState = PlayerState::IdleRun;
+
+	AddCollider(ColliderType::Rect, Vector(70, 120), Vector(10, 70));
 }
 
 void CPlayer::Update()
 {
-	m_bIsMove = false;
 
-	if (BUTTONSTAY(VK_LEFT))
+	switch (playerState)
 	{
-		m_vecPos.x -= m_fSpeed * DT;
-		m_bIsMove = true;
-		m_vecMoveDir.x = -1;
-	}
-	else if (BUTTONSTAY(VK_RIGHT))
-	{
-		m_vecPos.x += m_fSpeed * DT;
-		m_bIsMove = true;
-		m_vecMoveDir.x = +1;
-	}
-	else
-	{
-		m_vecMoveDir.x = 0;
+
+	case PlayerState::IdleRun:	// 기본(달리기 중)
+		SetColliderSize(Vector(70, 130), Vector(10, 70));
+		motion = L"IdleRun";
+		//RemoveCollider();
+
+		if (BUTTONDOWN(VK_SPACE)) // 점프
+		{
+			playerState = PlayerState::Jump;
+		}
+
+		if (BUTTONDOWN(VK_CONTROL)) // 슬라이드
+		{
+			playerState = PlayerState::Slide;
+		}
+
+		break;
+
+	case PlayerState::Jump:	// 1단 점프
+		SetColliderSize(Vector(70, 120), Vector(10, 70));
+		if (m_fJumpTimer > 0)
+		{
+			motion = L"Jump";
+
+			m_fJumpTimer -= DT;
+			m_vecPos.y -= m_fSpeed * DT * 1.6;
+		}
+
+		if (m_fJumpTimer < 0)
+		{
+			m_vecPos.y += m_fSpeed * DT * 2.3;
+			motion = L"JumpDown";
+
+			if (BUTTONDOWN(VK_SPACE)) // 2단 점프
+			{
+				playerState = PlayerState::DoubleJump;
+				m_fJumpTimer = 0.2;
+				break;
+			}
+		}
+
+		if (BUTTONDOWN(VK_SPACE)) // 2단 점프
+		{
+			playerState = PlayerState::DoubleJump;
+			m_fJumpTimer = 0.2;
+			break;
+		}
+
+		break;
+
+		
+
+	case PlayerState::DoubleJump:	// 2단 점프
+		SetColliderSize(Vector(70, 120), Vector(10, 70));
+		if (m_fJumpTimer > 0)
+		{
+			motion = L"DoubleJump";
+			m_fJumpTimer -= DT;
+			m_vecPos.y -= m_fSpeed * DT * 3.2;
+		}
+
+		if (m_fJumpTimer < 0)
+		{
+			m_vecPos.y += m_fSpeed * DT * 2.3;
+		}
+
+		break;
+
+	case PlayerState::Slide:	// 슬라이드
+
+		SetColliderSize(Vector(120, 65), Vector(10, 100));
+
+		motion = L"Slide";
+
+		if (BUTTONUP(VK_CONTROL)) // 슬라이드
+		{
+			playerState = PlayerState::IdleRun;
+		}
+
+		break;
+
+
+
 	}
 
-	if (BUTTONSTAY(VK_UP))
-	{
-		m_vecPos.y -= m_fSpeed * DT;
-		m_bIsMove = true;
-		m_vecMoveDir.y = +1;
-	}
-	else if (BUTTONSTAY(VK_DOWN))
-	{
-		m_vecPos.y += m_fSpeed * DT;
-		m_bIsMove = true;
-		m_vecMoveDir.y = -1;
-	}
-	else
-	{
-		m_vecMoveDir.y = 0;
-	}
 
-	if (BUTTONDOWN(VK_SPACE))
-	{
-		CreateMissile();
-	}
+	//if (BUTTONDOWN(VK_SPACE))
+	//{
+	//	CreateMissile();
+	//}
 
 	AnimatorUpdate();
 }
@@ -117,21 +172,11 @@ void CPlayer::Release()
 
 void CPlayer::AnimatorUpdate()
 {
-	if (m_vecMoveDir.Length() > 0)
-		m_vecLookDir = m_vecMoveDir;
+	//if (m_vecMoveDir.Length() > 0)
+	//m_vecLookDir = m_vecMoveDir;
 
-	wstring str = L"";
 
-	if (m_bIsMove)	str += L"Move";
-	else			str += L"Idle";
-
-	if (m_vecLookDir.x > 0) str += L"Right";
-	else if (m_vecLookDir.x < 0) str += L"Left";
-
-	if (m_vecLookDir.y > 0) str += L"Up";
-	else if (m_vecLookDir.y < 0) str += L"Down";
-
-	m_pAnimator->Play(str, false);
+	m_pAnimator->Play(motion, false);
 }
 
 void CPlayer::CreateMissile()
@@ -166,10 +211,40 @@ void CPlayer::CreateMissile()
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
+	isGround = true;
+
+	
+
+	if (BUTTONDOWN(VK_CONTROL)) // 슬라이드
+	{
+		playerState = PlayerState::Slide;
+	}
+
+	else
+	{
+		playerState = PlayerState::IdleRun;
+	}
 }
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
+	isGround = true;
+	playerState = PlayerState::IdleRun;
+
+	if (pOtherCollider->GetObjName() == L"GroundTile")
+	{
+		Logger::Debug(L"플레이어가 땅에 닿음");
+		m_vecPos.y -= 1;
+		m_fJumpTimer = 0.4;
+
+	}
+
+	if (pOtherCollider->GetObjName() == L"바닥")
+	{
+		Logger::Debug(L"플레이어가 땅에 닿음");
+		m_vecPos.y -= 1;
+		m_fJumpTimer = 0.4;
+	}
 }
 
 void CPlayer::OnCollisionExit(CCollider* pOtherCollider)
