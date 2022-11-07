@@ -15,7 +15,10 @@
 
 bool isJumping;
 bool isSliding;
+bool isDead;
 wstring motion;
+float playerHp;
+
 
 extern bool pause;
 
@@ -29,11 +32,15 @@ CPlayer::CPlayer()
 	m_pIdleImage = nullptr;
 	m_pJumpImage = nullptr;
 	m_pSlideImage = nullptr;
+	m_pDeathImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
 	m_bIsMove = false;
+	isDead = false;
 	m_fJumpTimer = 0.4;
+
+	playerHp = 100;
 }
 
 CPlayer::~CPlayer()
@@ -45,6 +52,7 @@ void CPlayer::Init()
 	m_pIdleImage = RESOURCE->LoadImg(L"PlayerAnimation", L"Image\\BraveCookie.png");
 	m_pJumpImage = RESOURCE->LoadImg(L"PlayerJump", L"Image\\BraveCookie.png");
 	m_pSlideImage = RESOURCE->LoadImg(L"PlayerSlide", L"Image\\BraveCookie.png");
+	m_pDeathImage = RESOURCE->LoadImg(L"PlayerDeath", L"Image\\BraveCookie.png");
 
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"IdleRun", m_pIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
@@ -55,6 +63,8 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"DoubleJump", m_pJumpImage, Vector(273, 0), Vector(273, 273), Vector(273, 0), 0.1f, 3);
 
 	m_pAnimator->CreateAnimation(L"Slide", m_pJumpImage, Vector(2457, 0), Vector(273, 273), Vector(273, 0.f), 0.1f, 2);
+
+	m_pAnimator->CreateAnimation(L"Death", m_pDeathImage, Vector(1356, 1092), Vector(273, 273), Vector(273, 0.f), 0.1f, 5, false);
 
 	m_pAnimator->Play(L"IdleRun", false);
 	AddComponent(m_pAnimator);
@@ -69,6 +79,11 @@ void CPlayer::Update()
 {
 	if (pause == false)
 	{
+
+		if (playerHp <= 0)
+		{
+			playerState = PlayerState::Death;
+		}
 
 		switch (playerState)
 		{
@@ -97,7 +112,7 @@ void CPlayer::Update()
 				motion = L"Jump";
 
 				m_fJumpTimer -= DT;
-				m_vecPos.y -= m_fSpeed * DT * 1.6;
+				m_vecPos.y -= m_fSpeed * DT * 1.9;
 			}
 
 			if (m_fJumpTimer < 0)
@@ -105,18 +120,18 @@ void CPlayer::Update()
 				m_vecPos.y += m_fSpeed * DT * 2.3;
 				motion = L"JumpDown";
 
-				if (BUTTONDOWN(VK_SPACE)) // 2단 점프
+				if (BUTTONDOWN(VK_SPACE)) // 내려오는 중에 2단 점프 진입
 				{
 					playerState = PlayerState::DoubleJump;
-					m_fJumpTimer = 0.2;
+					m_fJumpTimer = 0.25;
 					break;
 				}
 			}
 
-			if (BUTTONDOWN(VK_SPACE)) // 2단 점프
+			if (BUTTONDOWN(VK_SPACE)) // 2단 점프 진입
 			{
 				playerState = PlayerState::DoubleJump;
-				m_fJumpTimer = 0.2;
+				m_fJumpTimer = 0.25;
 				break;
 			}
 
@@ -130,7 +145,7 @@ void CPlayer::Update()
 			{
 				motion = L"DoubleJump";
 				m_fJumpTimer -= DT;
-				m_vecPos.y -= m_fSpeed * DT * 3.2;
+				m_vecPos.y -= m_fSpeed * DT * 3.1;
 			}
 
 			if (m_fJumpTimer < 0)
@@ -153,17 +168,20 @@ void CPlayer::Update()
 
 			break;
 
+		case PlayerState::Death:	// 죽음
 
+			motion = L"Death";
+			isDead = true;
 
 		}
 
 
-		//if (BUTTONDOWN(VK_SPACE))
-		//{
-		//	CreateMissile();
-		//}
-
 		AnimatorUpdate();
+	}
+
+	if (playerHp <= 0)
+	{
+		playerState = PlayerState::Death;
 	}
 }
 
@@ -177,16 +195,14 @@ void CPlayer::Release()
 
 void CPlayer::AnimatorUpdate()
 {
-	//if (m_vecMoveDir.Length() > 0)
-	//m_vecLookDir = m_vecMoveDir;
-
 
 	m_pAnimator->Play(motion, false);
+
 }
 
 void CPlayer::CreateMissile()
 {
-	Logger::Debug(L"미사일 생성");
+	/*Logger::Debug(L"미사일 생성");
 
 	CMissile* pMissile = new CMissile();
 	pMissile->SetPos(m_vecPos);
@@ -211,7 +227,7 @@ void CPlayer::CreateMissile()
 	CMissile* pMissile4 = new CMissile();
 	pMissile4->SetPos(m_vecPos);
 	pMissile4->SetDir(Vector(3, -1));
-	ADDOBJECT(pMissile4);
+	ADDOBJECT(pMissile4);*/
 }
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
@@ -224,6 +240,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"장애물")
 	{
 		Logger::Debug(L"플레이어가 장애물에 닿음");
+		playerHp -= 20;
 	}
 
 	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드

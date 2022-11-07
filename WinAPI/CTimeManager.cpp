@@ -2,6 +2,7 @@
 #include "CTimeManager.h"
 
 extern bool pause;
+extern bool isDead;
 
 CTimeManager::CTimeManager()
 {
@@ -30,11 +31,12 @@ void CTimeManager::Update()
 	curTime = chrono::high_resolution_clock::now();
 	chrono::duration<float> elapsed = curTime - prevTime;
 
-	if (pause == false)
+	if (pause == false && isDead == false)
 		m_fDT = elapsed.count();
 	else if (pause == true)
 		m_fDT = 0;
-
+	else if (isDead == true)
+		m_fDT = 0;;
 
 	if (m_fDT > 0.1f) m_fDT = 0.1f;
 	prevTime = curTime;

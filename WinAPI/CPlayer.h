@@ -15,13 +15,14 @@ private:
 	CImage* m_pIdleImage;
 	CImage* m_pJumpImage;
 	CImage* m_pSlideImage;
+	CImage* m_pDeathImage;
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
 	bool m_bIsMove;
 	bool isGround;
 
-	enum class PlayerState { IdleRun, Jump, DoubleJump, Slide };
+	enum class PlayerState { IdleRun, Jump, DoubleJump, Slide, Death };
 	PlayerState playerState;
 
 	float m_fSpeed = 200.0f;

@@ -12,8 +12,17 @@ public:
 private:
 	CPlayer* pPlayer;
 	CImage* pauseImage;
+	CImage* slideImage;
+	CImage* jumpImage;
+
+	CImage* HPIcon;
+	CImage* HPBackBar;
+	CImage* HPBar;
+	CImage* HPProgressBar;
+	CImage* HPEffect;
 
 	float obstacleTimer;
+	float HpTimer;
 
 private:
 	void Init()		override;
