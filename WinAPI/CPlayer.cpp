@@ -224,7 +224,6 @@ void CPlayer::Update()
 
 		}
 
-
 		AnimatorUpdate();
 	}
 

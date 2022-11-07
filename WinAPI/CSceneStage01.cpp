@@ -21,6 +21,7 @@
 #include "CImageObject.h"
 #include "CGameObject.h"
 #include "CObstacle.h"
+#include "CJelly1.h"
 
 bool pause;
 extern bool isSliding;
@@ -196,6 +197,10 @@ void CSceneStage01::Update()
 		CObstacle* pObstacle1 = new CObstacle();
 		pObstacle1->SetPos(WINSIZEX, WINSIZEY * 0.79);
 		AddGameObject(pObstacle1);
+
+		CJelly1* pJelly1 = new CJelly1();
+		pJelly1->SetPos(WINSIZEX, WINSIZEY * 0.65);
+		AddGameObject(pJelly1);
 
 
 	}

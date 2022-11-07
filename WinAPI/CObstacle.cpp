@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "CObstacle.h"
 
-wstring obstacleImage;
 
 CObstacle::CObstacle()
 {
@@ -22,15 +21,6 @@ CObstacle::~CObstacle()
 
 void CObstacle::Init()
 {
-	//AddCollider(ColliderType::Rect, Vector(25, 60), Vector(0, 10));
-
-	//m_pObstacle1Image = RESOURCE->LoadImg(L"Obstacle1", L"Image\\Obstacle1.png");
-
-	//m_pAnimators = new CAnimator;
-	//m_pAnimators->CreateAnimation(L"IdleObstacle", m_pObstacle1Image, Vector(0, 0), Vector(87, 118), Vector(87, 0.f), 1, 1);
-
-	//m_pAnimators->Play(L"IdleObstacle", false);
-	//AddComponent(m_pAnimators);
 
 	AddCollider(ColliderType::Rect, Vector(15, 60), Vector(0, 10));
 
@@ -38,7 +28,6 @@ void CObstacle::Init()
 
 void CObstacle::Update()
 {
-	//AnimatorUpdate();
 
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
 

@@ -195,6 +195,9 @@
     <ClInclude Include="CBottomCloud.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
+    <ClInclude Include="CJelly1.h">
+      <Filter>GameObject\Stage01</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -318,6 +321,9 @@
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
     <ClCompile Include="CBottomCloud.cpp">
+      <Filter>GameObject\Stage01</Filter>
+    </ClCompile>
+    <ClCompile Include="CJelly1.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
   </ItemGroup>

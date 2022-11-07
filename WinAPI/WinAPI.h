@@ -47,6 +47,8 @@ enum class Layer
 	Floor,
 	BottomBackGround,
 	Obstacle,
+	Jelly,
+	Coin,
 	Player,
 	Missile,
 	Monster,

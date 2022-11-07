@@ -1,21 +1,26 @@
 #pragma once
 #include "CGameObject.h"
-class CObstacle : public CGameObject
+
+class CImage;
+class CAnimator;
+
+class CJelly1 : public CGameObject
 {
 public:
-	CObstacle();
-	virtual ~CObstacle();
+	CJelly1();
+	virtual ~CJelly1();
 
 private:
-	CAnimator* m_pAnimators;
+	CAnimator* m_pAnimatorJelly;
 	CImage* m_pObstacle1Image;
 
-	CImage* m_pImg;
+	CImage* m_pJellyImage;
+
+	wstring jellyImage;
 
 	Vector m_vecDir;
 	float m_fVelocity;
 
-	wstring obstacleImage;
 
 	void Init() override;
 	void Update() override;
