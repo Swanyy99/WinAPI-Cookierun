@@ -23,6 +23,7 @@
 #include "CObstacle.h"
 #include "CJelly1.h"
 #include "CObstacleSky.h"
+#include "CHeartItem.h"
 
 bool pause;
 
@@ -424,6 +425,10 @@ void CSceneStage01::Update()
 		CObstacle* pObstacle2 = new CObstacle();
 		pObstacle2->SetPos(WINSIZEX + 20, WINSIZEY * 0.79);
 		AddGameObject(pObstacle2);
+
+		CHeartItem* pHeart1 = new CHeartItem();
+		pHeart1->SetPos(WINSIZEX + 10, WINSIZEY * 0.35);
+		AddGameObject(pHeart1);
 
 		CJelly1* pJelly36 = new CJelly1();
 		pJelly36->SetPos(WINSIZEX + 10, WINSIZEY * 0.5);

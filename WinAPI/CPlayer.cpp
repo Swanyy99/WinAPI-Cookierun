@@ -241,6 +241,11 @@ void CPlayer::Update()
 		playerState = PlayerState::Death;
 	}
 
+	if (playerHp > 100)
+	{
+		playerHp = 100;
+	}
+
 
 	// 피격 후 무적 및 살짝 주춤하는 모션
 	if (isHurt == true && isDead == false)
@@ -332,6 +337,12 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"젤리 점수 획득!");
 		score += 1000;
+	}
+
+	if (pOtherCollider->GetObjName() == L"하트아이템")
+	{
+		Logger::Debug(L"생명물약 획득!");
+		playerHp += 20;
 	}
 
 
