@@ -11,6 +11,9 @@ public:
 
 private:
 	CPlayer* pPlayer;
+
+	CImage* CookierunTitle;
+
 	CImage* pauseImage;
 	CImage* failImage;
 	CImage* slideImage;
@@ -21,6 +24,7 @@ private:
 	CImage* HPBar;
 	CImage* HPProgressBar;
 	CImage* HPEffect;
+
 
 	float obstacleTimer;
 	float HpTimer;

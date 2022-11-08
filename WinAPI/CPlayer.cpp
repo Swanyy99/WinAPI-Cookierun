@@ -235,9 +235,23 @@ void CPlayer::Update()
 		playerState = PlayerState::Death;
 	}
 
-	if (isHurt == true)
+
+	// 피격 후 무적 및 살짝 주춤하는 모션
+	if (isHurt == true && isDead == false)
 	{
 		m_fHurtTimer -= DT;
+
+		if (m_fHurtTimer <= 2.5 && m_fHurtTimer >= 2.44)
+		{
+			m_vecPos.x -= 0.1;
+			m_vecPos.y -= 0.2;
+		}
+
+		if (m_fHurtTimer < 2.4 && m_fHurtTimer >= 2.34)
+		{
+			m_vecPos.x += 0.1;
+			m_vecPos.y += 0.2;
+		}
 
 		if (m_fHurtTimer <= 0)
 		{

@@ -37,6 +37,7 @@ CSceneStage01::CSceneStage01()
 	HpTimer = 0;
 	pause = false;
 	pauseImage = nullptr;
+	CookierunTitle = nullptr;
 	failImage = nullptr;
 	slideImage = nullptr;
 	jumpImage = nullptr;
@@ -64,6 +65,8 @@ void CSceneStage01::Init()
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
+
+	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
 
 	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
 
@@ -249,7 +252,11 @@ void CSceneStage01::Update()
 void CSceneStage01::Render()
 {
 	
+	RENDER->Image(
+		CookierunTitle,
+		1130, 15, 1270, 80);
 
+	// 일시정지 UI
 	if (pause == true)
 	{
 		RENDER->Image(
@@ -257,12 +264,14 @@ void CSceneStage01::Render()
 			0, 0, WINSIZEX, WINSIZEY);
 	}
 
+	// 사망 시 UI
 	if (isDead== true)
 	{
 		RENDER->Image(
 			failImage,
 			0, 0, WINSIZEX, WINSIZEY);
 	}
+
 
 	// 슬라이드 버튼
 	RENDER->Image(
