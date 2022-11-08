@@ -202,6 +202,29 @@ void CSceneStage01::Update()
 		pJelly1->SetPos(WINSIZEX, WINSIZEY * 0.65);
 		AddGameObject(pJelly1);
 
+		CJelly1* pJelly2 = new CJelly1();
+		pJelly2->SetPos(WINSIZEX + 100, WINSIZEY * 0.7);
+		AddGameObject(pJelly2);
+
+		CJelly1* pJelly3 = new CJelly1();
+		pJelly3->SetPos(WINSIZEX + 200, WINSIZEY * 0.75);
+		AddGameObject(pJelly3);
+
+		CJelly1* pJelly4 = new CJelly1();
+		pJelly4->SetPos(WINSIZEX + 300, WINSIZEY * 0.78);
+		AddGameObject(pJelly4);
+
+		CJelly1* pJelly7 = new CJelly1();
+		pJelly7->SetPos(WINSIZEX + 300, WINSIZEY * 0.65);
+		AddGameObject(pJelly7);
+
+		CJelly1* pJelly5 = new CJelly1();
+		pJelly5->SetPos(WINSIZEX + 400, WINSIZEY * 0.75);
+		AddGameObject(pJelly5);
+
+		CJelly1* pJelly6 = new CJelly1();
+		pJelly6->SetPos(WINSIZEX + 500, WINSIZEY * 0.7);
+		AddGameObject(pJelly6);
 
 	}
 
