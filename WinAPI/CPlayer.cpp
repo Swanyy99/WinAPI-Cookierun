@@ -19,7 +19,8 @@ bool isDead;
 wstring motion;
 float playerHp;
 
-
+extern int score;
+extern wstring ScreenScore;
 extern bool pause;
 
 CPlayer::CPlayer()
@@ -40,6 +41,7 @@ CPlayer::CPlayer()
 	m_pHurtDeathImage = nullptr;
 
 	HurtInvincibilityImage = nullptr;
+	HurtRedImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
@@ -58,7 +60,9 @@ CPlayer::~CPlayer()
 
 void CPlayer::Init()
 {
+	m_pAnimator = new CAnimator;
 	
+	// 기본 쿠키 모션 이미지들
 	m_pIdleImage = RESOURCE->LoadImg(L"PlayerAnimation", L"Image\\BraveCookie.png");
 	m_pJumpImage = RESOURCE->LoadImg(L"PlayerJump", L"Image\\BraveCookie.png");
 	m_pSlideImage = RESOURCE->LoadImg(L"PlayerSlide", L"Image\\BraveCookie.png");
@@ -66,7 +70,8 @@ void CPlayer::Init()
 
 	HurtInvincibilityImage = RESOURCE->LoadImg(L"PlayerInvincibility", L"Image\\HurtInvincibility.png");
 
-	m_pAnimator = new CAnimator;
+	HurtRedImage = RESOURCE->LoadImg(L"HurtRedScreen", L"Image\\HurtRedScreen.png");
+
 	m_pAnimator->CreateAnimation(L"IdleRun", m_pIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
 	m_pAnimator->CreateAnimation(L"Dash", m_pIdleImage, Vector(0, 0), Vector(0, 75.f), Vector(84.f, 0.f), 0.05f, 16);
 
@@ -77,7 +82,7 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"Slide", m_pJumpImage, Vector(2457, 0), Vector(273, 273), Vector(273, 0.f), 0.1f, 2);
 
 
-
+	// 피격 후 반투명 쿠키 모션 이미지들
 	m_pHurtIdleImage = RESOURCE->LoadImg(L"PlayerHurtAnimation", L"Image\\BraveCookieHurt.png");
 	m_pHurtJumpImage = RESOURCE->LoadImg(L"PlayerHurtJump", L"Image\\BraveCookieHurt.png");
 	m_pHurtSlideImage = RESOURCE->LoadImg(L"PlayerHurtSlide", L"Image\\BraveCookieHurt.png");
@@ -267,15 +272,20 @@ void CPlayer::Update()
 
 void CPlayer::Render()
 {
-
 	if (isHurt == true && isDead == false)
 	{
+		// 피격 시 무적 텍스트 이미지
 		RENDER->Image(
 			HurtInvincibilityImage,
 			m_vecPos.x - HurtInvincibilityImage->GetWidth() * 0.25,
 			m_vecPos.y - 30 - HurtInvincibilityImage->GetHeight() * 0.25,
 			m_vecPos.x + HurtInvincibilityImage->GetWidth() * 0.25,
 			m_vecPos.y - 30 + HurtInvincibilityImage->GetHeight() * 0.25);
+
+		// 피격 시 붉은색 테두리 이미지
+		RENDER->Image(
+			HurtRedImage,
+			-230, -200, WINSIZEX + 230, WINSIZEY + 200);
 	}
 }
 
@@ -308,6 +318,13 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		playerHp -= 20;
 		isHurt = true;
 	}
+
+	if (pOtherCollider->GetObjName() == L"젤리")
+	{
+		Logger::Debug(L"젤리 점수 획득!");
+		score += 1000;
+	}
+
 
 	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
 	{

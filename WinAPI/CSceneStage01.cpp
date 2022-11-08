@@ -25,16 +25,20 @@
 #include "CObstacleSky.h"
 
 bool pause;
+
+int score;
+wstring ScreenScore;
+
 extern bool isSliding;
 extern bool isJumping;
 extern bool isDead;
 extern float playerHp;
 
+
+
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
-	obstacleTimer = 0;
-	HpTimer = 0;
 	pause = false;
 	pauseImage = nullptr;
 	CookierunTitle = nullptr;
@@ -46,6 +50,10 @@ CSceneStage01::CSceneStage01()
 	HPBackBar = nullptr;
 	HPIcon = nullptr;
 	HPEffect = nullptr;
+	obstacleTimer = 0;
+	HpTimer = 0;
+	ScreenScore = L"";
+	score = 0;
 }
 
 CSceneStage01::~CSceneStage01()
@@ -155,6 +163,7 @@ void CSceneStage01::Enter()
 void CSceneStage01::Update()
 {
 
+	ScreenScore = to_wstring(score);
 
 	if (BUTTONDOWN(VK_ESCAPE) && pause == false && isDead == false)
 	{
@@ -251,7 +260,10 @@ void CSceneStage01::Update()
 
 void CSceneStage01::Render()
 {
-	
+	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+	RENDER->Text(L"Score : " + ScreenScore, 50, 107, 300, 107, Color(255, 255, 255, 1.f), 20);
+	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+
 	RENDER->Image(
 		CookierunTitle,
 		1130, 15, 1270, 80);

@@ -59,7 +59,7 @@ void CRenderManager::Init()
 
 	// 텍스트 포맷 생성
 	hResult = m_pWriteFactory->CreateTextFormat(
-		L"굴림",
+		L"a피오피동글OL",
 		NULL,
 		DWRITE_FONT_WEIGHT_NORMAL,
 		DWRITE_FONT_STYLE_NORMAL,
@@ -81,7 +81,7 @@ void CRenderManager::Init()
 
 	// 텍스트 포맷 생성
 	hResult = m_pWriteFactory->CreateTextFormat(
-		L"굴림",
+		L"a피오피동글OL",
 		NULL,
 		DWRITE_FONT_WEIGHT_NORMAL,
 		DWRITE_FONT_STYLE_NORMAL,

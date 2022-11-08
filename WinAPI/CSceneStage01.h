@@ -26,6 +26,7 @@ private:
 	CImage* HPEffect;
 
 
+
 	float obstacleTimer;
 	float HpTimer;
 

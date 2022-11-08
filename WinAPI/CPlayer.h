@@ -23,6 +23,7 @@ private:
 	CImage* m_pHurtDeathImage;
 
 	CImage* HurtInvincibilityImage;
+	CImage* HurtRedImage;
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
