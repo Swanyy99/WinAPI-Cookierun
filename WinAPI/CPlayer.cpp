@@ -39,6 +39,8 @@ CPlayer::CPlayer()
 	m_pHurtSlideImage = nullptr;
 	m_pHurtDeathImage = nullptr;
 
+	HurtInvincibilityImage = nullptr;
+
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
 	m_bIsMove = false;
@@ -62,7 +64,7 @@ void CPlayer::Init()
 	m_pSlideImage = RESOURCE->LoadImg(L"PlayerSlide", L"Image\\BraveCookie.png");
 	m_pDeathImage = RESOURCE->LoadImg(L"PlayerDeath", L"Image\\BraveCookie.png");
 
-
+	HurtInvincibilityImage = RESOURCE->LoadImg(L"PlayerInvincibility", L"Image\\HurtInvincibility.png");
 
 	m_pAnimator = new CAnimator;
 	m_pAnimator->CreateAnimation(L"IdleRun", m_pIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
@@ -251,6 +253,16 @@ void CPlayer::Update()
 
 void CPlayer::Render()
 {
+
+	if (isHurt == true && isDead == false)
+	{
+		RENDER->Image(
+			HurtInvincibilityImage,
+			m_vecPos.x - HurtInvincibilityImage->GetWidth() * 0.25,
+			m_vecPos.y - 30 - HurtInvincibilityImage->GetHeight() * 0.25,
+			m_vecPos.x + HurtInvincibilityImage->GetWidth() * 0.25,
+			m_vecPos.y - 30 + HurtInvincibilityImage->GetHeight() * 0.25);
+	}
 }
 
 void CPlayer::Release()

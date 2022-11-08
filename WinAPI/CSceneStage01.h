@@ -12,6 +12,7 @@ public:
 private:
 	CPlayer* pPlayer;
 	CImage* pauseImage;
+	CImage* failImage;
 	CImage* slideImage;
 	CImage* jumpImage;
 

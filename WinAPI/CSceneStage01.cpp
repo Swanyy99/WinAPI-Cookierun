@@ -22,10 +22,12 @@
 #include "CGameObject.h"
 #include "CObstacle.h"
 #include "CJelly1.h"
+#include "CObstacleSky.h"
 
 bool pause;
 extern bool isSliding;
 extern bool isJumping;
+extern bool isDead;
 extern float playerHp;
 
 CSceneStage01::CSceneStage01()
@@ -35,6 +37,7 @@ CSceneStage01::CSceneStage01()
 	HpTimer = 0;
 	pause = false;
 	pauseImage = nullptr;
+	failImage = nullptr;
 	slideImage = nullptr;
 	jumpImage = nullptr;
 	HPProgressBar = nullptr;
@@ -63,6 +66,8 @@ void CSceneStage01::Init()
 	AddGameObject(pCamController);
 
 	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
+
+	failImage = RESOURCE->LoadImg(L"Fail", L"Image\\Fail.png");
 
 	slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
 	
@@ -148,14 +153,14 @@ void CSceneStage01::Update()
 {
 
 
-	if (BUTTONDOWN(VK_ESCAPE) && pause == false)
+	if (BUTTONDOWN(VK_ESCAPE) && pause == false && isDead == false)
 	{
 		pause = true;
 
 		/*CAMERA->FadeOut(0.25f);
 		DELAYCHANGESCENE(GroupScene::Title, 0.25f);*/
 	}
-	else if (BUTTONDOWN(VK_ESCAPE) && pause == true)
+	else if (BUTTONDOWN(VK_ESCAPE) && pause == true && isDead == false)
 	{
 		pause = false;
 
@@ -214,9 +219,9 @@ void CSceneStage01::Update()
 		pJelly4->SetPos(WINSIZEX + 300, WINSIZEY * 0.78);
 		AddGameObject(pJelly4);
 
-		CJelly1* pJelly7 = new CJelly1();
-		pJelly7->SetPos(WINSIZEX + 300, WINSIZEY * 0.65);
-		AddGameObject(pJelly7);
+		CObstacleSky* pObstacleSky1 = new CObstacleSky();
+		pObstacleSky1->SetPos(WINSIZEX + 300, WINSIZEY * 0.3);
+		AddGameObject(pObstacleSky1);
 
 		CJelly1* pJelly5 = new CJelly1();
 		pJelly5->SetPos(WINSIZEX + 400, WINSIZEY * 0.75);
@@ -249,7 +254,14 @@ void CSceneStage01::Render()
 	{
 		RENDER->Image(
 			pauseImage,
-			WINSIZEX *0.4, WINSIZEY * 0.3, WINSIZEX * 0.6, WINSIZEY * 0.7);
+			0, 0, WINSIZEX, WINSIZEY);
+	}
+
+	if (isDead== true)
+	{
+		RENDER->Image(
+			failImage,
+			0, 0, WINSIZEX, WINSIZEY);
 	}
 
 	// 슬라이드 버튼

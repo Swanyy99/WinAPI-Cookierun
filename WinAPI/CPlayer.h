@@ -22,6 +22,8 @@ private:
 	CImage* m_pHurtSlideImage;
 	CImage* m_pHurtDeathImage;
 
+	CImage* HurtInvincibilityImage;
+
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
 	bool m_bIsMove;
