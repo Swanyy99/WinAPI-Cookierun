@@ -5,6 +5,9 @@
 #include "CTimeManager.h"
 #include "CEventManager.h"
 #include "CCollider.h"
+#include "CImage.h"
+
+extern int score;
 
 CMissile::CMissile()
 {
@@ -13,6 +16,7 @@ CMissile::CMissile()
 	m_fVelocity = 300;
 	m_layer = Layer::Missile;
 	m_strName = L"미사일";
+	missileImage = nullptr;
 }
 
 CMissile::~CMissile()
@@ -38,10 +42,14 @@ void CMissile::Update()
 
 void CMissile::Render()
 {
-	RENDER->FrameCircle(
-		m_vecPos.x,
-		m_vecPos.y,
-		m_vecScale.x);
+	missileImage = RESOURCE->LoadImg(L"Missile", L"Image\\Missile.png");
+
+	RENDER->Image(
+		missileImage,
+		m_vecPos.x - missileImage->GetWidth() * 0.3,
+		m_vecPos.y - missileImage->GetHeight() * 0.3,
+		m_vecPos.x + missileImage->GetWidth() * 0.3,
+		m_vecPos.y + missileImage->GetHeight() * 0.3);
 }
 
 void CMissile::Release()
@@ -50,8 +58,12 @@ void CMissile::Release()
 
 void CMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	Logger::Debug(L"미사일이 충돌체와 부딪혀 사라집니다.");
-	DELETEOBJECT(this);
+	if (pOtherCollider->GetObjName() == L"장애물")
+	{
+		Logger::Debug(L"미사일이 장애물을 부쉈습니다.");
+		score += 5000;
+		DELETEOBJECT(this);
+	}
 }
 
 void CMissile::SetDir(Vector dir)

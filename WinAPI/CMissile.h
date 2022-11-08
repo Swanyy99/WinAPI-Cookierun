@@ -1,5 +1,8 @@
 #pragma once
 #include "CGameObject.h"
+
+class CImage;
+
 class CMissile : public CGameObject
 {
 public:
@@ -9,6 +12,7 @@ public:
 private:
 	Vector m_vecDir;
 	float m_fVelocity;
+	CImage* missileImage;
 
 private:
 	void Init() override;

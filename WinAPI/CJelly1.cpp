@@ -39,7 +39,7 @@ void CJelly1::Update()
 
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
 
-	if (m_vecPos.x < 0)
+	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);
 
 	jellyImage = L"Jelly1";

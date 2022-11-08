@@ -61,6 +61,10 @@ void CObstacle::AnimatorUpdate()
 
 void CObstacle::OnCollisionEnter(CCollider* pOtherCollider)
 {
+	if (pOtherCollider->GetObjName() == L"πÃªÁ¿œ")
+	{
+		DELETEOBJECT(this);
+	}
 }
 
 void CObstacle::OnCollisionStay(CCollider* pOtherCollider)

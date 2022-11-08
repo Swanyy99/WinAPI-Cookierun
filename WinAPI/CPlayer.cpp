@@ -12,6 +12,7 @@
 #include "CAnimator.h"
 
 #include "CMissile.h"
+#include "CGameObject.h"
 
 bool isJumping;
 bool isSliding;
@@ -265,7 +266,10 @@ void CPlayer::Update()
 		}
 	}
 
-	
+	if (BUTTONDOWN('A')) // 미사일발사
+	{
+		CreateMissile();
+	}
 
 	
 }
@@ -302,7 +306,12 @@ void CPlayer::AnimatorUpdate()
 
 void CPlayer::CreateMissile()
 {
+	Logger::Debug(L"미사일 발사!");
 
+	CMissile* pMissile = new CMissile();
+	pMissile->SetPos(m_vecPos.x + 20, m_vecPos.y + 50);
+	pMissile->SetDir(Vector(1, 0));
+	ADDOBJECT(pMissile);
 }
 
 void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)

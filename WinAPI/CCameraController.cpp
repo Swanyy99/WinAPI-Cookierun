@@ -24,17 +24,17 @@ void CCameraController::Update()
 	}
 
 	Vector dir;
-	if (BUTTONSTAY('A'))
+	if (BUTTONSTAY(VK_LEFT))
 	{
 		dir.x = -1;
 	}
-	else if (BUTTONSTAY('D'))
+	else if (BUTTONSTAY(VK_RIGHT))
 		dir.x = 1;
 	else dir.x = 0;
 
-	if (BUTTONSTAY('W'))
+	if (BUTTONSTAY(VK_UP))
 		dir.y = -1;
-	else if (BUTTONSTAY('S'))
+	else if (BUTTONSTAY(VK_DOWN))
 		dir.y = 1;
 	else
 		dir.y = 0;
