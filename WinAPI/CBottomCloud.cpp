@@ -1,6 +1,8 @@
 #include "framework.h"
 #include "CBottomCloud.h"
 
+extern bool isDash;
+
 CBottomCloud::CBottomCloud()
 {
 	m_vecScale = Vector(10, 10);
@@ -21,7 +23,9 @@ void CBottomCloud::Init()
 
 void CBottomCloud::Update()
 {
+
 	m_vecPos -= m_vecDir * m_fVelocity * DT * 1.2;
+
 
 	// 화면 좌측 밖으로 나갈경우 화면 우측 밖에 재배치
 	if (m_vecPos.x < -640)

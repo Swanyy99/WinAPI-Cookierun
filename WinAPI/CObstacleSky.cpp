@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CObstacleSky.h"
 
+extern bool isDash;
 
 CObstacleSky::CObstacleSky()
 {
@@ -29,7 +30,9 @@ void CObstacleSky::Init()
 void CObstacleSky::Update()
 {
 
+
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
 
 	if (m_vecPos.x < - 200)
 		DELETEOBJECT(this);
@@ -62,6 +65,11 @@ void CObstacleSky::AnimatorUpdate()
 void CObstacleSky::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"미사일")
+	{
+		DELETEOBJECT(this);
+	}
+
+	if (pOtherCollider->GetObjName() == L"플레이어" && isDash == true)
 	{
 		DELETEOBJECT(this);
 	}

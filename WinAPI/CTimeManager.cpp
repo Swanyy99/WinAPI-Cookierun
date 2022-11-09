@@ -3,11 +3,13 @@
 
 extern bool pause;
 extern bool isDead;
+extern bool isDash;
 
 CTimeManager::CTimeManager()
 {
 	m_uiFPS = 1;
 	m_fDT = 1;
+	m_fAbsDT = 1;
 	updateCount = 0;
 	updateOneSecond = 0;
 
@@ -31,19 +33,35 @@ void CTimeManager::Update()
 	curTime = chrono::high_resolution_clock::now();
 	chrono::duration<float> elapsed = curTime - prevTime;
 
-	if (pause == false && isDead == false)
+	if (pause == false && isDead == false && isDash == false)
+	{
 		m_fDT = elapsed.count();
+		m_fAbsDT = elapsed.count();
+	}
+
+	else if (isDash == true && pause == false && isDead == false)
+	{
+		m_fDT = elapsed.count() * 3;
+	}
+
 	else if (pause == true)
+	{
 		m_fDT = 0;
+		m_fAbsDT = 0;
+	}
 	else if (isDead == true)
-		m_fDT = 0;;
+	{
+		m_fDT = 0;
+		m_fAbsDT = 0;
+	}
 
 	if (m_fDT > 0.1f) m_fDT = 0.1f;
+	if (m_fAbsDT > 0.1f) m_fAbsDT = 0.1f;
 	prevTime = curTime;
 
 	// 1초가 걸릴때까지 반복한 횟수가 초당프레임수
 	updateCount++;
-	updateOneSecond += m_fDT;
+	updateOneSecond += m_fAbsDT;
 	if (updateOneSecond >= 1.0)
 	{
 		m_uiFPS = updateCount;
@@ -64,4 +82,9 @@ UINT CTimeManager::GetFPS()
 float CTimeManager::GetDT()
 {
 	return m_fDT;
+}
+
+float CTimeManager::GetAbsDT()
+{
+	return m_fAbsDT;
 }

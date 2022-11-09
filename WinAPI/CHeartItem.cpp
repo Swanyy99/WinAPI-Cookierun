@@ -2,6 +2,7 @@
 #include "CHeartItem.h"
 
 extern bool isMagnet;
+extern bool isDash;
 
 extern float playerPosX;
 extern float playerPosY;
@@ -40,7 +41,9 @@ void CHeartItem::Init()
 void CHeartItem::Update()
 {
 
+
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
 
 
 	if (isMagnet == true)

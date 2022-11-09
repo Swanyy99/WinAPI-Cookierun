@@ -2,6 +2,7 @@
 #include "CMagnetItem.h"
 
 extern bool isMagnet;
+extern bool isDash;
 
 extern float playerPosX;
 extern float playerPosY;
@@ -40,7 +41,9 @@ void CMagnetItem::Init()
 void CMagnetItem::Update()
 {
 
+
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
 
 	if (isMagnet == true)
 	{

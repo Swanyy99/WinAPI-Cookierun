@@ -210,6 +210,9 @@
     <ClInclude Include="CJelly1.h">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClInclude>
+    <ClInclude Include="CDashItem.h">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -345,6 +348,9 @@
       <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
     <ClCompile Include="CJelly1.cpp">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CDashItem.cpp">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
   </ItemGroup>

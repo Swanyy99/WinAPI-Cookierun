@@ -150,6 +150,7 @@
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CDashItem.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CFloor.h" />
     <ClInclude Include="CGameObject.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CDashItem.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CFloor.cpp" />
     <ClCompile Include="CGameObject.cpp" />

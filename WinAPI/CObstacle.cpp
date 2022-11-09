@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CObstacle.h"
 
+extern bool isDash;
 
 CObstacle::CObstacle()
 {
@@ -30,6 +31,7 @@ void CObstacle::Update()
 {
 
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
 
 	if (m_vecPos.x < 0)
 		DELETEOBJECT(this);
@@ -62,6 +64,11 @@ void CObstacle::AnimatorUpdate()
 void CObstacle::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"미사일")
+	{
+		DELETEOBJECT(this);
+	}
+
+	if (pOtherCollider->GetObjName() == L"플레이어" && isDash == true)
 	{
 		DELETEOBJECT(this);
 	}

@@ -25,6 +25,7 @@
 #include "CObstacleSky.h"
 #include "CHeartItem.h"
 #include "CMagnetItem.h"
+#include "CDashItem.h"
 
 bool pause;
 bool isRetry;
@@ -87,31 +88,6 @@ CSceneStage01::~CSceneStage01()
 void CSceneStage01::Init()
 {
 
-	
-
-	
-
-	/*CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
-
-	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
-
-	failImage = RESOURCE->LoadImg(L"Fail", L"Image\\Fail.png");
-
-	slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
-	
-	jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
-
-	HPIcon = RESOURCE->LoadImg(L"HpIcon", L"Image\\Hp_Icon.png");
-
-	HPEffect = RESOURCE->LoadImg(L"HpEffect", L"Image\\Hp_Effect.png");
-
-	HPBar = RESOURCE->LoadImg(L"HpBar", L"Image\\Hp_Bar.png");
-
-	HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
-
-	HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");*/
-
-	
 }
 
 void CSceneStage01::Enter()
@@ -145,6 +121,7 @@ void CSceneStage01::Enter()
 		pause = false;
 		isRetry = true;
 	};
+
 	CButton* RetryButton = new CButton;
 	RetryButton->SetName(L"다시하기 버튼");
 	RetryButton->SetPos(530, 355);
@@ -160,17 +137,6 @@ void CSceneStage01::Enter()
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
-
-	//if (isRetry)
-	//{
-	//	pPlayer = new CPlayer();
-	//	pPlayer->SetPos(300, WINSIZEY * 0.65f);
-	//	AddGameObject(pPlayer);
-
-	//	CCameraController* pCamController = new CCameraController;
-	//	AddGameObject(pCamController);
-
-	//}
 
 
 	CAMERA->FadeIn(0.25f);
@@ -238,9 +204,6 @@ void CSceneStage01::Enter()
 
 void CSceneStage01::Update()
 {
-	//escButtonHide();
-
-
 
 	ScreenScore = to_wstring(score);
 
@@ -279,8 +242,6 @@ void CSceneStage01::Update()
 
 
 	obstacleTimer += DT;
-
-	HpTimer += DT;
 
 	#pragma region 맵패턴노가다
 	if (obstacleTimer >= 2 && obstacleTimer <= 2.1)
@@ -330,6 +291,10 @@ void CSceneStage01::Update()
 		CJelly1* pJelly7 = new CJelly1();
 		pJelly7->SetPos(WINSIZEX, WINSIZEY * 0.65);
 		AddGameObject(pJelly7);
+
+		CDashItem* pDash1 = new CDashItem();
+		pDash1->SetPos(WINSIZEX, WINSIZEY * 0.6);
+		AddGameObject(pDash1);
 
 		CJelly1* pJelly8 = new CJelly1();
 		pJelly8->SetPos(WINSIZEX + 100, WINSIZEY * 0.7);
@@ -548,12 +513,12 @@ void CSceneStage01::Update()
 
 	if (playerHp > 0)
 	{
-		HpTimer += DT;
+		HpTimer += ABSDT;
 
 		if (HpTimer >= 0.2)
 		{
 			HpTimer -= 0.2;
-			playerHp -= 0.1;
+			playerHp -= 0.2;
 		}
 	}
 
@@ -612,7 +577,6 @@ void CSceneStage01::Render()
 		RENDER->Image(
 			pauseImage,
 			0, 0, WINSIZEX, WINSIZEY);
-
 	}
 
 	// 사망 시 UI
@@ -634,20 +598,4 @@ void CSceneStage01::Release()
 {
 }
 
-void CSceneStage01::escButtonHide()
-{
-	/*if (pause == false)
-	{
-		ResumeButton->SetScale(0, 0);
-		RetryButton->SetScale(0, 0);
-	}
-	else if (pause == true)
-	{
-		ResumeButton->SetScale(220, 55);
-		RetryButton->SetScale(220, 55);
-	}*/
-}
 
-void CSceneStage01::escButtonShow()
-{
-}

@@ -5,6 +5,7 @@ extern float playerPosX;
 extern float playerPosY;
 
 extern bool isMagnet;
+extern bool isDash;
 
 Vector DistanceGap;
 
@@ -42,21 +43,21 @@ void CJelly1::Init()
 void CJelly1::Update()
 {
 
+
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
 
 	if (isMagnet == true)
 	{
-		if (abs(m_vecPos.x - playerPosX) < 200 && abs(m_vecPos.y - playerPosY) < 200)
+		if (abs(m_vecPos.x - playerPosX) < 250 && abs(m_vecPos.y - playerPosY) < 250)
 		{
 
-			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3.5;
-			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 3.5;
+			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3;
+			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 3;
 
 		}
+
 	}
-
-
-
 
 	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);

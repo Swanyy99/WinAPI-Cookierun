@@ -15,6 +15,7 @@
 #include "CGameObject.h"
 
 bool isMagnet;
+bool isDash;
 
 bool isJumping;
 bool isSliding;
@@ -57,6 +58,7 @@ CPlayer::CPlayer()
 	m_fJumpTimer = 0.4;
 	m_fHurtTimer = 2.5;
 	m_fMagnetTimer = 5;
+	m_fDashTimer = 5;
 
 	MagnetBlueImage = nullptr;
 	isMagnet = false;
@@ -175,13 +177,13 @@ void CPlayer::Update()
 				else
 					motion = L"HurtJump";
 
-				m_fJumpTimer -= DT;
-				m_vecPos.y -= m_fSpeed * DT * 1.9;
+				m_fJumpTimer -= ABSDT;
+				m_vecPos.y -= m_fSpeed * ABSDT * 1.9;
 			}
 
 			if (m_fJumpTimer < 0)
 			{
-				m_vecPos.y += m_fSpeed * DT * 2.3;
+				m_vecPos.y += m_fSpeed * ABSDT * 2.3;
 
 				if (isHurt == false)
 					motion = L"JumpDown";
@@ -216,13 +218,13 @@ void CPlayer::Update()
 				else
 					motion = L"HurtDoubleJump";
 
-				m_fJumpTimer -= DT;
-				m_vecPos.y -= m_fSpeed * DT * 3.1;
+				m_fJumpTimer -= ABSDT;
+				m_vecPos.y -= m_fSpeed * ABSDT * 3.1;
 			}
 
 			if (m_fJumpTimer < 0)
 			{
-				m_vecPos.y += m_fSpeed * DT * 2.3;
+				m_vecPos.y += m_fSpeed * ABSDT * 2.3;
 			}
 
 			break;
@@ -268,7 +270,7 @@ void CPlayer::Update()
 	// 피격 후 무적 및 살짝 주춤하는 모션
 	if (isHurt == true && isDead == false)
 	{
-		m_fHurtTimer -= DT;
+		m_fHurtTimer -= ABSDT;
 
 		if (m_fHurtTimer <= 2.5 && m_fHurtTimer >= 2.44)
 		{
@@ -292,7 +294,7 @@ void CPlayer::Update()
 
 	if (isMagnet == true && isDead == false)
 	{
-		m_fMagnetTimer -= DT;
+		m_fMagnetTimer -= ABSDT;
 
 		if (m_fMagnetTimer <= 0)
 		{
@@ -301,6 +303,16 @@ void CPlayer::Update()
 		}
 	}
 
+	if (isDash == true && isDead == false)
+	{
+		m_fDashTimer -= ABSDT;
+
+		if (m_fDashTimer <= 0)
+		{
+			isDash = false;
+			m_fDashTimer = 5;
+		}
+	}
 
 
 
@@ -367,11 +379,17 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		isGround = true;
 	}
 
-	if (pOtherCollider->GetObjName() == L"장애물" && isHurt == false)
+	if (pOtherCollider->GetObjName() == L"장애물" && isHurt == false && isDash == false)
 	{
 		Logger::Debug(L"플레이어가 장애물에 닿음");
 		playerHp -= 20;
 		isHurt = true;
+	}
+
+	if (pOtherCollider->GetObjName() == L"장애물" && isHurt == false && isDash == true)
+	{
+		Logger::Debug(L"플레이어가 대쉬중에 장애물을 부숨");
+		score += 1000;
 	}
 
 	if (pOtherCollider->GetObjName() == L"젤리")
@@ -386,10 +404,18 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		playerHp += 20;
 	}
 
+
 	if (pOtherCollider->GetObjName() == L"자석아이템")
 	{
 		Logger::Debug(L"자석아이템 획득!");
 		isMagnet = true;
+	}
+
+	if (pOtherCollider->GetObjName() == L"대쉬아이템")
+	{
+		Logger::Debug(L"대쉬아이템 획득!");
+		isDash = true;
+		m_fDashTimer = 5;
 	}
 
 	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
