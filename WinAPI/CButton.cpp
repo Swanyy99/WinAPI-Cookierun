@@ -3,6 +3,9 @@
 
 #include "CRenderManager.h"
 
+extern bool pause;
+
+
 CButton::CButton()
 {
 	m_pCallback = nullptr;
@@ -20,9 +23,11 @@ CButton::~CButton()
 
 void CButton::SetClickedCallback(CallbackFunc pCallback, DWORD_PTR pParam1, DWORD_PTR pParam2)
 {
+	
 	m_pCallback = pCallback;
 	m_pParam1 = pParam1;
 	m_pParam2 = pParam2;
+	
 }
 
 void CButton::SetText(const wstring& text, float fontSize, Color color)
@@ -38,6 +43,7 @@ void CButton::Init()
 
 void CButton::Update()
 {
+	//SetClickedCallback(m_pCallback, m_pParam1, m_pParam2);
 }
 
 void CButton::Render()
@@ -79,6 +85,7 @@ void CButton::OnMouseEnter()
 
 void CButton::OnMouseOver()
 {
+
 }
 
 void CButton::OnMouseExit()
@@ -91,8 +98,11 @@ void CButton::OnMouseUp()
 
 void CButton::OnMouseDown()
 {
-	if (nullptr != m_pCallback)
-		m_pCallback(m_pParam1, m_pParam2);
+	if (pause == true)
+	{
+		if (nullptr != m_pCallback)
+			m_pCallback(m_pParam1, m_pParam2);
+	}
 }
 
 void CButton::OnMouseClicked()

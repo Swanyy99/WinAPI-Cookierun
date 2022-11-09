@@ -48,4 +48,3 @@ private:
 	// 부모에서 정의한 기능을 자식은 사용하지 않기를 바랄경우 사용
 	void AddChildUI(CUI* pChildUI) = delete;
 };
-

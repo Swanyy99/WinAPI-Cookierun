@@ -25,14 +25,12 @@ private:
 	CImage* HPProgressBar;
 	CImage* HPEffect;
 
-
-
 	float obstacleTimer;
 	float HpTimer;
 
 public:
-	CButton* RetryButton = new CButton;
-	CButton* ResumeButton = new CButton;
+
+
 
 private:
 	void Init()		override;
@@ -41,4 +39,6 @@ private:
 	void Render()	override;
 	void Exit()		override;
 	void Release()	override;
+	void escButtonHide();
+	void escButtonShow();
 };

@@ -37,9 +37,7 @@ extern bool isJumping;
 extern bool isDead;
 extern float playerHp;
 
-	
-CButton* RetryButton = new CButton;
-CButton* ResumeButton = new CButton;
+
 
 CSceneStage01::CSceneStage01()
 {
@@ -89,49 +87,7 @@ CSceneStage01::~CSceneStage01()
 void CSceneStage01::Init()
 {
 
-	// ESC 계속하기 버튼
-	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
-		CButton* ResumeButton = (CButton*)(button);
-		int paramInt = (int)(param);
-
-		Logger::Debug(ResumeButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-		pause = false;
-	};
-
-	ResumeButton->SetName(L"계속하기 버튼");
-	ResumeButton->SetPos(530, 265);
-	ResumeButton->SetScale(0, 0);
-	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
-	AddGameObject(ResumeButton);
-
-
-	// ESC 다시하기 버튼
-	auto RetryButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
-		CButton* RetryButton = (CButton*)(button);
-		int paramInt = (int)(param);
-
-		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-		CAMERA->FadeOut(0.25f);
-		CHANGESCENE(GroupScene::Title);
-		pause = false;
-		isRetry = true;
-	};
-
-
-	RetryButton->SetName(L"다시하기 버튼");
-	RetryButton->SetPos(530, 355);
-	RetryButton->SetScale(0, 0);
-	RetryButton->SetClickedCallback(RetryButtonClicked, (DWORD_PTR)RetryButton, (DWORD_PTR)1);
-	AddGameObject(RetryButton);
-
-
-
-	pPlayer = new CPlayer();
-	pPlayer->SetPos(300, WINSIZEY * 0.65f);
-	AddGameObject(pPlayer);
-
-	CCameraController* pCamController = new CCameraController;
-	AddGameObject(pCamController);
+	
 
 	
 
@@ -161,28 +117,60 @@ void CSceneStage01::Init()
 void CSceneStage01::Enter()
 {
 
-	if (isRetry)
-	{
-		pPlayer = new CPlayer();
-		pPlayer->SetPos(300, WINSIZEY * 0.65f);
-		AddGameObject(pPlayer);
+	// ESC 계속하기 버튼
+	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* ResumeButton = (CButton*)(button);
+		int paramInt = (int)(param);
 
-		CCameraController* pCamController = new CCameraController;
-		AddGameObject(pCamController);
+		Logger::Debug(ResumeButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		pause = false;
+	};
 
-		auto RetryButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
-			CButton* RetryButton = (CButton*)(button);
-			int paramInt = (int)(param);
+	CButton* ResumeButton = new CButton;
+	ResumeButton->SetName(L"계속하기 버튼");
+	ResumeButton->SetPos(530, 265);
+	ResumeButton->SetScale(220, 55);
+	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
+	AddGameObject(ResumeButton);
 
-			Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-			CAMERA->FadeOut(0.25f);
-			CHANGESCENE(GroupScene::Title);
-			pause = false;
-			isRetry = true;
-		};
 
-	
-	}
+	// ESC 다시하기 버튼
+	auto RetryButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* RetryButton = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		CHANGESCENE(GroupScene::Stage01);
+		CAMERA->FadeOut(0.5f);
+		pause = false;
+		isRetry = true;
+	};
+	CButton* RetryButton = new CButton;
+	RetryButton->SetName(L"다시하기 버튼");
+	RetryButton->SetPos(530, 355);
+	RetryButton->SetScale(220, 55);
+	RetryButton->SetClickedCallback(RetryButtonClicked, (DWORD_PTR)RetryButton, (DWORD_PTR)1);
+	AddGameObject(RetryButton);
+
+
+
+	pPlayer = new CPlayer();
+	pPlayer->SetPos(300, WINSIZEY * 0.65f);
+	AddGameObject(pPlayer);
+
+	CCameraController* pCamController = new CCameraController;
+	AddGameObject(pCamController);
+
+	//if (isRetry)
+	//{
+	//	pPlayer = new CPlayer();
+	//	pPlayer->SetPos(300, WINSIZEY * 0.65f);
+	//	AddGameObject(pPlayer);
+
+	//	CCameraController* pCamController = new CCameraController;
+	//	AddGameObject(pCamController);
+
+	//}
 
 
 	CAMERA->FadeIn(0.25f);
@@ -250,16 +238,8 @@ void CSceneStage01::Enter()
 
 void CSceneStage01::Update()
 {
-	if (pause == false)
-	{
-		ResumeButton->SetScale(0, 0);
-		RetryButton->SetScale(0, 0);
-	}
-	else if (pause == true)
-	{
-		ResumeButton->SetScale(220, 55);
-		RetryButton->SetScale(220, 55);
-	}
+	//escButtonHide();
+
 
 
 	ScreenScore = to_wstring(score);
@@ -296,8 +276,6 @@ void CSceneStage01::Update()
 	{
 		jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
 	}
-
-
 
 
 	obstacleTimer += DT;
@@ -592,23 +570,6 @@ void CSceneStage01::Render()
 		CookierunTitle,
 		1130, 15, 1270, 80);
 
-	// 일시정지 UI
-	if (pause == true)
-	{
-		RENDER->Image(
-			pauseImage,
-			0, 0, WINSIZEX, WINSIZEY);
-
-	}
-
-	// 사망 시 UI
-	if (isDead== true)
-	{
-		RENDER->Image(
-			failImage,
-			0, 0, WINSIZEX, WINSIZEY);
-	}
-
 
 	// 슬라이드 버튼
 	RENDER->Image(
@@ -645,6 +606,23 @@ void CSceneStage01::Render()
 		HPIcon,
 		40, 50, 90, 100);
 
+	// 일시정지 UI
+	if (pause == true)
+	{
+		RENDER->Image(
+			pauseImage,
+			0, 0, WINSIZEX, WINSIZEY);
+
+	}
+
+	// 사망 시 UI
+	if (isDead == true)
+	{
+		RENDER->Image(
+			failImage,
+			0, 0, WINSIZEX, WINSIZEY);
+	}
+
 }
 
 void CSceneStage01::Exit()
@@ -653,5 +631,23 @@ void CSceneStage01::Exit()
 }
 
 void CSceneStage01::Release()
+{
+}
+
+void CSceneStage01::escButtonHide()
+{
+	/*if (pause == false)
+	{
+		ResumeButton->SetScale(0, 0);
+		RetryButton->SetScale(0, 0);
+	}
+	else if (pause == true)
+	{
+		ResumeButton->SetScale(220, 55);
+		RetryButton->SetScale(220, 55);
+	}*/
+}
+
+void CSceneStage01::escButtonShow()
 {
 }
