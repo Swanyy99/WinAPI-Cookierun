@@ -27,6 +27,7 @@
 #include "CMagnetItem.h"
 
 bool pause;
+bool isRetry;
 
 int score;
 wstring ScreenScore;
@@ -36,7 +37,9 @@ extern bool isJumping;
 extern bool isDead;
 extern float playerHp;
 
-
+	
+CButton* RetryButton = new CButton;
+CButton* ResumeButton = new CButton;
 
 CSceneStage01::CSceneStage01()
 {
@@ -56,6 +59,27 @@ CSceneStage01::CSceneStage01()
 	HpTimer = 0;
 	ScreenScore = L"";
 	score = 0;
+	isRetry = false;
+
+	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
+
+	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
+
+	failImage = RESOURCE->LoadImg(L"Fail", L"Image\\Fail.png");
+
+	slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
+
+	jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
+
+	HPIcon = RESOURCE->LoadImg(L"HpIcon", L"Image\\Hp_Icon.png");
+
+	HPEffect = RESOURCE->LoadImg(L"HpEffect", L"Image\\Hp_Effect.png");
+
+	HPBar = RESOURCE->LoadImg(L"HpBar", L"Image\\Hp_Bar.png");
+
+	HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
+
+	HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");
 }
 
 CSceneStage01::~CSceneStage01()
@@ -65,9 +89,42 @@ CSceneStage01::~CSceneStage01()
 void CSceneStage01::Init()
 {
 
-	//CMonster* pMonster = new CMonster();
-	//pMonster->SetPos(1000, WINSIZEY * 0.5f);
-	//AddGameObject(pMonster);
+	// ESC 계속하기 버튼
+	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* ResumeButton = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(ResumeButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		pause = false;
+	};
+
+	ResumeButton->SetName(L"계속하기 버튼");
+	ResumeButton->SetPos(530, 265);
+	ResumeButton->SetScale(0, 0);
+	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
+	AddGameObject(ResumeButton);
+
+
+	// ESC 다시하기 버튼
+	auto RetryButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* RetryButton = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		CAMERA->FadeOut(0.25f);
+		CHANGESCENE(GroupScene::Title);
+		pause = false;
+		isRetry = true;
+	};
+
+
+	RetryButton->SetName(L"다시하기 버튼");
+	RetryButton->SetPos(530, 355);
+	RetryButton->SetScale(0, 0);
+	RetryButton->SetClickedCallback(RetryButtonClicked, (DWORD_PTR)RetryButton, (DWORD_PTR)1);
+	AddGameObject(RetryButton);
+
+
 
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(300, WINSIZEY * 0.65f);
@@ -76,7 +133,9 @@ void CSceneStage01::Init()
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
-	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
+	
+
+	/*CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
 
 	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
 
@@ -94,20 +153,47 @@ void CSceneStage01::Init()
 
 	HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
 
-	HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");
+	HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");*/
+
+	
 }
 
 void CSceneStage01::Enter()
 {
-	CAMERA->FadeIn(0.25f);
-	LoadTile(GETPATH + L"Tile\\Stage01.tile");
 
-	/*CImageObject* BackGround = new CImageObject;
-	BackGround->SetImage(RESOURCE->LoadImg(L"BackGround" , L"Image\\Stage1_BackGround.png"));
-	AddGameObject(BackGround);*/
+	if (isRetry)
+	{
+		pPlayer = new CPlayer();
+		pPlayer->SetPos(300, WINSIZEY * 0.65f);
+		AddGameObject(pPlayer);
+
+		CCameraController* pCamController = new CCameraController;
+		AddGameObject(pCamController);
+
+		auto RetryButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
+			CButton* RetryButton = (CButton*)(button);
+			int paramInt = (int)(param);
+
+			Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+			CAMERA->FadeOut(0.25f);
+			CHANGESCENE(GroupScene::Title);
+			pause = false;
+			isRetry = true;
+		};
 
 	
+	}
 
+
+	CAMERA->FadeIn(0.25f);
+
+
+	obstacleTimer = 0;
+	HpTimer = 0;
+	ScreenScore = L"";
+	score = 0;
+
+	
 	CFloor* pFloor2 = new CFloor();
 	pFloor2->SetPos(WINSIZEX, WINSIZEY * 0.9);
 	pFloor2->SetDir(Vector(1, 0));
@@ -164,6 +250,17 @@ void CSceneStage01::Enter()
 
 void CSceneStage01::Update()
 {
+	if (pause == false)
+	{
+		ResumeButton->SetScale(0, 0);
+		RetryButton->SetScale(0, 0);
+	}
+	else if (pause == true)
+	{
+		ResumeButton->SetScale(220, 55);
+		RetryButton->SetScale(220, 55);
+	}
+
 
 	ScreenScore = to_wstring(score);
 
@@ -183,10 +280,12 @@ void CSceneStage01::Update()
 	if (BUTTONSTAY(VK_CONTROL))
 	{
 		slideImage = RESOURCE->LoadImg(L"SlideButton2", L"Image\\Pushed_Slide.png");
+		isSliding = true;
 	}
 	if (BUTTONUP(VK_CONTROL))
 	{
 		slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
+		isSliding = false;
 	}
 
 	if (BUTTONSTAY(VK_SPACE))
@@ -199,18 +298,13 @@ void CSceneStage01::Update()
 	}
 
 
-	//if (BUTTONUP(VK_CONTROL))
-	//{
-	//	slideImage = RESOURCE->LoadImg(L"SlideButton2", L"Image\\Idle_Slide.png");
-	//}
-
 
 
 	obstacleTimer += DT;
 
 	HpTimer += DT;
 
-	#pragma region 맵패턴
+	#pragma region 맵패턴노가다
 	if (obstacleTimer >= 2 && obstacleTimer <= 2.1)
 	{
 		obstacleTimer += 1;
@@ -489,6 +583,7 @@ void CSceneStage01::Update()
 
 void CSceneStage01::Render()
 {
+
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 	RENDER->Text(L"Score : " + ScreenScore + L"점", 50, 107, 300, 107, Color(255, 255, 255, 1.f), 20);
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
@@ -503,6 +598,7 @@ void CSceneStage01::Render()
 		RENDER->Image(
 			pauseImage,
 			0, 0, WINSIZEX, WINSIZEY);
+
 	}
 
 	// 사망 시 UI
@@ -549,45 +645,11 @@ void CSceneStage01::Render()
 		HPIcon,
 		40, 50, 90, 100);
 
-	//// 슬라이드 버튼
-	//RENDER->Image(
-	//	slideImage,
-	//	WINSIZEX * 0.86, WINSIZEY * 0.8, WINSIZEX * 0.98, WINSIZEY * 0.95);
-
-	//// 점프 버튼
-	//RENDER->Image(
-	//	jumpImage,
-	//	WINSIZEX * 0.02, WINSIZEY * 0.8, WINSIZEX * 0.14, WINSIZEY * 0.95);
-
-	//// HP Back 바
-	//RENDER->Image(
-	//	HPBackBar,
-	//	WINSIZEX * 0.04, WINSIZEY * 0.075, WINSIZEX * 0.402, WINSIZEY * 0.095);
-	//
-	//// HP 바
-	//RENDER->Image(
-	//	HPBar,
-	//	WINSIZEX * 0.04, WINSIZEY * 0.07, WINSIZEX * 0.4, WINSIZEY * 0.1);
-
-	//// HP 프로그레스 바
-	//RENDER->Image(
-	//	HPProgressBar,
-	//	WINSIZEX * (0.402 * playerHp / 100), WINSIZEY * 0.075, WINSIZEX * 0.402, WINSIZEY * 0.095);
-
-	//// HP 이펙트
-	//RENDER->Image(
-	//	HPEffect,
-	//	WINSIZEX * (0.392 * playerHp / 100), WINSIZEY * 0.072, WINSIZEX * (0.408 * playerHp / 100), WINSIZEY * 0.098);
-
-	//// HP 아이콘
-	//RENDER->Image(
-	//	HPIcon,
-	//	WINSIZEX * 0.02, WINSIZEY * 0.05, WINSIZEX * 0.06, WINSIZEY * 0.12);
-
 }
 
 void CSceneStage01::Exit()
 {
+	DeleteAll();
 }
 
 void CSceneStage01::Release()

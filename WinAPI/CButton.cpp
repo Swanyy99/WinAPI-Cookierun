@@ -47,7 +47,7 @@ void CButton::Render()
 		m_vecRenderPos.y,
 		m_vecRenderPos.x + m_vecScale.x,
 		m_vecRenderPos.y + m_vecScale.y,
-		Color(255, 255, 255, 1)
+		Color(255, 255, 255, 0)
 	);
 
 	RENDER->FrameRect(
@@ -55,7 +55,7 @@ void CButton::Render()
 		m_vecRenderPos.y,
 		m_vecRenderPos.x + m_vecScale.x,
 		m_vecRenderPos.y + m_vecScale.y,
-		Color(0, 0, 0, 1)
+		Color(0, 0, 0, 0)
 	);
 
 	RENDER->Text(

@@ -159,6 +159,11 @@ void CPlayer::Update()
 				playerState = PlayerState::Slide;
 			}
 
+			if (isSliding == true)
+			{
+				playerState = PlayerState::Slide;
+			}
+
 			break;
 
 		case PlayerState::Jump:	// 1´Ü Á¡ÇÁ

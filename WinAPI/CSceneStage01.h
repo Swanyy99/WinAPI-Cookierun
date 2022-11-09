@@ -30,6 +30,10 @@ private:
 	float obstacleTimer;
 	float HpTimer;
 
+public:
+	CButton* RetryButton = new CButton;
+	CButton* ResumeButton = new CButton;
+
 private:
 	void Init()		override;
 	void Enter()	override;
