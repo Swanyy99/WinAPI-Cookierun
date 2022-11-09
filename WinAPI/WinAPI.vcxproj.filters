@@ -52,6 +52,9 @@
     <Filter Include="GameObject\Stage01">
       <UniqueIdentifier>{f2ad0501-d505-4b88-af0d-880a4673ef5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\Item">
+      <UniqueIdentifier>{1adb6c81-4f15-46f7-b3ea-cd059d7473db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -195,14 +198,17 @@
     <ClInclude Include="CBottomCloud.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
-    <ClInclude Include="CJelly1.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CObstacleSky.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
     <ClInclude Include="CHeartItem.h">
-      <Filter>GameObject\Stage01</Filter>
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CMagnetItem.h">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CJelly1.h">
+      <Filter>GameObject\Stage01\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,14 +335,17 @@
     <ClCompile Include="CBottomCloud.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
-    <ClCompile Include="CJelly1.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CObstacleSky.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
     <ClCompile Include="CHeartItem.cpp">
-      <Filter>GameObject\Stage01</Filter>
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CMagnetItem.cpp">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CJelly1.cpp">
+      <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

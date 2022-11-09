@@ -24,6 +24,7 @@ private:
 
 	CImage* HurtInvincibilityImage;
 	CImage* HurtRedImage;
+	CImage* MagnetBlueImage;
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
@@ -37,6 +38,7 @@ private:
 	float m_fSpeed = 200.0f;
 	float m_fJumpTimer;
 	float m_fHurtTimer;
+	float m_fMagnetTimer;
 
 	
 

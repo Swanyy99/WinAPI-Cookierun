@@ -14,11 +14,16 @@
 #include "CMissile.h"
 #include "CGameObject.h"
 
+bool isMagnet;
+
 bool isJumping;
 bool isSliding;
 bool isDead;
 wstring motion;
 float playerHp;
+
+float playerPosX;
+float playerPosY;
 
 extern int score;
 extern wstring ScreenScore;
@@ -51,6 +56,10 @@ CPlayer::CPlayer()
 	isHurt = false;
 	m_fJumpTimer = 0.4;
 	m_fHurtTimer = 2.5;
+	m_fMagnetTimer = 5;
+
+	MagnetBlueImage = nullptr;
+	isMagnet = false;
 
 	playerHp = 100;
 }
@@ -72,6 +81,8 @@ void CPlayer::Init()
 	HurtInvincibilityImage = RESOURCE->LoadImg(L"PlayerInvincibility", L"Image\\HurtInvincibility.png");
 
 	HurtRedImage = RESOURCE->LoadImg(L"HurtRedScreen", L"Image\\HurtRedScreen.png");
+
+	MagnetBlueImage = RESOURCE->LoadImg(L"MagnetBlueImage", L"Image\\MagnetBlueScreen.png");
 
 	m_pAnimator->CreateAnimation(L"IdleRun", m_pIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
 	m_pAnimator->CreateAnimation(L"Dash", m_pIdleImage, Vector(0, 0), Vector(0, 75.f), Vector(84.f, 0.f), 0.05f, 16);
@@ -114,6 +125,8 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
+	playerPosX = m_vecPos.x + 10;
+	playerPosY = m_vecPos.y + 70;
 
 	if (pause == false)
 	{
@@ -271,6 +284,21 @@ void CPlayer::Update()
 		}
 	}
 
+
+	if (isMagnet == true && isDead == false)
+	{
+		m_fMagnetTimer -= DT;
+
+		if (m_fMagnetTimer <= 0)
+		{
+			isMagnet = false;
+			m_fMagnetTimer = 5;
+		}
+	}
+
+
+
+
 	if (BUTTONDOWN('A')) // 미사일발사
 	{
 		CreateMissile();
@@ -295,6 +323,14 @@ void CPlayer::Render()
 		RENDER->Image(
 			HurtRedImage,
 			-230, -200, WINSIZEX + 230, WINSIZEY + 200);
+	}
+
+	if (isMagnet == true && isDead == false)
+	{
+		RENDER->Image(
+			MagnetBlueImage,
+			-230, -200, WINSIZEX + 230, WINSIZEY + 200);
+
 	}
 }
 
@@ -345,6 +381,11 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		playerHp += 20;
 	}
 
+	if (pOtherCollider->GetObjName() == L"자석아이템")
+	{
+		Logger::Debug(L"자석아이템 획득!");
+		isMagnet = true;
+	}
 
 	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
 	{

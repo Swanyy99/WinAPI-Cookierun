@@ -24,6 +24,7 @@
 #include "CJelly1.h"
 #include "CObstacleSky.h"
 #include "CHeartItem.h"
+#include "CMagnetItem.h"
 
 bool pause;
 
@@ -323,21 +324,25 @@ void CSceneStage01::Update()
 		pJelly18->SetPos(WINSIZEX + 500, WINSIZEY * 0.75);
 		AddGameObject(pJelly18);
 
-		CJelly1* pJelly19 = new CJelly1();
-		pJelly19->SetPos(WINSIZEX + 600, WINSIZEY * 0.75);
-		AddGameObject(pJelly19);
-
 		CJelly1* pJelly20 = new CJelly1();
 		pJelly20->SetPos(WINSIZEX + 500, WINSIZEY * 0.6);
 		AddGameObject(pJelly20);
 
-		CJelly1* pJelly21 = new CJelly1();
-		pJelly21->SetPos(WINSIZEX + 500, WINSIZEY * 0.75);
-		AddGameObject(pJelly21);
+		CJelly1* pJelly19 = new CJelly1();
+		pJelly19->SetPos(WINSIZEX + 600, WINSIZEY * 0.75);
+		AddGameObject(pJelly19);
 
 		CJelly1* pJelly22 = new CJelly1();
 		pJelly22->SetPos(WINSIZEX + 600, WINSIZEY * 0.6);
 		AddGameObject(pJelly22);
+
+		CMagnetItem* pMagent1 = new CMagnetItem();
+		pMagent1->SetPos(WINSIZEX + 600, WINSIZEY * 0.45);
+		AddGameObject(pMagent1);
+
+		//CJelly1* pJelly21 = new CJelly1();
+		//pJelly21->SetPos(WINSIZEX + 500, WINSIZEY * 0.75);
+		//AddGameObject(pJelly21);
 
 		CJelly1* pJelly23 = new CJelly1();
 		pJelly23->SetPos(WINSIZEX + 700, WINSIZEY * 0.75);

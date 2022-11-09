@@ -1,7 +1,10 @@
 #include "framework.h"
 #include "CHeartItem.h"
 
+extern bool isMagnet;
 
+extern float playerPosX;
+extern float playerPosY;
 
 CHeartItem::CHeartItem()
 {
@@ -25,7 +28,7 @@ void CHeartItem::Init()
 
 
 	m_pAnimatorHeartItem = new CAnimator;
-	m_pAnimatorHeartItem->CreateAnimation(L"HeartItem", m_pHeartItemImage, Vector(0, 0), Vector(88, 89), Vector(88, 0), 0.2f, 4);
+	m_pAnimatorHeartItem->CreateAnimation(L"HeartItem", m_pHeartItemImage, Vector(0, 0), Vector(89, 89), Vector(89, 0), 0.2f, 4);
 
 	m_pAnimatorHeartItem->Play(L"HeartItem", false);
 	AddComponent(m_pAnimatorHeartItem);
@@ -38,6 +41,18 @@ void CHeartItem::Update()
 {
 
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
+
+	if (isMagnet == true)
+	{
+		if (abs(m_vecPos.x - playerPosX) < 200 && abs(m_vecPos.y - playerPosY) < 200)
+		{
+
+			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3.5;
+			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 3.5;
+
+		}
+	}
 
 	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);

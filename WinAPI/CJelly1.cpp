@@ -1,7 +1,12 @@
 #include "framework.h"
 #include "CJelly1.h"
 
+extern float playerPosX;
+extern float playerPosY;
 
+extern bool isMagnet;
+
+Vector DistanceGap;
 
 CJelly1::CJelly1()
 {
@@ -38,6 +43,20 @@ void CJelly1::Update()
 {
 
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
+
+	if (isMagnet == true)
+	{
+		if (abs(m_vecPos.x - playerPosX) < 200 && abs(m_vecPos.y - playerPosY) < 200)
+		{
+
+			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3.5;
+			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 3.5;
+
+		}
+	}
+
+
+
 
 	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);
