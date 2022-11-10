@@ -365,12 +365,13 @@ void CPlayer::Render()
 			m_vecPos.x + HurtInvincibilityImage->GetWidth() * 0.25,
 			m_vecPos.y - 30 + HurtInvincibilityImage->GetHeight() * 0.25);
 
-		// 피격 시 붉은색 테두리 이미지
+		// 피격 시 화면 붉은색 테두리 이미지
 		RENDER->Image(
 			HurtRedImage,
 			-230, -200, WINSIZEX + 230, WINSIZEY + 200);
 	}
 
+	// 자석 화면 파란색 테두리 이미지
 	if (isMagnet == true && isDead == false)
 	{
 		RENDER->Image(
@@ -379,11 +380,12 @@ void CPlayer::Render()
 
 	}
 
+	// 대쉬 불꽃돔 이미지
 	if (isDash == true && isDead == false)
 	{
 		RENDER->Image(
 			DashFireDom,
-			playerPosX - 110, playerPosY - 70, playerPosX-10, playerPosY + 70);
+			playerPosX - 110, playerPosY - 75, playerPosX - 10, playerPosY + 70);
 
 	}
 }
