@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CJelly1.h"
+#include "CJellyEatEffect.h"
 
 extern float playerPosX;
 extern float playerPosY;
@@ -89,6 +90,9 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{
 		Logger::Debug(L"플레이어가 젤리를 먹었습니다.");
+		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
+		pJellyEffect->SetPos(m_vecPos.x, m_vecPos.y);
+		ADDOBJECT(pJellyEffect);
 		DELETEOBJECT(this);
 	}
 }

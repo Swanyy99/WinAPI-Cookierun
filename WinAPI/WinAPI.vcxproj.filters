@@ -219,6 +219,12 @@
     <ClInclude Include="CDashFireEffect.h">
       <Filter>GameObject\Stage01\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="CJellyEatEffect.h">
+      <Filter>GameObject\Stage01\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacleBoomEffect.h">
+      <Filter>GameObject\Stage01\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -360,6 +366,12 @@
       <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
     <ClCompile Include="CDashFireEffect.cpp">
+      <Filter>GameObject\Stage01\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CJellyEatEffect.cpp">
+      <Filter>GameObject\Stage01\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacleBoomEffect.cpp">
       <Filter>GameObject\Stage01\Effect</Filter>
     </ClCompile>
   </ItemGroup>

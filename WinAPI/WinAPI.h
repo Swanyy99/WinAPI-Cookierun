@@ -52,6 +52,8 @@ enum class Layer
 	HeartItem,
 	DashItem,
 	MagnetItem,
+	ObstacleBoomEffect,
+	JellyEatEffect,
 	DashEffect,
 	Player,
 	Missile,

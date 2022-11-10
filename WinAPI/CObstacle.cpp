@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CObstacle.h"
+#include "CObstacleBoomEffect.h"
 
 extern bool isDash;
 
@@ -70,6 +71,10 @@ void CObstacle::OnCollisionEnter(CCollider* pOtherCollider)
 
 	if (pOtherCollider->GetObjName() == L"플레이어" && isDash == true)
 	{
+		Logger::Debug(L"플레이어가 장애물을 부쉈습니다");
+		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
+		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
+		ADDOBJECT(pObstacleBoomEffect);
 		DELETEOBJECT(this);
 	}
 }

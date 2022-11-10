@@ -85,7 +85,6 @@ void CDashItem::AnimatorUpdate()
 
 void CDashItem::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	
 
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{

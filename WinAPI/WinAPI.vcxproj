@@ -160,10 +160,12 @@
     <ClInclude Include="CImageObject.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CJelly1.h" />
+    <ClInclude Include="CJellyEatEffect.h" />
     <ClInclude Include="CMagnetItem.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObstacle.h" />
+    <ClInclude Include="CObstacleBoomEffect.h" />
     <ClInclude Include="CObstacleSky.h" />
     <ClInclude Include="CPanel.h" />
     <ClInclude Include="CPathManager.h" />
@@ -215,10 +217,12 @@
     <ClCompile Include="CImageObject.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CJelly1.cpp" />
+    <ClCompile Include="CJellyEatEffect.cpp" />
     <ClCompile Include="CMagnetItem.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObstacle.cpp" />
+    <ClCompile Include="CObstacleBoomEffect.cpp" />
     <ClCompile Include="CObstacleSky.cpp" />
     <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPathManager.cpp" />
