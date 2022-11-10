@@ -6,6 +6,8 @@
 
 UINT CCollider::s_uiID = 0;
 
+extern bool isDebugMode;
+
 CCollider::CCollider()
 {
 	m_uiID = s_uiID++;
@@ -87,13 +89,20 @@ void CCollider::PhysicsUpdate()
 void CCollider::Render()
 {
 	Color color = Color(0, 0, 0, 0);
+
 	if (m_uiCollisionCount > 0)
 	{
-		color = Color(255, 0, 0, 1.f);
+		if(isDebugMode == true)
+			color = Color(255, 0, 0, 1.f);
+		if (isDebugMode == false)
+			color = Color(255, 0, 0, 0);
 	}
 	else
 	{
-		color = Color(0, 255, 0, 1.f);
+		if (isDebugMode == true)
+			color = Color(0, 255, 0, 1.f);
+		if (isDebugMode == false)
+			color = Color(0, 255, 0, 0);
 	}
 
 	if (m_type == ColliderType::Rect)

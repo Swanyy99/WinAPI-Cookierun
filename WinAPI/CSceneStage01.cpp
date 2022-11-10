@@ -21,6 +21,7 @@
 #include "CImageObject.h"
 #include "CGameObject.h"
 #include "CObstacle.h"
+#include "CObstacle2.h"
 #include "CJelly1.h"
 #include "CObstacleSky.h"
 #include "CHeartItem.h"
@@ -29,6 +30,7 @@
 
 bool pause;
 bool isRetry;
+bool isDebugMode;
 
 int score;
 wstring ScreenScore;
@@ -61,6 +63,7 @@ CSceneStage01::CSceneStage01()
 	ScreenScore = L"";
 	score = 0;
 	isRetry = false;
+	isDebugMode = false;
 
 
 	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
@@ -168,30 +171,55 @@ void CSceneStage01::Enter()
 	score = 0;
 	isDash = false;
 	isMagnet = false;
-
+	isDebugMode = false;
 	
+	//CFloor* pFloor2 = new CFloor();
+	//pFloor2->SetPos(WINSIZEX, WINSIZEY * 0.9);
+	//pFloor2->SetDir(Vector(1, 0));
+	//AddGameObject(pFloor2);
+
+	//CFloor* pFloor3 = new CFloor();
+	//pFloor3->SetPos(WINSIZEX - 310, WINSIZEY * 0.9);
+	//pFloor3->SetDir(Vector(1, 0));
+	//AddGameObject(pFloor3);
+
+	//CFloor* pFloor4 = new CFloor();
+	//pFloor4->SetPos(WINSIZEX - 620, WINSIZEY * 0.9);
+	//pFloor4->SetDir(Vector(1, 0));
+	//AddGameObject(pFloor4);
+
+	//CFloor* pFloor5 = new CFloor();
+	//pFloor5->SetPos(WINSIZEX - 930, WINSIZEY * 0.9);
+	//pFloor5->SetDir(Vector(1, 0));
+	//AddGameObject(pFloor5);
+
+	//CFloor* pFloor1 = new CFloor();
+	//pFloor1->SetPos(WINSIZEX - 1240, WINSIZEY * 0.9);
+	//pFloor1->SetDir(Vector(1, 0));
+	//AddGameObject(pFloor1);
+
 	CFloor* pFloor2 = new CFloor();
-	pFloor2->SetPos(WINSIZEX, WINSIZEY * 0.9);
+	pFloor2->SetPos(0, WINSIZEY * 0.9);
 	pFloor2->SetDir(Vector(1, 0));
 	AddGameObject(pFloor2);
 
 	CFloor* pFloor3 = new CFloor();
-	pFloor3->SetPos(WINSIZEX - 320, WINSIZEY * 0.9);
+	pFloor3->SetPos(320, WINSIZEY * 0.9);
 	pFloor3->SetDir(Vector(1, 0));
 	AddGameObject(pFloor3);
 
 	CFloor* pFloor4 = new CFloor();
-	pFloor4->SetPos(WINSIZEX - 640, WINSIZEY * 0.9);
+	pFloor4->SetPos(640, WINSIZEY * 0.9);
 	pFloor4->SetDir(Vector(1, 0));
 	AddGameObject(pFloor4);
 
 	CFloor* pFloor5 = new CFloor();
-	pFloor5->SetPos(WINSIZEX - 960, WINSIZEY * 0.9);
+	pFloor5->SetPos(960, WINSIZEY * 0.9);
 	pFloor5->SetDir(Vector(1, 0));
 	AddGameObject(pFloor5);
 
 	CFloor* pFloor1 = new CFloor();
-	pFloor1->SetPos(WINSIZEX - 1280, WINSIZEY * 0.9);
+	pFloor1->SetPos(1280, WINSIZEY * 0.9);
 	pFloor1->SetDir(Vector(1, 0));
 	AddGameObject(pFloor1);
 
@@ -262,7 +290,14 @@ void CSceneStage01::Update()
 		jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
 	}
 
-
+	if (BUTTONDOWN('D') && isDebugMode == false)
+	{
+		isDebugMode = true;
+	}
+	else if (BUTTONDOWN('D') && isDebugMode == true)
+	{
+		isDebugMode = false;
+	}
 
 	obstacleTimer += DT;
 
@@ -482,7 +517,7 @@ void CSceneStage01::Update()
 
 	if (obstacleTimer >= 15.5 && obstacleTimer <= 15.6)
 	{
-		obstacleTimer = -0.4;
+		obstacleTimer += 1;
 		CObstacle* pObstacle1 = new CObstacle();
 		pObstacle1->SetPos(WINSIZEX, WINSIZEY * 0.79);
 		AddGameObject(pObstacle1);
@@ -532,6 +567,361 @@ void CSceneStage01::Update()
 		AddGameObject(pJelly42);
 
 	}
+
+	if (obstacleTimer >= 18.5 && obstacleTimer <= 18.6)
+	{
+		obstacleTimer += 1;
+
+		CJelly1* pJelly1 = new CJelly1();
+		pJelly1->SetPos(WINSIZEX + 100, WINSIZEY * 0.51);
+		AddGameObject(pJelly1);
+
+		CJelly1* pJelly43 = new CJelly1();
+		pJelly43->SetPos(WINSIZEX + 100, WINSIZEY * 0.63);
+		AddGameObject(pJelly43);
+
+		CJelly1* pJelly44 = new CJelly1();
+		pJelly44->SetPos(WINSIZEX + 100, WINSIZEY * 0.75);
+		AddGameObject(pJelly44);
+
+		CJelly1* pJelly2 = new CJelly1();
+		pJelly2->SetPos(WINSIZEX + 200, WINSIZEY * 0.51);
+		AddGameObject(pJelly2);
+
+		CJelly1* pJelly45 = new CJelly1();
+		pJelly45->SetPos(WINSIZEX + 200, WINSIZEY * 0.63);
+		AddGameObject(pJelly45);
+
+		CJelly1* pJelly46 = new CJelly1();
+		pJelly46->SetPos(WINSIZEX + 200, WINSIZEY * 0.75);
+		AddGameObject(pJelly46);
+
+		CJelly1* pJelly3 = new CJelly1();
+		pJelly3->SetPos(WINSIZEX + 300, WINSIZEY * 0.51);
+		AddGameObject(pJelly3);
+
+		CJelly1* pJelly47 = new CJelly1();
+		pJelly47->SetPos(WINSIZEX + 300, WINSIZEY * 0.63);
+		AddGameObject(pJelly47);
+
+		CJelly1* pJelly48 = new CJelly1();
+		pJelly48->SetPos(WINSIZEX + 300, WINSIZEY * 0.75);
+		AddGameObject(pJelly48);
+
+		CJelly1* pJelly4 = new CJelly1();
+		pJelly4->SetPos(WINSIZEX + 400, WINSIZEY * 0.51);
+		AddGameObject(pJelly4);
+
+		CJelly1* pJelly49 = new CJelly1();
+		pJelly49->SetPos(WINSIZEX + 400, WINSIZEY * 0.63);
+		AddGameObject(pJelly49);
+
+		CJelly1* pJelly50 = new CJelly1();
+		pJelly50->SetPos(WINSIZEX + 400, WINSIZEY * 0.75);
+		AddGameObject(pJelly50);
+
+		CJelly1* pJelly5 = new CJelly1();
+		pJelly5->SetPos(WINSIZEX + 500, WINSIZEY * 0.51);
+		AddGameObject(pJelly5);
+
+		CJelly1* pJelly34 = new CJelly1();
+		pJelly34->SetPos(WINSIZEX + 500, WINSIZEY * 0.63);
+		AddGameObject(pJelly34);
+
+		CJelly1* pJelly35 = new CJelly1();
+		pJelly35->SetPos(WINSIZEX + 500, WINSIZEY * 0.75);
+		AddGameObject(pJelly35);
+
+		CJelly1* pJelly6 = new CJelly1();
+		pJelly6->SetPos(WINSIZEX + 600, WINSIZEY * 0.51);
+		AddGameObject(pJelly6);
+
+		CJelly1* pJelly36 = new CJelly1();
+		pJelly36->SetPos(WINSIZEX + 600, WINSIZEY * 0.63);
+		AddGameObject(pJelly36);
+
+		CJelly1* pJelly37 = new CJelly1();
+		pJelly37->SetPos(WINSIZEX + 600, WINSIZEY * 0.75);
+		AddGameObject(pJelly37);
+
+	}
+
+	if (obstacleTimer >= 21.7 && obstacleTimer <= 21.8)
+	{
+		obstacleTimer += 1;
+
+		CJelly1* pJelly43 = new CJelly1();
+		pJelly43->SetPos(WINSIZEX + 100, WINSIZEY * 0.7);
+		AddGameObject(pJelly43);
+
+		CJelly1* pJelly44 = new CJelly1();
+		pJelly44->SetPos(WINSIZEX + 200, WINSIZEY * 0.7);
+		AddGameObject(pJelly44);
+
+		CJelly1* pJelly45 = new CJelly1();
+		pJelly45->SetPos(WINSIZEX + 300, WINSIZEY * 0.7);
+		AddGameObject(pJelly45);
+
+		CJelly1* pJelly46 = new CJelly1();
+		pJelly46->SetPos(WINSIZEX + 400, WINSIZEY * 0.7);
+		AddGameObject(pJelly46);
+
+		CJelly1* pJelly47 = new CJelly1();
+		pJelly47->SetPos(WINSIZEX + 500, WINSIZEY * 0.7);
+		AddGameObject(pJelly47);
+
+		CObstacle2* Obstacle2 = new CObstacle2();
+		Obstacle2->SetPos(WINSIZEX + 600, WINSIZEY * 0.68);
+		AddGameObject(Obstacle2);
+
+		CJelly1* pJelly48 = new CJelly1();
+		pJelly48->SetPos(WINSIZEX + 640, WINSIZEY * 0.5);
+		AddGameObject(pJelly48);
+
+		CJelly1* pJelly49 = new CJelly1();
+		pJelly49->SetPos(WINSIZEX + 790, WINSIZEY * 0.7);
+		AddGameObject(pJelly49);
+
+		CJelly1* pJelly50 = new CJelly1();
+		pJelly50->SetPos(WINSIZEX + 890, WINSIZEY * 0.7);
+		AddGameObject(pJelly50);
+
+		CObstacle2* Obstacle3 = new CObstacle2();
+		Obstacle3->SetPos(WINSIZEX + 1000, WINSIZEY * 0.68);
+		AddGameObject(Obstacle3);
+
+		CJelly1* pJelly51 = new CJelly1();
+		pJelly51->SetPos(WINSIZEX + 1040, WINSIZEY * 0.5);
+		AddGameObject(pJelly51);
+
+		CJelly1* pJelly52 = new CJelly1();
+		pJelly52->SetPos(WINSIZEX + 1190, WINSIZEY * 0.7);
+		AddGameObject(pJelly52);
+
+		CJelly1* pJelly53 = new CJelly1();
+		pJelly53->SetPos(WINSIZEX + 1290, WINSIZEY * 0.7);
+		AddGameObject(pJelly53);
+
+		CObstacle2* Obstacle4 = new CObstacle2();
+		Obstacle4->SetPos(WINSIZEX + 1400, WINSIZEY * 0.68);
+		AddGameObject(Obstacle4);
+
+		CJelly1* pJelly54 = new CJelly1();
+		pJelly54->SetPos(WINSIZEX + 1440, WINSIZEY * 0.5);
+		AddGameObject(pJelly54);
+
+		CJelly1* pJelly55 = new CJelly1();
+		pJelly55->SetPos(WINSIZEX + 1590, WINSIZEY * 0.7);
+		AddGameObject(pJelly55);
+
+		CJelly1* pJelly56 = new CJelly1();
+		pJelly56->SetPos(WINSIZEX + 1690, WINSIZEY * 0.7);
+		AddGameObject(pJelly56);
+
+		CObstacle2* Obstacle5 = new CObstacle2();
+		Obstacle5->SetPos(WINSIZEX + 1800, WINSIZEY * 0.68);
+		AddGameObject(Obstacle5);
+
+		CJelly1* pJelly57 = new CJelly1();
+		pJelly57->SetPos(WINSIZEX + 1840, WINSIZEY * 0.5);
+		AddGameObject(pJelly57);
+
+		CJelly1* pJelly58 = new CJelly1();
+		pJelly58->SetPos(WINSIZEX + 1990, WINSIZEY * 0.7);
+		AddGameObject(pJelly58);
+
+		CJelly1* pJelly59 = new CJelly1();
+		pJelly59->SetPos(WINSIZEX + 2090, WINSIZEY * 0.7);
+		AddGameObject(pJelly59);
+
+		CObstacle2* Obstacle6 = new CObstacle2();
+		Obstacle6->SetPos(WINSIZEX + 2200, WINSIZEY * 0.68);
+		AddGameObject(Obstacle6);
+
+		CJelly1* pJelly60 = new CJelly1();
+		pJelly60->SetPos(WINSIZEX + 2240, WINSIZEY * 0.5);
+		AddGameObject(pJelly60);
+
+		CJelly1* pJelly61 = new CJelly1();
+		pJelly61->SetPos(WINSIZEX + 2390, WINSIZEY * 0.7);
+		AddGameObject(pJelly61);
+
+		CJelly1* pJelly62 = new CJelly1();
+		pJelly62->SetPos(WINSIZEX + 2490, WINSIZEY * 0.7);
+		AddGameObject(pJelly62);
+	}
+
+	if (obstacleTimer >= 31 && obstacleTimer <= 31.1)
+	{
+		obstacleTimer = -12.3;
+
+		CJelly1* pJelly43 = new CJelly1();
+		pJelly43->SetPos(WINSIZEX + 100, WINSIZEY * 0.7);
+		AddGameObject(pJelly43);
+
+		CJelly1* pJelly44 = new CJelly1();
+		pJelly44->SetPos(WINSIZEX + 200, WINSIZEY * 0.7);
+		AddGameObject(pJelly44);
+
+		CJelly1* pJelly45 = new CJelly1();
+		pJelly45->SetPos(WINSIZEX + 300, WINSIZEY * 0.7);
+		AddGameObject(pJelly45);
+
+		CJelly1* pJelly46 = new CJelly1();
+		pJelly46->SetPos(WINSIZEX + 400, WINSIZEY * 0.7);
+		AddGameObject(pJelly46);
+
+		CDashItem* pDashItem1 = new CDashItem();
+		pDashItem1->SetPos(WINSIZEX + 500, WINSIZEY * 0.7);
+		AddGameObject(pDashItem1);
+
+		CObstacle2* Obstacle1 = new CObstacle2();
+		Obstacle1->SetPos(WINSIZEX + 600, WINSIZEY * 0.68);
+		AddGameObject(Obstacle1);
+
+		CObstacle2* Obstacle2 = new CObstacle2();
+		Obstacle2->SetPos(WINSIZEX + 700, WINSIZEY * 0.68);
+		AddGameObject(Obstacle2);
+
+		CObstacle2* Obstacle4 = new CObstacle2();
+		Obstacle4->SetPos(WINSIZEX + 800, WINSIZEY * 0.68);
+		AddGameObject(Obstacle4);
+
+		CObstacle2* Obstacle5 = new CObstacle2();
+		Obstacle5->SetPos(WINSIZEX + 900, WINSIZEY * 0.68);
+		AddGameObject(Obstacle5);
+
+		CObstacle2* Obstacle6 = new CObstacle2();
+		Obstacle6->SetPos(WINSIZEX + 1000, WINSIZEY * 0.68);
+		AddGameObject(Obstacle6);
+
+		CObstacle2* Obstacle7 = new CObstacle2();
+		Obstacle7->SetPos(WINSIZEX + 1100, WINSIZEY * 0.68);
+		AddGameObject(Obstacle7);
+
+		CObstacle2* Obstacle8 = new CObstacle2();
+		Obstacle8->SetPos(WINSIZEX + 1200, WINSIZEY * 0.68);
+		AddGameObject(Obstacle8);
+
+		CObstacle2* Obstacle9 = new CObstacle2();
+		Obstacle9->SetPos(WINSIZEX + 1300, WINSIZEY * 0.68);
+		AddGameObject(Obstacle9);
+
+		CObstacle2* Obstacle10 = new CObstacle2();
+		Obstacle10->SetPos(WINSIZEX + 1400, WINSIZEY * 0.68);
+		AddGameObject(Obstacle10);
+
+		CObstacle2* Obstacle11 = new CObstacle2();
+		Obstacle11->SetPos(WINSIZEX + 1500, WINSIZEY * 0.68);
+		AddGameObject(Obstacle11);
+
+		CObstacle2* Obstacle12 = new CObstacle2();
+		Obstacle12->SetPos(WINSIZEX + 1600, WINSIZEY * 0.68);
+		AddGameObject(Obstacle12);
+
+		CObstacle2* Obstacle13 = new CObstacle2();
+		Obstacle13->SetPos(WINSIZEX + 1700, WINSIZEY * 0.68);
+		AddGameObject(Obstacle13);
+
+		CObstacle2* Obstacle14 = new CObstacle2();
+		Obstacle14->SetPos(WINSIZEX + 1800, WINSIZEY * 0.68);
+		AddGameObject(Obstacle14);
+
+		CObstacle2* Obstacle15 = new CObstacle2();
+		Obstacle15->SetPos(WINSIZEX + 1900, WINSIZEY * 0.68);
+		AddGameObject(Obstacle15);
+
+		CObstacle2* Obstacle16 = new CObstacle2();
+		Obstacle16->SetPos(WINSIZEX + 2000, WINSIZEY * 0.68);
+		AddGameObject(Obstacle16);
+
+		CObstacle2* Obstacle17 = new CObstacle2();
+		Obstacle17->SetPos(WINSIZEX + 2100, WINSIZEY * 0.68);
+		AddGameObject(Obstacle17);
+
+		CObstacle2* Obstacle18 = new CObstacle2();
+		Obstacle18->SetPos(WINSIZEX + 2200, WINSIZEY * 0.68);
+		AddGameObject(Obstacle18);
+
+		CObstacle2* Obstacle19 = new CObstacle2();
+		Obstacle19->SetPos(WINSIZEX + 2300, WINSIZEY * 0.68);
+		AddGameObject(Obstacle19);
+
+		CObstacle2* Obstacle20 = new CObstacle2();
+		Obstacle20->SetPos(WINSIZEX + 2400, WINSIZEY * 0.68);
+		AddGameObject(Obstacle20);
+
+		CObstacle2* Obstacle21 = new CObstacle2();
+		Obstacle21->SetPos(WINSIZEX + 2500, WINSIZEY * 0.68);
+		AddGameObject(Obstacle21);
+
+		CObstacle2* Obstacle22 = new CObstacle2();
+		Obstacle22->SetPos(WINSIZEX + 2600, WINSIZEY * 0.68);
+		AddGameObject(Obstacle22);
+
+		CObstacle2* Obstacle23 = new CObstacle2();
+		Obstacle23->SetPos(WINSIZEX + 2700, WINSIZEY * 0.68);
+		AddGameObject(Obstacle23);
+
+		CObstacle2* Obstacle24 = new CObstacle2();
+		Obstacle24->SetPos(WINSIZEX + 2800, WINSIZEY * 0.68);
+		AddGameObject(Obstacle24);
+
+		CObstacle2* Obstacle25 = new CObstacle2();
+		Obstacle25->SetPos(WINSIZEX + 2900, WINSIZEY * 0.68);
+		AddGameObject(Obstacle25);
+
+		CObstacle2* Obstacle26 = new CObstacle2();
+		Obstacle26->SetPos(WINSIZEX + 3000, WINSIZEY * 0.68);
+		AddGameObject(Obstacle26);
+
+		CObstacle2* Obstacle27 = new CObstacle2();
+		Obstacle27->SetPos(WINSIZEX + 3100, WINSIZEY * 0.68);
+		AddGameObject(Obstacle27);
+
+		CObstacle2* Obstacle28 = new CObstacle2();
+		Obstacle28->SetPos(WINSIZEX + 3200, WINSIZEY * 0.68);
+		AddGameObject(Obstacle28);
+
+		CObstacle2* Obstacle29 = new CObstacle2();
+		Obstacle29->SetPos(WINSIZEX + 3300, WINSIZEY * 0.68);
+		AddGameObject(Obstacle29);
+
+		CObstacle2* Obstacle30 = new CObstacle2();
+		Obstacle30->SetPos(WINSIZEX + 3400, WINSIZEY * 0.68);
+		AddGameObject(Obstacle30);
+
+		CObstacle2* Obstacle31 = new CObstacle2();
+		Obstacle31->SetPos(WINSIZEX + 3500, WINSIZEY * 0.68);
+		AddGameObject(Obstacle31);
+
+		CObstacle2* Obstacle32 = new CObstacle2();
+		Obstacle32->SetPos(WINSIZEX + 3600, WINSIZEY * 0.68);
+		AddGameObject(Obstacle32);
+
+		CObstacle2* Obstacle33 = new CObstacle2();
+		Obstacle33->SetPos(WINSIZEX + 3700, WINSIZEY * 0.68);
+		AddGameObject(Obstacle33);
+
+		CObstacle2* Obstacle34 = new CObstacle2();
+		Obstacle34->SetPos(WINSIZEX + 3800, WINSIZEY * 0.68);
+		AddGameObject(Obstacle34);
+
+		CObstacle2* Obstacle35 = new CObstacle2();
+		Obstacle35->SetPos(WINSIZEX + 3900, WINSIZEY * 0.68);
+		AddGameObject(Obstacle35);
+
+		CJelly1* pJelly30 = new CJelly1();
+		pJelly30->SetPos(WINSIZEX + 4070, WINSIZEY * 0.75);
+		AddGameObject(pJelly30);
+
+		CJelly1* pJelly31 = new CJelly1();
+		pJelly31->SetPos(WINSIZEX + 4170, WINSIZEY * 0.7);
+		AddGameObject(pJelly31);
+	
+	}
+
+
 	#pragma endregion
 
 	if (playerHp > 0)

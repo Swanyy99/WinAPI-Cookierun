@@ -39,10 +39,10 @@ void CFloor::Render()
 
 	RENDER->Image(
 		m_pImg,
-		m_vecPos.x - m_pImg->GetWidth() * 0.2f,
-		m_vecPos.y - m_pImg->GetHeight() * 0.2f,
-		m_vecPos.x + m_pImg->GetWidth() * 0.2f,
-		m_vecPos.y + m_pImg->GetHeight() * 0.2f);
+		m_vecPos.x - m_pImg->GetWidth() * 0.5f,
+		m_vecPos.y - m_pImg->GetHeight() * 0.5f,
+		m_vecPos.x + m_pImg->GetWidth() * 0.5f,
+		m_vecPos.y + m_pImg->GetHeight() * 0.5f);
 
 }
 

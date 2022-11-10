@@ -58,6 +58,9 @@
     <Filter Include="GameObject\Stage01\Effect">
       <UniqueIdentifier>{f907c067-9c4c-49ee-9ca1-2d8a32265aba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\Obstacle">
+      <UniqueIdentifier>{0dd589fd-561a-43d9-95f0-59fce87c7c18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -195,13 +198,7 @@
     <ClInclude Include="CBackground.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
-    <ClInclude Include="CObstacle.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CBottomCloud.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CObstacleSky.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
     <ClInclude Include="CHeartItem.h">
@@ -224,6 +221,15 @@
     </ClInclude>
     <ClInclude Include="CObstacleBoomEffect.h">
       <Filter>GameObject\Stage01\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacle.h">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacleSky.h">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacle2.h">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -344,13 +350,7 @@
     <ClCompile Include="CBackground.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
-    <ClCompile Include="CObstacle.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CBottomCloud.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CObstacleSky.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
     <ClCompile Include="CHeartItem.cpp">
@@ -373,6 +373,15 @@
     </ClCompile>
     <ClCompile Include="CObstacleBoomEffect.cpp">
       <Filter>GameObject\Stage01\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle.cpp">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacleSky.cpp">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle2.cpp">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
