@@ -52,6 +52,7 @@ enum class Layer
 	HeartItem,
 	DashItem,
 	MagnetItem,
+	DashEffect,
 	Player,
 	Missile,
 	Monster,

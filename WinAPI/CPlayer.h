@@ -13,6 +13,7 @@ public:
 private:
 	CAnimator* m_pAnimator;
 	CImage* m_pIdleImage;
+	CImage* m_pIdleDashImage;
 	CImage* m_pJumpImage;
 	CImage* m_pSlideImage;
 	CImage* m_pDeathImage;
@@ -25,6 +26,8 @@ private:
 	CImage* HurtInvincibilityImage;
 	CImage* HurtRedImage;
 	CImage* MagnetBlueImage;
+
+	CImage* DashFireDom;
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
@@ -40,7 +43,7 @@ private:
 	float m_fHurtTimer;
 	float m_fMagnetTimer;
 	float m_fDashTimer;
-
+	float m_fDashEffectTimer;
 	
 
 private:

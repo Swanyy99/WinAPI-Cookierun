@@ -41,8 +41,10 @@ void CTimeManager::Update()
 
 	else if (isDash == true && pause == false && isDead == false)
 	{
+		m_fAbsDT = elapsed.count();
 		m_fDT = elapsed.count() * 3;
 	}
+	
 
 	else if (pause == true)
 	{

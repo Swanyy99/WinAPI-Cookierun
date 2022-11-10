@@ -8,6 +8,9 @@ public:
 	virtual ~CSceneTitle();
 
 private:
+	CImage* TitleBackgroundImage;
+
+private:
 	void Init()		override;
 	void Enter()	override;
 	void Update()	override;

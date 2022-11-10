@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CDashItem.h"
+#include "CDashFireEffect.h"
 
 extern bool isMagnet;
 extern bool isDash;
@@ -84,6 +85,8 @@ void CDashItem::AnimatorUpdate()
 
 void CDashItem::OnCollisionEnter(CCollider* pOtherCollider)
 {
+	
+
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{
 		Logger::Debug(L"플레이어가 대쉬 아이템을 먹었습니다.");

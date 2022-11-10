@@ -49,11 +49,11 @@ private:
 
 public:
 	void LoadTile(const wstring& strPath);
+	void AddGameObject(CGameObject* pGameObj);
 
 protected:
 	list<CGameObject*>& GetLayerObject(Layer layer);
 
-	void AddGameObject(CGameObject* pGameObj);
 	// 삭제과정은 게임오브젝트 자료구조에서 삭제될 게임오브젝트를 찾아서 제거하는 방법을 채택하지 않음
 	// 1. 게임오브젝트를 탐색하여 삭제하는 것이 비효율적
 	// 2. 삭제예정인 게임오브젝트를 참조하고 있는 게임오브젝트들에게 유예시간을 줘야함

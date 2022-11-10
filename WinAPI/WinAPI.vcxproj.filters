@@ -55,6 +55,9 @@
     <Filter Include="GameObject\Stage01\Item">
       <UniqueIdentifier>{1adb6c81-4f15-46f7-b3ea-cd059d7473db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\Effect">
+      <UniqueIdentifier>{f907c067-9c4c-49ee-9ca1-2d8a32265aba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -213,6 +216,9 @@
     <ClInclude Include="CDashItem.h">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClInclude>
+    <ClInclude Include="CDashFireEffect.h">
+      <Filter>GameObject\Stage01\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -352,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="CDashItem.cpp">
       <Filter>GameObject\Stage01\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CDashFireEffect.cpp">
+      <Filter>GameObject\Stage01\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

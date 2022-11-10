@@ -6,6 +6,8 @@
 #include "CAnimator.h"
 #include "CGameObject.h"
 
+extern bool isDash;
+
 CAnimation::CAnimation()
 {
 	m_pAnimator = nullptr;
@@ -66,7 +68,10 @@ void CAnimation::Init()
 void CAnimation::Update()
 {
 	// 현재 플레이중인 프레임의 누적시간
-	m_fAccTime += DT;
+	if (isDash == false)
+		m_fAccTime += ABSDT;
+	if (isDash == true)
+		m_fAccTime += ABSDT * 1.7;
 
 	// 누적시간이 현재 플레이중인 프레임의 지속시간보다 커졌을 경우
 	// -> 다음 프레임을 보여줘야 하는 경우

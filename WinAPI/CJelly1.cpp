@@ -52,8 +52,8 @@ void CJelly1::Update()
 		if (abs(m_vecPos.x - playerPosX) < 250 && abs(m_vecPos.y - playerPosY) < 250)
 		{
 
-			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3;
-			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 3;
+			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 2;
+			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 2;
 
 		}
 

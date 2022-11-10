@@ -13,6 +13,8 @@
 
 #include "CMissile.h"
 #include "CGameObject.h"
+#include "CDashFireEffect.h"
+#include "CScene.h"
 
 bool isMagnet;
 bool isDash;
@@ -38,6 +40,7 @@ CPlayer::CPlayer()
 	m_strName = L"플레이어";
 
 	m_pIdleImage = nullptr;
+	m_pIdleDashImage = nullptr;
 	m_pJumpImage = nullptr;
 	m_pSlideImage = nullptr;
 	m_pDeathImage = nullptr;	
@@ -59,6 +62,7 @@ CPlayer::CPlayer()
 	m_fHurtTimer = 2.5;
 	m_fMagnetTimer = 5;
 	m_fDashTimer = 5;
+	m_fDashEffectTimer = 0.3;
 
 	MagnetBlueImage = nullptr;
 	isMagnet = false;
@@ -76,6 +80,7 @@ void CPlayer::Init()
 	
 	// 기본 쿠키 모션 이미지들
 	m_pIdleImage = RESOURCE->LoadImg(L"PlayerAnimation", L"Image\\BraveCookie.png");
+	m_pIdleDashImage = RESOURCE->LoadImg(L"PlayerIdleDash", L"Image\\BraveCookie.png");
 	m_pJumpImage = RESOURCE->LoadImg(L"PlayerJump", L"Image\\BraveCookie.png");
 	m_pSlideImage = RESOURCE->LoadImg(L"PlayerSlide", L"Image\\BraveCookie.png");
 	m_pDeathImage = RESOURCE->LoadImg(L"PlayerDeath", L"Image\\BraveCookie.png");
@@ -87,7 +92,7 @@ void CPlayer::Init()
 	MagnetBlueImage = RESOURCE->LoadImg(L"MagnetBlueImage", L"Image\\MagnetBlueScreen.png");
 
 	m_pAnimator->CreateAnimation(L"IdleRun", m_pIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
-	m_pAnimator->CreateAnimation(L"Dash", m_pIdleImage, Vector(0, 0), Vector(0, 75.f), Vector(84.f, 0.f), 0.05f, 16);
+	m_pAnimator->CreateAnimation(L"IdleDash", m_pIdleDashImage, Vector(1092, 273), Vector(273, 273), Vector(273, 0.f), 0.06f, 4);
 
 	m_pAnimator->CreateAnimation(L"Jump", m_pJumpImage, Vector(0, 0), Vector(273, 273), Vector(273, 0), 1, 1);
 	m_pAnimator->CreateAnimation(L"JumpDown", m_pJumpImage, Vector(2184, 546), Vector(273, 273), Vector(273, 0), 1, 1);
@@ -122,13 +127,26 @@ void CPlayer::Init()
 	
 	playerState = PlayerState::IdleRun;
 
+	DashFireDom = RESOURCE->LoadImg(L"DashFireDom", L"Image\\DashFireDom.png");
+
 	AddCollider(ColliderType::Rect, Vector(70, 120), Vector(10, 70));
 }
 
 void CPlayer::Update()
 {
-	playerPosX = m_vecPos.x + 10;
-	playerPosY = m_vecPos.y + 70;
+	
+	if (playerState == PlayerState::Slide)
+	{
+		playerPosX = m_vecPos.x + 80;
+		playerPosY = m_vecPos.y + 110;
+	}
+
+	else
+	{
+		playerPosX = m_vecPos.x + 80;
+		playerPosY = m_vecPos.y + 70;
+	}
+
 
 	if (pause == false)
 	{
@@ -144,12 +162,12 @@ void CPlayer::Update()
 		case PlayerState::IdleRun:	// 기본(달리기 중)
 			SetColliderSize(Vector(70, 130), Vector(10, 70));
 
-			if (isHurt == false)
+			if (isHurt == false && isDash == false)
 				motion = L"IdleRun";
-			else
+			else if (isDash == true)
+				motion = L"IdleDash";
+			else if (isDash == false && isHurt == true)
 				motion = L"HurtIdleRun";
-
-			//RemoveCollider();
 
 			if (BUTTONDOWN(VK_SPACE)) // 점프
 			{
@@ -306,6 +324,17 @@ void CPlayer::Update()
 	if (isDash == true && isDead == false)
 	{
 		m_fDashTimer -= ABSDT;
+		m_fDashEffectTimer += ABSDT;
+
+		if (m_fDashEffectTimer > 0.12)
+		{
+			m_fDashEffectTimer -= 0.12;
+			CDashFireEffect* pDashFireEffect = new CDashFireEffect();
+			pDashFireEffect->SetPos(playerPosX - 50, playerPosY);
+			ADDOBJECT(pDashFireEffect);
+
+
+		}
 
 		if (m_fDashTimer <= 0)
 		{
@@ -347,6 +376,14 @@ void CPlayer::Render()
 		RENDER->Image(
 			MagnetBlueImage,
 			-230, -200, WINSIZEX + 230, WINSIZEY + 200);
+
+	}
+
+	if (isDash == true && isDead == false)
+	{
+		RENDER->Image(
+			DashFireDom,
+			playerPosX - 110, playerPosY - 70, playerPosX-10, playerPosY + 70);
 
 	}
 }
@@ -409,6 +446,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"자석아이템 획득!");
 		isMagnet = true;
+		m_fMagnetTimer = 5;
 	}
 
 	if (pOtherCollider->GetObjName() == L"대쉬아이템")

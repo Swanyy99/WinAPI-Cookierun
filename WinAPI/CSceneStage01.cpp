@@ -35,6 +35,8 @@ wstring ScreenScore;
 
 extern bool isSliding;
 extern bool isJumping;
+extern bool isDash;
+extern bool isMagnet;
 extern bool isDead;
 extern float playerHp;
 
@@ -59,6 +61,7 @@ CSceneStage01::CSceneStage01()
 	ScreenScore = L"";
 	score = 0;
 	isRetry = false;
+
 
 	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
 
@@ -130,6 +133,23 @@ void CSceneStage01::Enter()
 	AddGameObject(RetryButton);
 
 
+	// ESC 나가기 버튼
+	auto QuitButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* QuitButton = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(QuitButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		CHANGESCENE(GroupScene::Title);
+		CAMERA->FadeOut(0.5f);
+		pause = false;
+	};
+
+	CButton* QuitButton = new CButton;
+	QuitButton->SetName(L"나가기 버튼");
+	QuitButton->SetPos(530, 445);
+	QuitButton->SetScale(220, 55);
+	QuitButton->SetClickedCallback(QuitButtonClicked, (DWORD_PTR)QuitButton, (DWORD_PTR)1);
+	AddGameObject(QuitButton);
 
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(300, WINSIZEY * 0.65f);
@@ -146,6 +166,8 @@ void CSceneStage01::Enter()
 	HpTimer = 0;
 	ScreenScore = L"";
 	score = 0;
+	isDash = false;
+	isMagnet = false;
 
 	
 	CFloor* pFloor2 = new CFloor();
@@ -241,6 +263,7 @@ void CSceneStage01::Update()
 	}
 
 
+
 	obstacleTimer += DT;
 
 	#pragma region 맵패턴노가다
@@ -292,9 +315,9 @@ void CSceneStage01::Update()
 		pJelly7->SetPos(WINSIZEX, WINSIZEY * 0.65);
 		AddGameObject(pJelly7);
 
-		CDashItem* pDash1 = new CDashItem();
-		pDash1->SetPos(WINSIZEX, WINSIZEY * 0.6);
-		AddGameObject(pDash1);
+		CDashItem* pDashItem1 = new CDashItem();
+		pDashItem1->SetPos(WINSIZEX, WINSIZEY * 0.5);
+		AddGameObject(pDashItem1);
 
 		CJelly1* pJelly8 = new CJelly1();
 		pJelly8->SetPos(WINSIZEX + 100, WINSIZEY * 0.7);
