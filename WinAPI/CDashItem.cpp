@@ -49,7 +49,7 @@ void CDashItem::Update()
 
 	if (isMagnet == true)
 	{
-		if (abs(m_vecPos.x - playerPosX) < 200 && abs(m_vecPos.y - playerPosY) < 200)
+		if (abs(m_vecPos.x - playerPosX) < 170 && abs(m_vecPos.y - playerPosY) < 170)
 		{
 
 			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3.5;

@@ -60,8 +60,8 @@ CPlayer::CPlayer()
 	isHurt = false;
 	m_fJumpTimer = 0.4;
 	m_fHurtTimer = 2.5;
-	m_fMagnetTimer = 5;
-	m_fDashTimer = 5;
+	m_fMagnetTimer = 4;
+	m_fDashTimer = 4;
 	m_fDashEffectTimer = 0.3;
 
 	MagnetBlueImage = nullptr;
@@ -317,7 +317,7 @@ void CPlayer::Update()
 		if (m_fMagnetTimer <= 0)
 		{
 			isMagnet = false;
-			m_fMagnetTimer = 5;
+			m_fMagnetTimer = 4;
 		}
 	}
 
@@ -339,7 +339,7 @@ void CPlayer::Update()
 		if (m_fDashTimer <= 0)
 		{
 			isDash = false;
-			m_fDashTimer = 5;
+			m_fDashTimer = 4;
 		}
 	}
 
@@ -446,14 +446,14 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"자석아이템 획득!");
 		isMagnet = true;
-		m_fMagnetTimer = 5;
+		m_fMagnetTimer = 4;
 	}
 
 	if (pOtherCollider->GetObjName() == L"대쉬아이템")
 	{
 		Logger::Debug(L"대쉬아이템 획득!");
 		isDash = true;
-		m_fDashTimer = 5;
+		m_fDashTimer = 4;
 	}
 
 	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
