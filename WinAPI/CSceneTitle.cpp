@@ -64,6 +64,7 @@ void CSceneTitle::Enter()
 		Logger::Debug(ExitButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 
 		//wmId = IDM_EXIT;
+		SendMessage(hWnd, WM_CLOSE, 0, 0);
 	};
 
 	CButton* ExitButton = new CButton;

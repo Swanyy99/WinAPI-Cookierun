@@ -232,7 +232,7 @@ void CPlayer::Update()
 					playerState = PlayerState::DoubleJump;
 					m_fJumpTimer = 0.25;
 					isJumpUp = true;
-					m_fSpeed = 700;
+					m_fSpeed = 900;
 					break;
 				}
 				
@@ -243,7 +243,7 @@ void CPlayer::Update()
 				playerState = PlayerState::DoubleJump;
 				m_fJumpTimer = 0.25;
 				isJumpUp = true;
-				m_fSpeed = 700;
+				m_fSpeed = 900;
 				break;
 			}
 
@@ -262,7 +262,7 @@ void CPlayer::Update()
 
 					isJumpUp = true;
 
-					m_fSpeed -= ABSDT * 1500;
+					m_fSpeed -= ABSDT * 2100;
 
 					if (isHurt == false)
 						motion = L"DoubleJump";
@@ -280,7 +280,7 @@ void CPlayer::Update()
 			{
 				isJumpUp = false;
 
-				m_fSpeed += ABSDT * 2000;
+				m_fSpeed += ABSDT * 2200;
 				m_vecPos.y += m_fSpeed * ABSDT;
 
 				if (isHurt == false)

@@ -25,8 +25,11 @@ private:
 	CImage* HPProgressBar;
 	CImage* HPEffect;
 
+	CImage* Tear;
+
 	float obstacleTimer;
 	float HpTimer;
+
 
 public:
 

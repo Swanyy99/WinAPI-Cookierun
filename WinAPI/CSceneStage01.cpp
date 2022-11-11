@@ -43,7 +43,10 @@ extern bool isDead;
 extern bool isHurt;
 extern float playerHp;
 extern bool revive;
+extern float playerPosX;
+extern float playerPosY;
 
+bool TearOn;
 
 
 CSceneStage01::CSceneStage01()
@@ -60,12 +63,14 @@ CSceneStage01::CSceneStage01()
 	HPBackBar = nullptr;
 	HPIcon = nullptr;
 	HPEffect = nullptr;
+	Tear = nullptr;
 	obstacleTimer = 0;
 	HpTimer = 0;
 	ScreenScore = L"";
 	score = 0;
 	isRetry = false;
 	isDebugMode = false;
+	TearOn = false;
 
 
 	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
@@ -83,6 +88,8 @@ CSceneStage01::CSceneStage01()
 	HPEffect = RESOURCE->LoadImg(L"HpEffect", L"Image\\Hp_Effect.png");
 
 	HPBar = RESOURCE->LoadImg(L"HpBar", L"Image\\Hp_Bar.png");
+
+	Tear = RESOURCE->LoadImg(L"Tear", L"Image\\Tear.png");
 
 	HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
 
@@ -115,6 +122,10 @@ void CSceneStage01::Enter()
 
 		Logger::Debug(ResumeButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		pause = false;
+		if (isDead == true)
+		{
+			TearOn = true;
+		}
 	};
 
 	CButton* ResumeButton = new CButton;
@@ -991,6 +1002,15 @@ void CSceneStage01::Render()
 	RENDER->Image(
 		HPIcon,
 		40, 50, 90, 100);
+
+	// 슬퍼하기 눈물 이미지
+	if (TearOn == true)
+	{
+		RENDER->Image(
+			Tear,
+			playerPosX - 60, playerPosY + 25, playerPosX - 50, playerPosY + 43);
+	}
+	
 
 	// 일시정지 UI
 	if (pause == true)
