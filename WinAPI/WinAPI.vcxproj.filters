@@ -237,6 +237,9 @@
     <ClInclude Include="CPet.h">
       <Filter>GameObject\Stage01\Player</Filter>
     </ClInclude>
+    <ClInclude Include="CPetMissile.h">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -390,6 +393,9 @@
       <Filter>GameObject\Stage01\Player</Filter>
     </ClCompile>
     <ClCompile Include="CPet.cpp">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CPetMissile.cpp">
       <Filter>GameObject\Stage01\Player</Filter>
     </ClCompile>
   </ItemGroup>

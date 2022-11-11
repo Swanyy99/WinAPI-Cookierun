@@ -15,6 +15,7 @@
 #include "CGameObject.h"
 #include "CDashFireEffect.h"
 #include "CScene.h"
+#include "CPetMissile.h"
 
 bool skillOn;
 wstring PetMotion;
@@ -45,6 +46,8 @@ CPet::CPet()
 	m_vecLookDir = Vector(0, -1);
 	m_fSkillTimer = 0;
 	m_fSkillCooltimeTimer = 0;
+	SkillUsed = false;
+	skillOn = false;
 
 }
 
@@ -74,9 +77,10 @@ void CPet::Init()
 
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 
-	m_fSkillTimer = 3;
-	m_fSkillCooltimeTimer = 8;
-
+	m_fSkillTimer = 5;
+	m_fSkillCooltimeTimer = 10;
+	SkillUsed = false;
+	skillOn = false;
 	PetMotion = L"IdleRun";
 }
 
@@ -85,28 +89,53 @@ void CPet::Update()
 
 	m_fSkillCooltimeTimer -= ABSDT;
 
-	if (m_fSkillCooltimeTimer < 0)
+	if (m_fSkillCooltimeTimer <= 0)
 	{
 		skillOn = true;
-		m_fSkillCooltimeTimer = 8;
 	}
+	
 
+	//스킬 발동
 	if (skillOn == true && isDead == false)
 	{
 		m_fSkillTimer -= ABSDT;
 		PetMotion = L"Skill";
 
+		m_vecPos.y -= (m_vecPos.y - (playerPosY - 100)) * DT * 3.5;
+		m_vecPos.x -= (m_vecPos.x - (playerPosX + 180)) * DT * 3;
+
+		if (SkillUsed == false)
+		{
+			SkillUsed = true;
+
+			CPetMissile* pPetMissile = new CPetMissile();
+			pPetMissile->SetPos(-200, WINSIZEY * 0.7);
+			ADDOBJECT(pPetMissile);
+
+			/*CPetMissile* pPetMissile2 = new CPetMissile();
+			pPetMissile2->SetPos(-400, WINSIZEY * 0.7);
+			ADDOBJECT(pPetMissile2);
+
+			CPetMissile* pPetMissile3 = new CPetMissile();
+			pPetMissile3->SetPos(-600, WINSIZEY * 0.7);
+			ADDOBJECT(pPetMissile3);*/
+
+			
+		}
 		if (m_fSkillTimer <= 0)
 		{
 			skillOn = false;
-			m_fSkillTimer = 3;
-			m_fSkillTimer = 8;
+			SkillUsed = false;
+			m_fSkillCooltimeTimer = 10;
+			m_fSkillTimer = 5;
+			PetMotion = L"IdleRun";
 		}
 	}
 
-
-
-	m_vecPos.y -= (m_vecPos.y - (playerPosY - 60)) * DT * 3.5;
+	// 스킬 쿨타임 중
+	if (skillOn == false)
+		m_vecPos.y -= (m_vecPos.y - (playerPosY - 70)) * DT * 3.5;
+		m_vecPos.x -= (m_vecPos.x - (playerPosX - 170)) * DT * 3;
 
 	AnimatorUpdate();
 }
@@ -130,7 +159,7 @@ void CPet::AnimatorUpdate()
 void CPet::OnCollisionEnter(CCollider* pOtherCollider)
 {
 
-	if (pOtherCollider->GetObjName() == L"장애물")
+	/*if (pOtherCollider->GetObjName() == L"장애물")
 	{
 		Logger::Debug(L"장애물 파괴!");
 		score += 1000;
@@ -159,18 +188,13 @@ void CPet::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"대쉬아이템 획득!");
 		isDash = true;
-	}
+	}*/
 
 }
 
 void CPet::OnCollisionStay(CCollider* pOtherCollider)
 {
 
-
-	if (pOtherCollider->GetObjName() == L"젤리")
-	{
-	
-	}
 
 }
 

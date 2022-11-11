@@ -380,7 +380,7 @@ void CPlayer::Update()
 		{
 			m_fDashEffectTimer -= 0.12;
 			CDashFireEffect* pDashFireEffect = new CDashFireEffect();
-			pDashFireEffect->SetPos(playerPosX - 50, playerPosY);
+			pDashFireEffect->SetPos(playerPosX - 120, playerPosY);
 			ADDOBJECT(pDashFireEffect);
 
 
@@ -480,7 +480,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"장애물" && isHurt == false && isDash == true)
 	{
 		Logger::Debug(L"플레이어가 대쉬중에 장애물을 부숨");
-		score += 1000;
+		score += 2000;
 	}
 
 	if (pOtherCollider->GetObjName() == L"젤리")
@@ -538,7 +538,6 @@ void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 		playerState = PlayerState::IdleRun;
 		Logger::Debug(L"플레이어가 땅에 닿음");
 		m_vecPos.y -= 1;
-		m_fJumpTimer = 0.4;
 	}
 
 }

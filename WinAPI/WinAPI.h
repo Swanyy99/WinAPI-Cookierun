@@ -57,6 +57,7 @@ enum class Layer
 	DashEffect,
 	Player,
 	Pet,
+	PetMissile,
 	Missile,
 	Monster,
 	OverlayBackGround,
