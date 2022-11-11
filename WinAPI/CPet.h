@@ -18,12 +18,12 @@ private:
 
 	Vector m_vecMoveDir;
 	Vector m_vecLookDir;
-	bool m_bIsMove;
 
 	enum class PetState { IdleRun, Skill };
 	PetState petState;
 
 	float m_fSpeed = 200.0f;
+	float m_fSkillCooltimeTimer;
 	float m_fSkillTimer;
 
 

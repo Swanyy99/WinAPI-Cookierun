@@ -36,16 +36,15 @@ CPet::CPet()
 	m_vecPos = Vector(playerPosX - 150, playerPosY);
 	m_vecScale = Vector(100, 100);
 	m_layer = Layer::Player;
-	m_strName = L"ÇÃ·¹ÀÌ¾î";
+	m_strName = L"Æê";
 
 	m_pPetImage = nullptr;
 	m_pSkillImage = nullptr;
 
 	m_vecMoveDir = Vector(0, 0);
 	m_vecLookDir = Vector(0, -1);
-	m_bIsMove = false;
-	isDead = false;
-	m_fSkillTimer = 0.4;
+	m_fSkillTimer = 0;
+	m_fSkillCooltimeTimer = 0;
 
 }
 
@@ -63,6 +62,8 @@ void CPet::Init()
 
 	m_pAnimator->CreateAnimation(L"IdleRun", m_pPetImage, Vector(0, 0), Vector(100, 100), Vector(100, 0.f), 0.1f, 4);
 
+	m_pAnimator->CreateAnimation(L"Skill", m_pPetImage, Vector(100, 300), Vector(100, 100), Vector(100, 0.f), 0.1f, 7);
+
 	m_pAnimator->CreateAnimation(L"Death", m_pPetImage, Vector(0, 942), Vector(100, 100), Vector(100, 0.f), 0.1f, 1, false);
 
 	m_pAnimator->Play(L"IdleRun", false);
@@ -71,19 +72,43 @@ void CPet::Init()
 
 	petState = PetState::IdleRun;
 
-	AddCollider(ColliderType::Rect, Vector(30, 30), Vector(0, 0));
+	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
+
+	m_fSkillTimer = 3;
+	m_fSkillCooltimeTimer = 8;
+
+	PetMotion = L"IdleRun";
 }
 
 void CPet::Update()
 {
-	m_fSkillTimer += DT;
 
-	if (m_fSkillTimer >= 3)
+	m_fSkillCooltimeTimer -= ABSDT;
+
+	if (m_fSkillCooltimeTimer < 0)
 	{
-
+		skillOn = true;
+		m_fSkillCooltimeTimer = 8;
 	}
 
+	if (skillOn == true && isDead == false)
+	{
+		m_fSkillTimer -= ABSDT;
+		PetMotion = L"Skill";
+
+		if (m_fSkillTimer <= 0)
+		{
+			skillOn = false;
+			m_fSkillTimer = 3;
+			m_fSkillTimer = 8;
+		}
+	}
+
+
+
 	m_vecPos.y -= (m_vecPos.y - (playerPosY - 60)) * DT * 3.5;
+
+	AnimatorUpdate();
 }
 
 void CPet::Render()

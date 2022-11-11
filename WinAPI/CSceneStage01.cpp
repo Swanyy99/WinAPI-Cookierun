@@ -133,7 +133,7 @@ void CSceneStage01::Enter()
 	};
 
 	CButton* ResumeButton = new CButton;
-	ResumeButton->SetName(L"계속하기 버튼");
+	ResumeButton->SetName(L"계속하기/슬퍼하기 버튼");
 	ResumeButton->SetPos(530, 265);
 	ResumeButton->SetScale(220, 55);
 	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
@@ -192,33 +192,6 @@ void CSceneStage01::Enter()
 
 	CAMERA->FadeIn(0.25f);
 
-
-
-	
-	//CFloor* pFloor2 = new CFloor();
-	//pFloor2->SetPos(WINSIZEX, WINSIZEY * 0.9);
-	//pFloor2->SetDir(Vector(1, 0));
-	//AddGameObject(pFloor2);
-
-	//CFloor* pFloor3 = new CFloor();
-	//pFloor3->SetPos(WINSIZEX - 310, WINSIZEY * 0.9);
-	//pFloor3->SetDir(Vector(1, 0));
-	//AddGameObject(pFloor3);
-
-	//CFloor* pFloor4 = new CFloor();
-	//pFloor4->SetPos(WINSIZEX - 620, WINSIZEY * 0.9);
-	//pFloor4->SetDir(Vector(1, 0));
-	//AddGameObject(pFloor4);
-
-	//CFloor* pFloor5 = new CFloor();
-	//pFloor5->SetPos(WINSIZEX - 930, WINSIZEY * 0.9);
-	//pFloor5->SetDir(Vector(1, 0));
-	//AddGameObject(pFloor5);
-
-	//CFloor* pFloor1 = new CFloor();
-	//pFloor1->SetPos(WINSIZEX - 1240, WINSIZEY * 0.9);
-	//pFloor1->SetDir(Vector(1, 0));
-	//AddGameObject(pFloor1);
 
 	CFloor* pFloor2 = new CFloor();
 	pFloor2->SetPos(0, WINSIZEY * 0.9);

@@ -56,6 +56,7 @@ enum class Layer
 	JellyEatEffect,
 	DashEffect,
 	Player,
+	Pet,
 	Missile,
 	Monster,
 	OverlayBackGround,
