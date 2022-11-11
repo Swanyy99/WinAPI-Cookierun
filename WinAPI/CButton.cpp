@@ -4,6 +4,8 @@
 #include "CRenderManager.h"
 
 extern bool pause;
+extern bool inTitle;
+extern bool isDead;
 
 
 CButton::CButton()
@@ -98,7 +100,7 @@ void CButton::OnMouseUp()
 
 void CButton::OnMouseDown()
 {
-	if (pause == true)
+	if (pause == true || inTitle == true || isDead == true)
 	{
 		if (nullptr != m_pCallback)
 			m_pCallback(m_pParam1, m_pParam2);

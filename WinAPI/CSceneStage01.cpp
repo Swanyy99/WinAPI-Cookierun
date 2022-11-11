@@ -40,7 +40,9 @@ extern bool isJumping;
 extern bool isDash;
 extern bool isMagnet;
 extern bool isDead;
+extern bool isHurt;
 extern float playerHp;
+extern bool revive;
 
 
 
@@ -98,8 +100,15 @@ void CSceneStage01::Init()
 
 void CSceneStage01::Enter()
 {
+	obstacleTimer = 0;
+	HpTimer = 0;
+	ScreenScore = L"";
+	score = 0;
+	isDash = false;
+	isMagnet = false;
+	isDebugMode = false;
 
-	// ESC 계속하기 버튼
+	// ESC 계속하기 && FAIL 부활하기 버튼
 	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* ResumeButton = (CButton*)(button);
 		int paramInt = (int)(param);
@@ -122,8 +131,8 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		CAMERA->FadeOut(1);
 		CHANGESCENE(GroupScene::Stage01);
-		CAMERA->FadeOut(0.5f);
 		pause = false;
 		isRetry = true;
 	};
@@ -142,8 +151,8 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(QuitButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		CAMERA->FadeOut(1);
 		CHANGESCENE(GroupScene::Title);
-		CAMERA->FadeOut(0.5f);
 		pause = false;
 	};
 
@@ -165,13 +174,7 @@ void CSceneStage01::Enter()
 	CAMERA->FadeIn(0.25f);
 
 
-	obstacleTimer = 0;
-	HpTimer = 0;
-	ScreenScore = L"";
-	score = 0;
-	isDash = false;
-	isMagnet = false;
-	isDebugMode = false;
+
 	
 	//CFloor* pFloor2 = new CFloor();
 	//pFloor2->SetPos(WINSIZEX, WINSIZEY * 0.9);
@@ -933,6 +936,11 @@ void CSceneStage01::Update()
 			HpTimer -= 0.2;
 			playerHp -= 0.2;
 		}
+	}
+
+	if (BUTTONDOWN('Q'))
+	{
+		playerHp = 0;
 	}
 
 }

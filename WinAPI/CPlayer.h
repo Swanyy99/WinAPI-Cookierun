@@ -33,17 +33,17 @@ private:
 	Vector m_vecLookDir;
 	bool m_bIsMove;
 	bool isGround;
-	bool isHurt;
 
 	enum class PlayerState { IdleRun, Jump, DoubleJump, Slide, Death };
 	PlayerState playerState;
 
-	float m_fSpeed = 200.0f;
+	float m_fSpeed = 500.0f;
 	float m_fJumpTimer;
 	float m_fHurtTimer;
 	float m_fMagnetTimer;
 	float m_fDashTimer;
 	float m_fDashEffectTimer;
+	float m_fReviveTimer;
 	
 
 private:

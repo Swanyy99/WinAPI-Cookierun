@@ -18,8 +18,12 @@
 
 bool isMagnet;
 bool isDash;
+bool isHurt;
+
+bool revive;
 
 bool isJumping;
+bool isJumpUp;
 bool isSliding;
 bool isDead;
 wstring motion;
@@ -66,8 +70,11 @@ CPlayer::CPlayer()
 
 	MagnetBlueImage = nullptr;
 	isMagnet = false;
+	revive = false;
 
 	playerHp = 100;
+
+	isJumpUp = true;
 }
 
 CPlayer::~CPlayer()
@@ -134,7 +141,7 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-	
+
 	if (playerState == PlayerState::Slide)
 	{
 		playerPosX = m_vecPos.x + 80;
@@ -150,11 +157,6 @@ void CPlayer::Update()
 
 	if (pause == false)
 	{
-
-		if (playerHp <= 0)
-		{
-			playerState = PlayerState::Death;
-		}
 
 		switch (playerState)
 		{
@@ -188,20 +190,37 @@ void CPlayer::Update()
 
 		case PlayerState::Jump:	// 1단 점프
 			SetColliderSize(Vector(70, 120), Vector(10, 70));
-			if (m_fJumpTimer > 0)
-			{
-				if (isHurt == false)
-					motion = L"Jump";
-				else
-					motion = L"HurtJump";
 
-				m_fJumpTimer -= ABSDT;
-				m_vecPos.y -= m_fSpeed * ABSDT * 1.9;
+			if (isJumpUp == true)
+			{
+				if (m_fSpeed < 0)
+					isJumpUp = false;
+
+				if (m_fSpeed > 0)
+				{
+
+					isJumpUp = true;
+
+					m_fSpeed -= ABSDT * 1200;
+
+					if (isHurt == false)
+						motion = L"Jump";
+					else
+						motion = L"HurtJump";
+
+					m_fJumpTimer -= ABSDT;
+					m_vecPos.y -= m_fSpeed * ABSDT;
+					
+				}
 			}
 
-			if (m_fJumpTimer < 0)
+
+			if (isJumpUp == false)
 			{
-				m_vecPos.y += m_fSpeed * ABSDT * 2.3;
+				isJumpUp = false;
+
+				m_fSpeed += ABSDT * 1200;
+				m_vecPos.y += m_fSpeed * ABSDT;
 
 				if (isHurt == false)
 					motion = L"JumpDown";
@@ -212,37 +231,63 @@ void CPlayer::Update()
 				{
 					playerState = PlayerState::DoubleJump;
 					m_fJumpTimer = 0.25;
+					isJumpUp = true;
+					m_fSpeed = 700;
 					break;
 				}
+				
 			}
 
 			if (BUTTONDOWN(VK_SPACE)) // 2단 점프 진입
 			{
 				playerState = PlayerState::DoubleJump;
 				m_fJumpTimer = 0.25;
+				isJumpUp = true;
+				m_fSpeed = 700;
 				break;
 			}
 
 			break;
 
-
-
 		case PlayerState::DoubleJump:	// 2단 점프
 			SetColliderSize(Vector(70, 120), Vector(10, 70));
-			if (m_fJumpTimer > 0)
+
+			if (isJumpUp == true)
 			{
+				if (m_fSpeed < 0)
+					isJumpUp = false;
+
+				if (m_fSpeed > 0)
+				{
+
+					isJumpUp = true;
+
+					m_fSpeed -= ABSDT * 1500;
+
+					if (isHurt == false)
+						motion = L"DoubleJump";
+					else
+						motion = L"HurtDoubleJump";
+
+					m_fJumpTimer -= ABSDT;
+					m_vecPos.y -= m_fSpeed * ABSDT;
+
+				}
+			}
+
+
+			if (isJumpUp == false)
+			{
+				isJumpUp = false;
+
+				m_fSpeed += ABSDT * 2000;
+				m_vecPos.y += m_fSpeed * ABSDT;
+
 				if (isHurt == false)
 					motion = L"DoubleJump";
 				else
 					motion = L"HurtDoubleJump";
 
-				m_fJumpTimer -= ABSDT;
-				m_vecPos.y -= m_fSpeed * ABSDT * 3.1;
-			}
-
-			if (m_fJumpTimer < 0)
-			{
-				m_vecPos.y += m_fSpeed * ABSDT * 2.3;
 			}
 
 			break;
@@ -265,9 +310,14 @@ void CPlayer::Update()
 
 		case PlayerState::Death:	// 죽음
 
-			motion = L"Death";
-			isDead = true;
+			if (revive == false)
+			{
+				motion = L"Death";
+				isDead = true;
+				break;
+			}
 
+			break;
 		}
 
 		AnimatorUpdate();
@@ -275,8 +325,8 @@ void CPlayer::Update()
 
 	if (playerHp <= 0)
 	{
-		playerHp = 0;
 		playerState = PlayerState::Death;
+		playerHp = 0;
 	}
 
 	if (playerHp > 100)
@@ -350,7 +400,7 @@ void CPlayer::Update()
 		CreateMissile();
 	}
 
-	
+
 }
 
 void CPlayer::Render()
@@ -415,7 +465,9 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 {
 	if (pOtherCollider->GetObjName() == L"바닥")
 	{
+		isJumpUp = true;
 		isGround = true;
+		m_fSpeed = 500;
 	}
 
 	if (pOtherCollider->GetObjName() == L"장애물" && isHurt == false && isDash == false)
