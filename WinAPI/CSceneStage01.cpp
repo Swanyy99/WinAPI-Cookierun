@@ -114,6 +114,7 @@ void CSceneStage01::Enter()
 	isDash = false;
 	isMagnet = false;
 	isDebugMode = false;
+	TearOn = false;
 
 	// ESC 계속하기 && FAIL 부활하기 버튼
 	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {

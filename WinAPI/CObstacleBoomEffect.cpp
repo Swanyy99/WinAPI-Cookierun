@@ -26,11 +26,11 @@ CObstacleBoomEffect::~CObstacleBoomEffect()
 
 void CObstacleBoomEffect::Init()
 {
-	m_pObstacleBoomEffect = RESOURCE->LoadImg(L"ObstacleBoomEffects", L"Image\\ObstacleBoomImage.png");
+	m_pObstacleBoomEffect = RESOURCE->LoadImg(L"ObstacleBoomEffects", L"Image\\ObstacleBoomImage2.png");
 
 
 	m_pAnimatorObstacleBoomEffect = new CAnimator;
-	m_pAnimatorObstacleBoomEffect->CreateAnimation(L"ObstacleBoomEffect", m_pObstacleBoomEffect, Vector(0, 0), Vector(301, 287), Vector(301, 0), 0.04f, 7, false);
+	m_pAnimatorObstacleBoomEffect->CreateAnimation(L"ObstacleBoomEffect", m_pObstacleBoomEffect, Vector(0, 0), Vector(225, 231), Vector(225, 0), 0.1f, 7, false);
 
 	m_pAnimatorObstacleBoomEffect->Play(L"ObstacleBoomEffect", false);
 	AddComponent(m_pAnimatorObstacleBoomEffect);
@@ -46,7 +46,7 @@ void CObstacleBoomEffect::Update()
 
 	effectTimer += ABSDT;
 
-	if (effectTimer > 0.3)
+	if (effectTimer > 0.71)
 		DELETEOBJECT(this);
 
 	ObstacleBoomEffect = L"ObstacleBoomEffect";
