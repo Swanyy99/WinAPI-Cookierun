@@ -10,6 +10,7 @@
 #include "CPathManager.h"
 
 #include "CPlayer.h"
+#include "CPet.h"
 #include "CMonster.h"
 #include "CCameraController.h"
 #include "CButton.h"
@@ -52,6 +53,8 @@ bool TearOn;
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
+	pPet = nullptr;
+
 	pause = false;
 	pauseImage = nullptr;
 	CookierunTitle = nullptr;
@@ -178,6 +181,10 @@ void CSceneStage01::Enter()
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(300, WINSIZEY * 0.65f);
 	AddGameObject(pPlayer);
+
+	pPet = new CPet();
+	pPet->SetPos(200, WINSIZEY * 0.45f);
+	AddGameObject(pPet);
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);

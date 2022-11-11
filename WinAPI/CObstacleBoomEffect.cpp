@@ -46,7 +46,7 @@ void CObstacleBoomEffect::Update()
 
 	effectTimer += ABSDT;
 
-	if (effectTimer > 0.71)
+	if (effectTimer > 0.5)
 		DELETEOBJECT(this);
 
 	ObstacleBoomEffect = L"ObstacleBoomEffect";

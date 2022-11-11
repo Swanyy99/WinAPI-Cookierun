@@ -61,6 +61,9 @@
     <Filter Include="GameObject\Stage01\Obstacle">
       <UniqueIdentifier>{0dd589fd-561a-43d9-95f0-59fce87c7c18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\Player">
+      <UniqueIdentifier>{7f7463e8-56fd-4705-a142-8d16bf6cf460}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -177,9 +180,6 @@
     <ClInclude Include="CMonster.h">
       <Filter>GameObject\Stage01</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CTilePanel.h">
       <Filter>Engine\Asset\UI</Filter>
     </ClInclude>
@@ -230,6 +230,12 @@
     </ClInclude>
     <ClInclude Include="CObstacle2.h">
       <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CPet.h">
+      <Filter>GameObject\Stage01\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +335,6 @@
     <ClCompile Include="CMonster.cpp">
       <Filter>GameObject\Stage01</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CTileButton.cpp">
       <Filter>Engine\Asset\UI</Filter>
     </ClCompile>
@@ -382,6 +385,12 @@
     </ClCompile>
     <ClCompile Include="CObstacle2.cpp">
       <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CPet.cpp">
+      <Filter>GameObject\Stage01\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

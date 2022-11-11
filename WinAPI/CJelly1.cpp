@@ -53,8 +53,8 @@ void CJelly1::Update()
 		if (abs(m_vecPos.x - playerPosX) < 200 && abs(m_vecPos.y - playerPosY) < 200)
 		{
 
-			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 3.5;
-			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 3.5;
+			m_vecPos.x -= (m_vecPos.x - playerPosX) * DT * 2.5;
+			m_vecPos.y -= (m_vecPos.y - playerPosY) * DT * 2.5;
 
 		}
 
@@ -91,7 +91,7 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"플레이어가 젤리를 먹었습니다.");
 		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
-		pJellyEffect->SetPos(m_vecPos.x, m_vecPos.y);
+		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
 		ADDOBJECT(pJellyEffect);
 		DELETEOBJECT(this);
 	}

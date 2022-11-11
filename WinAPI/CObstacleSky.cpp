@@ -3,6 +3,8 @@
 #include "CObstacleBoomEffect.h"
 
 extern bool isDash;
+extern float playerPosX;
+extern float playerPosY;
 
 CObstacleSky::CObstacleSky()
 {
@@ -74,7 +76,7 @@ void CObstacleSky::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"플레이어가 장애물을 부쉈습니다");
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
-		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y + 100);
+		pObstacleBoomEffect->SetPos(playerPosX + 30, playerPosY - 70);
 		ADDOBJECT(pObstacleBoomEffect);
 		DELETEOBJECT(this);
 	}

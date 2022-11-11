@@ -76,7 +76,7 @@ void CObstacle2::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"플레이어가 장애물을 부쉈습니다");
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
-		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
+		pObstacleBoomEffect->SetPos(playerPosX, playerPosY);
 		ADDOBJECT(pObstacleBoomEffect);
 		DELETEOBJECT(this);
 	}

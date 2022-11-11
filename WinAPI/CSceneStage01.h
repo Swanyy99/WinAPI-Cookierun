@@ -2,6 +2,7 @@
 #include "CScene.h"
 
 class CPlayer;
+class CPet;
 
 class CSceneStage01 : public CScene
 {
@@ -11,6 +12,7 @@ public:
 
 private:
 	CPlayer* pPlayer;
+	CPet* pPet;
 
 	CImage* CookierunTitle;
 
