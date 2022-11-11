@@ -112,13 +112,13 @@ void CPet::Update()
 			pPetMissile->SetPos(-200, WINSIZEY * 0.7);
 			ADDOBJECT(pPetMissile);
 
-			/*CPetMissile* pPetMissile2 = new CPetMissile();
+			CPetMissile* pPetMissile2 = new CPetMissile();
 			pPetMissile2->SetPos(-400, WINSIZEY * 0.7);
 			ADDOBJECT(pPetMissile2);
 
 			CPetMissile* pPetMissile3 = new CPetMissile();
 			pPetMissile3->SetPos(-600, WINSIZEY * 0.7);
-			ADDOBJECT(pPetMissile3);*/
+			ADDOBJECT(pPetMissile3);
 
 			
 		}
