@@ -105,7 +105,7 @@ void CTilePanel::CreateTileTypeButton()
 	pGroundTypeButton->SetText(L"Ground");
 	pGroundTypeButton->SetClickedCallback(click, (DWORD_PTR)pTileToolScene, (DWORD_PTR)TypeTile::Ground);
 	AddChildUI(pGroundTypeButton);
-}
+} 
 
 void CTilePanel::SetPage(UINT page)
 {

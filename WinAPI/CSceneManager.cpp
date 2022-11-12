@@ -5,6 +5,7 @@
 #include "CSceneTitle.h"
 #include "CSceneTileTool.h"
 #include "CSceneStage01.h"
+#include "CScenePrepare.h"
 
 CSceneManager::CSceneManager()
 {
@@ -25,6 +26,8 @@ void CSceneManager::Init()
 	m_mapScene.insert(make_pair(GroupScene::TileTool, pSceneTileTool));
 	CScene* pSceneStage01 = new CSceneStage01();
 	m_mapScene.insert(make_pair(GroupScene::Stage01, pSceneStage01));
+	CScene* pScenePrepare = new CScenePrepare();
+	m_mapScene.insert(make_pair(GroupScene::PrePare, pScenePrepare));
 
 	// 게임씬 자료구조를 순회하며 씬을 초기화
 	for (pair<GroupScene, CScene*> scene : m_mapScene)

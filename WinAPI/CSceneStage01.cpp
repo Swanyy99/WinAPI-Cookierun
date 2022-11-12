@@ -136,6 +136,8 @@ void CSceneStage01::Enter()
 	ResumeButton->SetName(L"계속하기/슬퍼하기 버튼");
 	ResumeButton->SetPos(530, 265);
 	ResumeButton->SetScale(220, 55);
+	//ResumeButton->SetImage(L"Idle_jump.png");
+	ResumeButton->SetText(L"안녕", 36, Color( 0, 0, 0, 1));
 	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
 	AddGameObject(ResumeButton);
 
@@ -157,6 +159,7 @@ void CSceneStage01::Enter()
 	RetryButton->SetPos(530, 355);
 	RetryButton->SetScale(220, 55);
 	RetryButton->SetClickedCallback(RetryButtonClicked, (DWORD_PTR)RetryButton, (DWORD_PTR)1);
+	
 	AddGameObject(RetryButton);
 
 
@@ -994,12 +997,12 @@ void CSceneStage01::Render()
 	
 
 	// 일시정지 UI
-	if (pause == true)
+	/*if (pause == true)
 	{
 		RENDER->Image(
 			pauseImage,
 			0, 0, WINSIZEX, WINSIZEY);
-	}
+	}*/
 
 	// 사망 시 UI
 	if (isDead == true)

@@ -20,8 +20,6 @@ CPetMissile::CPetMissile()
 	m_pAnimatorPetMissile = nullptr;
 	m_pPetMissileImage = nullptr;
 
-
-
 }
 
 CPetMissile::~CPetMissile()

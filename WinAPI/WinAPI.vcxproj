@@ -178,6 +178,7 @@
     <ClInclude Include="CResourceManager.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
+    <ClInclude Include="CScenePrepare.h" />
     <ClInclude Include="CSceneStage01.h" />
     <ClInclude Include="CSceneTileTool.h" />
     <ClInclude Include="CSceneTitle.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="CResourceManager.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
+    <ClCompile Include="CScenePrepare.cpp" />
     <ClCompile Include="CSceneStage01.cpp" />
     <ClCompile Include="CSceneTileTool.cpp" />
     <ClCompile Include="CSceneTitle.cpp" />

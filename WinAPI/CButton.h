@@ -1,6 +1,8 @@
 #pragma once
 #include "CUI.h"
 
+class CImage;
+
 // 함수포인터 : 함수를 가리키는 포인터 변수로 함수의 시작주소를 저장하는 변수
 // 반환형 (*함수포인터 이름)(매개변수들...)
 // ex) void (*FuncPointer)(int);
@@ -22,11 +24,18 @@ private:
 	wstring			m_strText;
 	float			m_iSizeText;
 	Color			m_colorText;
+	CImage*			m_buttonImage;
+	CImage*			m_buttonImageMouseOver;
+	wstring			m_strImageName;
+	
+	bool			isMouseOver;
 
 public:
 	void SetClickedCallback(CallbackFunc pCallback, DWORD_PTR pParam1, DWORD_PTR pParam2);
 
 	void SetText(const wstring& text, float fontSize = 12, Color color = Color(0, 0, 0, 1));
+
+	void SetImage(const wstring& image, const wstring& mouseOverImage);
 
 private:
 	void Init() override;

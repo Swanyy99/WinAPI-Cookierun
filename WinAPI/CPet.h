@@ -34,7 +34,6 @@ private:
 	void Release() override;
 
 	void AnimatorUpdate();
-	void CreateMissile();
 
 	void OnCollisionEnter(CCollider* pOtherCollider) override;
 	void OnCollisionStay(CCollider* pOtherCollider) override;

@@ -64,6 +64,12 @@
     <Filter Include="GameObject\Stage01\Player">
       <UniqueIdentifier>{7f7463e8-56fd-4705-a142-8d16bf6cf460}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\Image">
+      <UniqueIdentifier>{c60db030-8987-4474-bd83-045cd231f9bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Stage01\Floor">
+      <UniqueIdentifier>{9109c520-cf50-4d7b-aed0-ab7011e09295}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -192,15 +198,6 @@
     <ClInclude Include="CSoundManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CFloor.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CBackground.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
-    <ClInclude Include="CBottomCloud.h">
-      <Filter>GameObject\Stage01</Filter>
-    </ClInclude>
     <ClInclude Include="CHeartItem.h">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClInclude>
@@ -239,6 +236,18 @@
     </ClInclude>
     <ClInclude Include="CPetMissile.h">
       <Filter>GameObject\Stage01\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CScenePrepare.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CFloor.h">
+      <Filter>GameObject\Stage01\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="CBackground.h">
+      <Filter>GameObject\Stage01\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CBottomCloud.h">
+      <Filter>GameObject\Stage01\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -350,15 +359,6 @@
     <ClCompile Include="CSoundManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CFloor.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CBackground.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
-    <ClCompile Include="CBottomCloud.cpp">
-      <Filter>GameObject\Stage01</Filter>
-    </ClCompile>
     <ClCompile Include="CHeartItem.cpp">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
@@ -397,6 +397,18 @@
     </ClCompile>
     <ClCompile Include="CPetMissile.cpp">
       <Filter>GameObject\Stage01\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CScenePrepare.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CFloor.cpp">
+      <Filter>GameObject\Stage01\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackground.cpp">
+      <Filter>GameObject\Stage01\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CBottomCloud.cpp">
+      <Filter>GameObject\Stage01\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

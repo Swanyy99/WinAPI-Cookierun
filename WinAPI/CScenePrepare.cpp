@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "CSceneTitle.h"
+#include "CScenePrepare.h"
 
 #include "WinAPI.h"
 #include "CRenderManager.h"
@@ -8,29 +8,26 @@
 #include "CCameraManager.h"
 
 extern bool pause;
-bool inTitle;
 
-CSceneTitle::CSceneTitle()
+CScenePrepare::CScenePrepare()
 {
-	TitleBackgroundImage = nullptr;
+	PrepareSceneBackgroundImage = nullptr;
 }
 
-CSceneTitle::~CSceneTitle()
+CScenePrepare::~CScenePrepare()
 {
 }
 
-void CSceneTitle::Init()
+void CScenePrepare::Init()
 {
-	TitleBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneImage", L"Image\\TitleCsceneImage.png");
+	PrepareSceneBackgroundImage = RESOURCE->LoadImg(L"PrepareSceneBackgroundImage", L"Image\\PrepareSceneBackground.png");
 }
 
 
-void CSceneTitle::Enter()
+void CScenePrepare::Enter()
 {
 	CAMERA->FadeIn(1);
 
-	inTitle = true;
-	//pause = true;
 
 	// 게임 시작버튼
 	auto StartButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
@@ -40,7 +37,6 @@ void CSceneTitle::Enter()
 
 		Logger::Debug(StartButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		pause = false;
-		inTitle = false;
 		CAMERA->FadeIn(0.25f);
 		CHANGESCENE(GroupScene::Stage01);
 		//pause = false;
@@ -75,54 +71,37 @@ void CSceneTitle::Enter()
 	AddGameObject(ExitButton);
 }
 
-void CSceneTitle::Update()
+void CScenePrepare::Update()
 {
-	if (BUTTONDOWN(VK_F1))
-	{
-		CHANGESCENE(GroupScene::TileTool);
-	}
-	/*
-	if (BUTTONDOWN(VK_SPACE))
-	{
-		CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Stage01, 0.25f);
-	}*/
 
 	if (MOUSESCREENPOS.x > 790 && MOUSESCREENPOS.x < 1090 && MOUSESCREENPOS.y > 405 && MOUSESCREENPOS.y < 475)
 	{
-		TitleBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneStartOverImage", L"Image\\TitleCsceneStartOverImage.png");
+		PrepareSceneBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneStartOverImage", L"Image\\TitleCsceneStartOverImage.png");
 	}
 	else if (MOUSESCREENPOS.x > 790 && MOUSESCREENPOS.x < 1090 && MOUSESCREENPOS.y > 545 && MOUSESCREENPOS.y < 615)
 	{
-		TitleBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneExitOverImage", L"Image\\TitleCsceneExitOverImage.png");
+		PrepareSceneBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneExitOverImage", L"Image\\TitleCsceneExitOverImage.png");
 	}
 	else
 	{
-		TitleBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneImage", L"Image\\TitleCsceneImage.png");
+		PrepareSceneBackgroundImage = RESOURCE->LoadImg(L"TitleCsceneImage", L"Image\\TitleCsceneImage.png");
 	}
-	
+
 }
 
-void CSceneTitle::Render()
+void CScenePrepare::Render()
 {
-	/*RENDER->Text(L"press space to start",
-		WINSIZEX * 0.5f - 100,
-		WINSIZEY * 0.5f - 10,
-		WINSIZEX * 0.5f + 100,
-		WINSIZEY * 0.5f + 10,
-		Color(0, 0, 0, 1.f),
-		20.f);*/
 
 	RENDER->Image(
-		TitleBackgroundImage,
-		0,0, 1280, 730);
+		PrepareSceneBackgroundImage,
+		0, 0, 1280, 730);
 }
 
 
-void CSceneTitle::Exit()
+void CScenePrepare::Exit()
 {
 }
 
-void CSceneTitle::Release()
+void CScenePrepare::Release()
 {
 }

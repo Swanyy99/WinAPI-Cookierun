@@ -39,27 +39,28 @@ void CTimeManager::Update()
 		m_fAbsDT = elapsed.count();
 	}
 
-	else if (isDash == true && pause == false && isDead == false)
+	if (isDash == true && pause == false && isDead == false)
 	{
-		m_fAbsDT = elapsed.count();
 		m_fDT = elapsed.count() * 3;
+		m_fAbsDT = elapsed.count();
 	}
 	
 
-	else if (pause == true)
+	if (pause == true)
 	{
 		m_fDT = 0;
 		m_fAbsDT = 0;
 	}
-	else if (isDead == true)
+
+	if (isDead == true)
 	{
 		m_fDT = 0;
 		m_fAbsDT = 0;
 	}
 
 
-	if (m_fDT > 0.1f) m_fDT = 0.1f;
-	if (m_fAbsDT > 0.1f) m_fAbsDT = 0.1f;
+	if (m_fDT >= 0.1f) m_fDT = 0.1f;
+	if (m_fAbsDT >= 0.1f) m_fAbsDT = 0.1f;
 	prevTime = curTime;
 
 	// 1초가 걸릴때까지 반복한 횟수가 초당프레임수

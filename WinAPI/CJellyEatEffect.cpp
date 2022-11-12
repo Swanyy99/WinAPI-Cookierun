@@ -29,7 +29,7 @@ void CJellyEatEffect::Init()
 
 
 	m_pAnimatorJellyEatEffect = new CAnimator;
-	m_pAnimatorJellyEatEffect->CreateAnimation(L"JellyEatEffect", m_pJellyEatEffect, Vector(0, 0), Vector(301, 287), Vector(301, 0), 0.04f, 7, false);
+	m_pAnimatorJellyEatEffect->CreateAnimation(L"JellyEatEffect", m_pJellyEatEffect, Vector(0, 0), Vector(301, 287), Vector(301, 0), 0.05f, 7, false);
 
 	m_pAnimatorJellyEatEffect->Play(L"JellyEatEffect", false);
 	AddComponent(m_pAnimatorJellyEatEffect);
@@ -45,7 +45,7 @@ void CJellyEatEffect::Update()
 
 	effectTimer += ABSDT;
 
-	if (effectTimer > 0.3)
+	if (effectTimer > 0.35)
 		DELETEOBJECT(this);
 
 	JellyEatEffect = L"JellyEatEffect";

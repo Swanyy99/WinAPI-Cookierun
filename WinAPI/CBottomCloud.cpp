@@ -28,7 +28,7 @@ void CBottomCloud::Update()
 
 
 	// 화면 좌측 밖으로 나갈경우 화면 우측 밖에 재배치
-	if (m_vecPos.x < -640)
+	if (m_vecPos.x <= -640)
 		this->SetPos(WINSIZEX + 640, WINSIZEY * 0.85);
 }
 
