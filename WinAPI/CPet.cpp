@@ -29,7 +29,6 @@ extern float playerPosX;
 extern float playerPosY;
 
 extern int score;
-extern wstring ScreenScore;
 extern bool pause;
 
 CPet::CPet()
@@ -46,7 +45,6 @@ CPet::CPet()
 	m_vecLookDir = Vector(0, -1);
 	m_fSkillTimer = 0;
 	m_fSkillCooltimeTimer = 0;
-	SkillUsed = false;
 	skillOn = false;
 
 }
@@ -57,32 +55,41 @@ CPet::~CPet()
 
 void CPet::Init()
 {
-	m_pAnimator = new CAnimator;
+	CPetMissile* pPetMissile1 = new CPetMissile();
+	pPetMissile1->SetPos(-200, WINSIZEY * 0.7);
+	ADDOBJECT(pPetMissile1);
+	DELETEOBJECT(pPetMissile1);
+
+	m_pAnimatorp = new CAnimator;
 
 	// 기본 쿠키 모션 이미지들
-	m_pPetImage = RESOURCE->LoadImg(L"PetrAnimation", L"Image\\Pet.png");
-	m_pDeathImage = RESOURCE->LoadImg(L"PlayerDeath", L"Image\\Pet.png");
+	m_pPetImage = RESOURCE->LoadImg(L"PetAnimation", L"Image\\Pet.png");
+	m_pDeathImage = RESOURCE->LoadImg(L"PetDeath", L"Image\\Pet.png");
 
-	m_pAnimator->CreateAnimation(L"IdleRun", m_pPetImage, Vector(0, 0), Vector(100, 100), Vector(100, 0.f), 0.1f, 4);
+	m_pAnimatorp->CreateAnimation(L"IdleRun", m_pPetImage, Vector(0, 0), Vector(100, 100), Vector(100, 0.f), 0.1f, 4);
 
-	m_pAnimator->CreateAnimation(L"Skill", m_pPetImage, Vector(100, 300), Vector(100, 100), Vector(100, 0.f), 0.1f, 7);
+	m_pAnimatorp->CreateAnimation(L"Skill", m_pPetImage, Vector(100, 300), Vector(100, 100), Vector(100, 0.f), 0.1f, 7);
 
-	m_pAnimator->CreateAnimation(L"Death", m_pPetImage, Vector(0, 942), Vector(100, 100), Vector(100, 0.f), 0.1f, 1, false);
+	m_pAnimatorp->CreateAnimation(L"Death", m_pPetImage, Vector(0, 942), Vector(100, 100), Vector(100, 0.f), 0.1f, 1, false);
 
-	m_pAnimator->Play(L"IdleRun", false);
-	AddComponent(m_pAnimator);
+	m_pAnimatorp->Play(L"IdleRun", false);
+	AddComponent(m_pAnimatorp);
 
 
 	petState = PetState::IdleRun;
 
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 
-	m_fSkillTimer = 5;
+
+	m_fSkillTimer = 5.5;
 	m_fSkillCooltimeTimer = 10;
-	SkillUsed = false;
 	skillOn = false;
 	PetMotion = L"IdleRun";
+
+	
+
 }
+
 
 void CPet::Update()
 {
@@ -91,49 +98,33 @@ void CPet::Update()
 
 	if (m_fSkillCooltimeTimer <= 0)
 	{
+		CPetMissile* pPetMissile1 = new CPetMissile();
+		pPetMissile1->SetPos(-200, WINSIZEY * 0.7);
+		ADDOBJECT(pPetMissile1);
+		m_fSkillCooltimeTimer = 15.5;
 		skillOn = true;
 	}
 	
 
 	//스킬 발동
-	if (skillOn == true && isDead == false)
+	if (skillOn == true)
 	{
-		m_fSkillTimer -= ABSDT;
 		PetMotion = L"Skill";
+		m_fSkillTimer -= ABSDT;
 
 		m_vecPos.y -= (m_vecPos.y - (playerPosY - 100)) * DT * 3.5;
 		m_vecPos.x -= (m_vecPos.x - (playerPosX + 180)) * DT * 3;
 
-		if (SkillUsed == false)
-		{
-			SkillUsed = true;
-
-			CPetMissile* pPetMissile = new CPetMissile();
-			pPetMissile->SetPos(-200, WINSIZEY * 0.7);
-			ADDOBJECT(pPetMissile);
-
-			CPetMissile* pPetMissile2 = new CPetMissile();
-			pPetMissile2->SetPos(-400, WINSIZEY * 0.7);
-			ADDOBJECT(pPetMissile2);
-
-			CPetMissile* pPetMissile3 = new CPetMissile();
-			pPetMissile3->SetPos(-600, WINSIZEY * 0.7);
-			ADDOBJECT(pPetMissile3);
-
-			
-		}
 		if (m_fSkillTimer <= 0)
 		{
 			skillOn = false;
-			SkillUsed = false;
-			m_fSkillCooltimeTimer = 10;
-			m_fSkillTimer = 5;
+			m_fSkillTimer = 5.5;
 			PetMotion = L"IdleRun";
 		}
 	}
 
 	// 스킬 쿨타임 중
-	if (skillOn == false)
+	else if (skillOn == false)
 		m_vecPos.y -= (m_vecPos.y - (playerPosY - 70)) * DT * 3.5;
 		m_vecPos.x -= (m_vecPos.x - (playerPosX - 170)) * DT * 3;
 
@@ -152,7 +143,7 @@ void CPet::Release()
 void CPet::AnimatorUpdate()
 {
 
-	m_pAnimator->Play(PetMotion, false);
+	m_pAnimatorp->Play(PetMotion, false);
 
 }
 

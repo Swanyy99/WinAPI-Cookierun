@@ -7,6 +7,7 @@ extern float playerPosY;
 
 extern bool isMagnet;
 extern bool isDash;
+extern bool skillOn;
 
 Vector DistanceGap;
 
@@ -96,7 +97,7 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 		DELETEOBJECT(this);
 	}
 
-	if (pOtherCollider->GetObjName() == L"Æê¹Ì»çÀÏ")
+	if (pOtherCollider->GetObjName() == L"Æê¹Ì»çÀÏ" && skillOn == true)
 	{
 		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
 		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);

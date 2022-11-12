@@ -7,6 +7,7 @@ extern float playerPosY;
 extern bool isMagnet;
 extern bool isDash;
 
+extern bool skillOn;
 extern int score;
 
 CPetMissile::CPetMissile()
@@ -18,6 +19,8 @@ CPetMissile::CPetMissile()
 	m_fVelocity = 300;
 	m_pAnimatorPetMissile = nullptr;
 	m_pPetMissileImage = nullptr;
+
+
 
 }
 
@@ -48,7 +51,8 @@ void CPetMissile::Update()
 	m_vecPos += m_vecDir * m_fVelocity * ABSDT;
 
 
-	if (m_vecPos.x > 1500)
+
+	if (m_vecPos.x >= 1400)
 		DELETEOBJECT(this);
 
 
@@ -74,16 +78,18 @@ void CPetMissile::AnimatorUpdate()
 
 void CPetMissile::OnCollisionEnter(CCollider* pOtherCollider)
 {
-	if (pOtherCollider->GetObjName() == L"장애물")
+	
+	if (pOtherCollider->GetObjName() == L"장애물" && skillOn == true)
 	{
-		score + 2000;
+		score += 2000;
 	}
 
-	if (pOtherCollider->GetObjName() == L"젤리")
+	if (pOtherCollider->GetObjName() == L"젤리" && skillOn == true)
 	{
 		Logger::Debug(L"왕 하프물범이 젤리를 먹었습니다!");
-		score + 2000;
+		score += 2000;
 	}
+
 }
 
 void CPetMissile::OnCollisionStay(CCollider* pOtherCollider)

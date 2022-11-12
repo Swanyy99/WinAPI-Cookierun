@@ -11,7 +11,7 @@ public:
 	virtual ~CPet();
 
 private:
-	CAnimator* m_pAnimator;
+	CAnimator* m_pAnimatorp;
 	CImage* m_pPetImage;
 	CImage* m_pSkillImage;
 	CImage* m_pDeathImage;
@@ -25,7 +25,6 @@ private:
 	float m_fSpeed = 200.0f;
 	float m_fSkillCooltimeTimer;
 	float m_fSkillTimer;
-	bool SkillUsed;
 
 
 private:
