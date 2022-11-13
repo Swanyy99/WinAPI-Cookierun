@@ -437,9 +437,9 @@ void CPlayer::Render()
 		RENDER->Image(
 			HurtInvincibilityImage,
 			m_vecPos.x + 11 - HurtInvincibilityImage->GetWidth() * 0.15,
-			playerPosY - 94 - HurtInvincibilityImage->GetHeight() * 0.15,
+			playerPosY - 95 - HurtInvincibilityImage->GetHeight() * 0.15,
 			m_vecPos.x + 11 + HurtInvincibilityImage->GetWidth() * 0.15,
-			playerPosY - 94 + HurtInvincibilityImage->GetHeight() * 0.15);
+			playerPosY - 95 + HurtInvincibilityImage->GetHeight() * 0.15);
 
 		// 피격 시 화면 붉은색 테두리 이미지
 		if (realHurt == true)
