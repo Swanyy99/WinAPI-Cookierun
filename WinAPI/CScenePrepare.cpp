@@ -136,7 +136,7 @@ void CScenePrepare::Render()
 			200, 210, 310, 290);
 	}
 
-	if (choicePet == 2)
+	else if (choicePet == 2)
 	{
 		RENDER->Image(
 			ChoosedImage,
