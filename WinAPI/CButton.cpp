@@ -94,8 +94,8 @@ void CButton::Render()
 			m_colorText,
 			m_iSizeText
 		);
-	}
 
+	}
 		
 }
 
@@ -123,11 +123,10 @@ void CButton::OnMouseUp()
 
 void CButton::OnMouseDown()
 {
-	if (pause == true || inTitle == true || isDead == true)
-	{
-		if (nullptr != m_pCallback)
-			m_pCallback(m_pParam1, m_pParam2);
-	}
+	
+	if (nullptr != m_pCallback)
+		m_pCallback(m_pParam1, m_pParam2);
+	
 }
 
 void CButton::OnMouseClicked()

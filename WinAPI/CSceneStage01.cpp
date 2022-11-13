@@ -28,6 +28,7 @@
 #include "CHeartItem.h"
 #include "CMagnetItem.h"
 #include "CDashItem.h"
+#include "CImages.h"
 
 bool pause;
 bool isRetry;
@@ -55,10 +56,19 @@ CSceneStage01::CSceneStage01()
 	pPlayer = nullptr;
 	pPet = nullptr;
 
+
+	RetryButton = nullptr;
+	ResumeButton = nullptr;
+	QuitButton = nullptr;
+
+
 	pause = false;
-	pauseImage = nullptr;
+
+	PauseImage = nullptr;
+	FailImage = nullptr;
+
 	CookierunTitle = nullptr;
-	failImage = nullptr;
+
 	slideImage = nullptr;
 	jumpImage = nullptr;
 	HPProgressBar = nullptr;
@@ -74,13 +84,9 @@ CSceneStage01::CSceneStage01()
 	isRetry = false;
 	isDebugMode = false;
 	TearOn = false;
-
+	
 
 	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
-
-	pauseImage = RESOURCE->LoadImg(L"Pause", L"Image\\Pause.png");
-
-	failImage = RESOURCE->LoadImg(L"Fail", L"Image\\Fail.png");
 
 	slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
 
@@ -128,42 +134,48 @@ void CSceneStage01::Enter()
 		pause = false;
 		if (isDead == true)
 		{
-			TearOn = true;
+			//TearOn = true;
+			playerHp += 50;
+			isDead = false;
+			revive = true;
 		}
 	};
 
-	CButton* ResumeButton = new CButton;
-	ResumeButton->SetName(L"계속하기/슬퍼하기 버튼");
-	ResumeButton->SetPos(530, 265);
-	ResumeButton->SetScale(220, 55);
+	ResumeButton = new CButton;
+	ResumeButton->SetName(L"계속하기 / 부활하기 버튼");
+	ResumeButton->SetLayer(Layer::Ui);
+	ResumeButton->SetPos(540, 250);	// 689 296
+	ResumeButton->SetScale(0, 0);
 	//ResumeButton->SetImage(L"Idle_jump.png");
-	ResumeButton->SetText(L"안녕", 36, Color( 0, 0, 0, 1));
+	ResumeButton->SetText(L"", 32, Color(0, 0, 0, 1));
 	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
 	AddGameObject(ResumeButton);
 
 
-	// ESC 다시하기 버튼
+	// 다시하기 버튼
 	auto RetryButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* RetryButton = (CButton*)(button);
 		int paramInt = (int)(param);
 
 		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		CAMERA->FadeOut(1);
-		CHANGESCENE(GroupScene::Stage01);
 		pause = false;
+		CHANGESCENE(GroupScene::Stage01);
+		isDash = true;
 		isRetry = true;
 	};
 
-	CButton* RetryButton = new CButton;
+	RetryButton = new CButton;
 	RetryButton->SetName(L"다시하기 버튼");
-	RetryButton->SetPos(530, 355);
-	RetryButton->SetScale(220, 55);
+	RetryButton->SetLayer(Layer::Ui);
+	RetryButton->SetPos(540, 350);
+	RetryButton->SetScale(0, 0);
+	RetryButton->SetText(L"", 32, Color(0, 0, 0, 1));
 	RetryButton->SetClickedCallback(RetryButtonClicked, (DWORD_PTR)RetryButton, (DWORD_PTR)1);
-	
 	AddGameObject(RetryButton);
 
 
-	// ESC 나가기 버튼
+	// 나가기 버튼
 	auto QuitButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* QuitButton = (CButton*)(button);
 		int paramInt = (int)(param);
@@ -174,10 +186,12 @@ void CSceneStage01::Enter()
 		pause = false;
 	};
 
-	CButton* QuitButton = new CButton;
+	QuitButton = new CButton;
 	QuitButton->SetName(L"나가기 버튼");
-	QuitButton->SetPos(530, 445);
-	QuitButton->SetScale(220, 55);
+	QuitButton->SetLayer(Layer::Ui);
+	QuitButton->SetPos(540, 450);
+	QuitButton->SetScale(0, 0);
+	QuitButton->SetText(L"", 32, Color(0, 0, 0, 1));
 	QuitButton->SetClickedCallback(QuitButtonClicked, (DWORD_PTR)QuitButton, (DWORD_PTR)1);
 	AddGameObject(QuitButton);
 
@@ -192,8 +206,24 @@ void CSceneStage01::Enter()
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
+	// 일시정지 화면 반투명효과 + 일시정지 글자
+	PauseImage = new CImages();
+	PauseImage->SetImageName(L"Pause.png");
+	PauseImage->SetPos(0, 0);
+	PauseImage->SetScale(0, 0);
+	AddGameObject(PauseImage);
+
+	// 사망 화면 반투명효과 + 으앙주금 글자
+	FailImage = new CImages();
+	FailImage->SetImageName(L"Fail.png");
+	FailImage->SetPos(0, 0);
+	FailImage->SetScale(0, 0);
+	AddGameObject(FailImage);
 
 	CAMERA->FadeIn(0.25f);
+
+
+
 
 
 	CFloor* pFloor2 = new CFloor();
@@ -252,6 +282,41 @@ void CSceneStage01::Enter()
 
 void CSceneStage01::Update()
 {
+	if (pause == true && isDead == false)
+	{
+		ResumeButton->SetScale(200, 80);
+		ResumeButton->SetText(L"계속하기", 32, Color(0, 0, 0, 1));
+
+		RetryButton->SetScale(200, 80);
+		RetryButton->SetText(L"다시하기", 32, Color(0, 0, 0, 1));
+
+		QuitButton->SetScale(200, 80);
+		QuitButton->SetText(L"나가기", 32, Color(0, 0, 0, 1));
+	}
+
+	if (isDead == true)
+	{
+		ResumeButton->SetScale(200, 80);
+		ResumeButton->SetText(L"부활하기", 32, Color(0, 0, 0, 1));
+
+		RetryButton->SetScale(200, 80);
+		RetryButton->SetText(L"다시하기", 32, Color(0, 0, 0, 1));
+
+		QuitButton->SetScale(200, 80);
+		QuitButton->SetText(L"나가기", 32, Color(0, 0, 0, 1));
+	}
+
+	if (pause == false && isDead == false)
+	{
+		ResumeButton->SetScale(0, 0);
+		ResumeButton->SetText(L"", 32, Color(0, 0, 0, 1));
+
+		RetryButton->SetScale(0, 0);
+		RetryButton->SetText(L"", 32, Color(0, 0, 0, 1));
+
+		QuitButton->SetScale(0, 0);
+		QuitButton->SetText(L"", 32, Color(0, 0, 0, 1));
+	}
 
 	ScreenScore = to_wstring(score);
 
@@ -988,29 +1053,43 @@ void CSceneStage01::Render()
 		40, 50, 90, 100);
 
 	// 슬퍼하기 눈물 이미지
-	if (TearOn == true)
+	/*if (TearOn == true)
 	{
 		RENDER->Image(
 			Tear,
 			playerPosX - 60, playerPosY + 25, playerPosX - 50, playerPosY + 43);
+	}*/
+	
+
+	//일시정지 UI
+	if (pause == true)
+	{
+		PauseImage->SetScale(WINSIZEX, WINSIZEY);
+	}
+
+	else if (pause == false)
+	{
+		PauseImage->SetScale(0, 0);
+	}
+
+	if (isDead == true)
+	{
+		FailImage->SetScale(WINSIZEX, WINSIZEY);
+	}
+
+	else if (isDead == false)
+	{
+		FailImage->SetScale(0, 0);
 	}
 	
 
-	// 일시정지 UI
-	/*if (pause == true)
-	{
-		RENDER->Image(
-			pauseImage,
-			0, 0, WINSIZEX, WINSIZEY);
-	}*/
-
 	// 사망 시 UI
-	if (isDead == true)
+	/*if (isDead == true)
 	{
 		RENDER->Image(
 			failImage,
 			0, 0, WINSIZEX, WINSIZEY);
-	}
+	}*/
 
 }
 

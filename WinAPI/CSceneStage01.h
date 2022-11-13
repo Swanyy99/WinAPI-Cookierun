@@ -1,8 +1,10 @@
 #pragma once
 #include "CScene.h"
+#include "CImages.h"
 
 class CPlayer;
 class CPet;
+class CImages;
 
 class CSceneStage01 : public CScene
 {
@@ -16,8 +18,6 @@ private:
 
 	CImage* CookierunTitle;
 
-	CImage* pauseImage;
-	CImage* failImage;
 	CImage* slideImage;
 	CImage* jumpImage;
 
@@ -29,8 +29,16 @@ private:
 
 	CImage* Tear;
 
+	CButton* RetryButton;
+	CButton* ResumeButton;
+	CButton* QuitButton;
+
+	CImages* PauseImage;
+	CImages* FailImage;
+
 	float obstacleTimer;
 	float HpTimer;
+
 
 
 public:

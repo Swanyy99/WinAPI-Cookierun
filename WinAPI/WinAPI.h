@@ -58,13 +58,15 @@ enum class Layer
 	JellyEatEffect,
 	DashEffect,
 	Player,
+	RespawnEffect,
 	Pet,
 	PetMissile,
 	Missile,
 	Monster,
 	OverlayBackGround,
-
+	UnderUi,
 	Ui,
+
 	Size,
 };
 

@@ -249,6 +249,12 @@
     <ClInclude Include="CBottomCloud.h">
       <Filter>GameObject\Stage01\Image</Filter>
     </ClInclude>
+    <ClInclude Include="CImages.h">
+      <Filter>GameObject\Stage01\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="CRespawnEffect.h">
+      <Filter>GameObject\Stage01\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -409,6 +415,12 @@
     </ClCompile>
     <ClCompile Include="CBottomCloud.cpp">
       <Filter>GameObject\Stage01\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CImages.cpp">
+      <Filter>GameObject\Stage01\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="CRespawnEffect.cpp">
+      <Filter>GameObject\Stage01\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

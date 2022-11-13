@@ -15,10 +15,12 @@
 #include "CGameObject.h"
 #include "CDashFireEffect.h"
 #include "CScene.h"
+#include "CRespawnEffect.h"
 
 bool isMagnet;
 bool isDash;
 bool isHurt;
+bool realHurt;
 
 bool revive;
 
@@ -62,6 +64,7 @@ CPlayer::CPlayer()
 	m_bIsMove = false;
 	isDead = false;
 	isHurt = false;
+	realHurt = false;
 	m_fJumpTimer = 0.4;
 	m_fHurtTimer = 2.5;
 	m_fMagnetTimer = 4;
@@ -115,7 +118,7 @@ void CPlayer::Init()
 	m_pHurtDeathImage = RESOURCE->LoadImg(L"PlayerHurtDeath", L"Image\\BraveCookieHurt.png");
 
 	m_pAnimator->CreateAnimation(L"HurtIdleRun", m_pHurtIdleImage, Vector(0, 273), Vector(273, 273), Vector(273, 0.f), 0.08f, 4);
-	m_pAnimator->CreateAnimation(L"HurtDash", m_pHurtIdleImage, Vector(0, 0), Vector(0, 75.f), Vector(84.f, 0.f), 0.05f, 16);
+	m_pAnimator->CreateAnimation(L"HurtDash", m_pHurtIdleImage, Vector(1092, 273), Vector(273, 273), Vector(273, 0.f), 0.06f, 4);
 
 	m_pAnimator->CreateAnimation(L"HurtJump", m_pHurtJumpImage, Vector(0, 0), Vector(273, 273), Vector(273, 0), 1, 1);
 	m_pAnimator->CreateAnimation(L"HurtJumpDown", m_pHurtJumpImage, Vector(2184, 546), Vector(273, 273), Vector(273, 0), 1, 1);
@@ -166,10 +169,12 @@ void CPlayer::Update()
 
 			if (isHurt == false && isDash == false)
 				motion = L"IdleRun";
-			else if (isDash == true)
-				motion = L"IdleDash";
 			else if (isDash == false && isHurt == true)
 				motion = L"HurtIdleRun";
+			else if (isDash == true && isHurt == true)
+				motion = L"HurtDash";
+			else if (isDash == true)
+				motion = L"IdleDash";
 
 			if (BUTTONDOWN(VK_SPACE)) // 점프
 			{
@@ -310,10 +315,32 @@ void CPlayer::Update()
 
 		case PlayerState::Death:	// 죽음
 
-			if (revive == false)
+			
+			if (playerHp <= 0)
 			{
+				
 				motion = L"Death";
 				isDead = true;
+				break;
+			}
+			
+			if (playerHp > 0)
+			{
+				playerState = PlayerState::IdleRun;
+				motion = L"IdleRun";
+				isDead = false;
+				
+				m_fSpeed = 500;
+				m_vecPos.y = WINSIZEY * 0.65f;
+				isJumpUp = true;
+				isGround = true;
+				isHurt = true;
+				m_fHurtTimer = 2.5;
+
+				CRespawnEffect* pRespawnEffect = new CRespawnEffect();
+				pRespawnEffect->SetPos(playerPosX, WINSIZEY * 0.68);
+				ADDOBJECT(pRespawnEffect);
+				
 				break;
 			}
 
@@ -340,21 +367,25 @@ void CPlayer::Update()
 	{
 		m_fHurtTimer -= ABSDT;
 
-		if (m_fHurtTimer <= 2.5 && m_fHurtTimer >= 2.44)
+		if (realHurt == true)
 		{
-			m_vecPos.x -= 0.1;
-			m_vecPos.y -= 0.2;
-		}
+			if (m_fHurtTimer <= 2.5 && m_fHurtTimer >= 2.44)
+			{
+				m_vecPos.x -= 0.1;
+				m_vecPos.y -= 0.2;
+			}
 
-		if (m_fHurtTimer < 2.4 && m_fHurtTimer >= 2.34)
-		{
-			m_vecPos.x += 0.1;
-			m_vecPos.y += 0.2;
+			if (m_fHurtTimer < 2.4 && m_fHurtTimer >= 2.34)
+			{
+				m_vecPos.x += 0.1;
+				m_vecPos.y += 0.2;
+			}
 		}
 
 		if (m_fHurtTimer <= 0)
 		{
 			isHurt = false;
+			realHurt = false;
 			m_fHurtTimer = 2.5;
 		}
 	}
@@ -389,6 +420,8 @@ void CPlayer::Update()
 		if (m_fDashTimer <= 0)
 		{
 			isDash = false;
+			isHurt = true;
+			m_fHurtTimer = 2.5;
 			m_fDashTimer = 4;
 		}
 	}
@@ -410,15 +443,18 @@ void CPlayer::Render()
 		// 피격 시 무적 텍스트 이미지
 		RENDER->Image(
 			HurtInvincibilityImage,
-			m_vecPos.x - HurtInvincibilityImage->GetWidth() * 0.25,
-			m_vecPos.y - 30 - HurtInvincibilityImage->GetHeight() * 0.25,
-			m_vecPos.x + HurtInvincibilityImage->GetWidth() * 0.25,
-			m_vecPos.y - 30 + HurtInvincibilityImage->GetHeight() * 0.25);
+			m_vecPos.x + 15 - HurtInvincibilityImage->GetWidth() * 0.15,
+			playerPosY - 92 - HurtInvincibilityImage->GetHeight() * 0.15,
+			m_vecPos.x + 15 + HurtInvincibilityImage->GetWidth() * 0.15,
+			playerPosY - 92 + HurtInvincibilityImage->GetHeight() * 0.15);
 
 		// 피격 시 화면 붉은색 테두리 이미지
-		RENDER->Image(
-			HurtRedImage,
-			-230, -200, WINSIZEX + 230, WINSIZEY + 200);
+		if (realHurt == true)
+		{
+			RENDER->Image(
+				HurtRedImage,
+				-230, -200, WINSIZEX + 230, WINSIZEY + 200);
+		}
 	}
 
 	// 자석 화면 파란색 테두리 이미지
@@ -475,6 +511,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		Logger::Debug(L"플레이어가 장애물에 닿음");
 		playerHp -= 20;
 		isHurt = true;
+		realHurt = true;
 	}
 
 	if (pOtherCollider->GetObjName() == L"장애물" && isHurt == false && isDash == true)
