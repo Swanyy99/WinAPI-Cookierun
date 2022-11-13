@@ -49,7 +49,8 @@ void CButton::SetImage(const wstring& image, const wstring& mouseOverImage)
 {
 	m_strImageName = image;
 	m_buttonImage = RESOURCE->LoadImg(m_strImageName, L"Image\\" + m_strImageName);
-	m_buttonImageMouseOver = RESOURCE->LoadImg(m_strImageName, L"Image\\" + m_strImageName);
+	m_strMouseUpImageName = mouseOverImage;
+	m_buttonImageMouseOver = RESOURCE->LoadImg(m_strMouseUpImageName, L"Image\\" + m_strImageName);
 }
 
 void CButton::Init()

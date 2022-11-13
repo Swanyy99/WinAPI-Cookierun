@@ -279,12 +279,7 @@ void CSceneStage01::Enter()
 	FailImage->SetScale(0, 0);
 	AddGameObject(FailImage);
 
-
 	CAMERA->FadeIn(0.25f);
-
-
-
-
 
 	CFloor* pFloor2 = new CFloor();
 	pFloor2->SetPos(0, WINSIZEY * 0.9);

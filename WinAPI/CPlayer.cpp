@@ -510,7 +510,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"장애물" && isDash == true)
 	{
 		Logger::Debug(L"플레이어가 대쉬중에 장애물을 부숨");
-		score += 2000;
+		score += 1000;
 	}
 
 	if (pOtherCollider->GetObjName() == L"젤리")

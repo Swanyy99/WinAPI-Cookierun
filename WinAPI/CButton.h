@@ -27,6 +27,7 @@ private:
 	CImage*			m_buttonImage;
 	CImage*			m_buttonImageMouseOver;
 	wstring			m_strImageName;
+	wstring			m_strMouseUpImageName;
 	
 	bool			isMouseOver;
 
