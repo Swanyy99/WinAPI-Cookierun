@@ -48,6 +48,7 @@ extern float playerHp;
 extern bool revive;
 extern float playerPosX;
 extern float playerPosY;
+extern bool skillOn;
 
 extern int choicePet;
 int nowPet;
@@ -1026,12 +1027,15 @@ void CSceneStage01::Update()
 
 	if (playerHp > 0)
 	{
-		HpTimer += ABSDT;
-
-		if (HpTimer >= 0.1)
+		if (skillOn == false)
 		{
-			HpTimer -= 0.1;
-			playerHp -= 0.2;
+			HpTimer += ABSDT;
+
+			if (HpTimer >= 0.1)
+			{
+				HpTimer -= 0.1;
+				playerHp -= 0.2;
+			}
 		}
 	}
 
