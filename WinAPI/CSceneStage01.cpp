@@ -333,12 +333,12 @@ void CSceneStage01::Update()
 
 	}
 
-	if (BUTTONSTAY(VK_DOWN))
+	if (BUTTONSTAY(VK_DOWN)|| BUTTONSTAY(VK_CONTROL))
 	{
 		slideImage = RESOURCE->LoadImg(L"SlideButton2", L"Image\\Pushed_Slide.png");
 		isSliding = true;
 	}
-	if (BUTTONUP(VK_DOWN))
+	if (BUTTONUP(VK_DOWN) || BUTTONUP(VK_CONTROL))
 	{
 		slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
 		isSliding = false;

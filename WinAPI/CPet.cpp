@@ -156,36 +156,6 @@ void CPet::AnimatorUpdate()
 void CPet::OnCollisionEnter(CCollider* pOtherCollider)
 {
 
-	/*if (pOtherCollider->GetObjName() == L"¿Âæ÷π∞")
-	{
-		Logger::Debug(L"¿Âæ÷π∞ ∆ƒ±´!");
-		score += 1000;
-	}
-
-	if (pOtherCollider->GetObjName() == L"¡©∏Æ")
-	{
-		Logger::Debug(L"¡©∏Æ ¡°ºˆ »πµÊ!");
-		score += 1000;
-	}
-
-	if (pOtherCollider->GetObjName() == L"«œ∆Ææ∆¿Ã≈€")
-	{
-		Logger::Debug(L"ª˝∏Ìπ∞æ‡ »πµÊ!");
-		playerHp += 20;
-	}
-
-
-	if (pOtherCollider->GetObjName() == L"¿⁄ºÆæ∆¿Ã≈€")
-	{
-		Logger::Debug(L"¿⁄ºÆæ∆¿Ã≈€ »πµÊ!");
-		isMagnet = true;
-	}
-
-	if (pOtherCollider->GetObjName() == L"¥ÎΩ¨æ∆¿Ã≈€")
-	{
-		Logger::Debug(L"¥ÎΩ¨æ∆¿Ã≈€ »πµÊ!");
-		isDash = true;
-	}*/
 
 }
 

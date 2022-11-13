@@ -181,7 +181,7 @@ void CPlayer::Update()
 				playerState = PlayerState::Jump;
 			}
 
-			if (BUTTONDOWN(VK_DOWN)) // 슬라이드
+			if (BUTTONDOWN(VK_DOWN) || BUTTONDOWN(VK_CONTROL)) // 슬라이드
 			{
 				playerState = PlayerState::Slide;
 			}
@@ -306,7 +306,7 @@ void CPlayer::Update()
 			else
 				motion = L"HurtSlide";
 
-			if (BUTTONUP(VK_DOWN)) // 컨트롤키를 떼면
+			if (BUTTONUP(VK_DOWN) || BUTTONUP(VK_CONTROL)) // 컨트롤키를 떼면
 			{
 				playerState = PlayerState::IdleRun;
 			}
@@ -548,6 +548,12 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	}
 
 	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
+	{
+		playerState = PlayerState::Slide;
+
+	}
+	
+	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_DOWN)) // 슬라이드
 	{
 		playerState = PlayerState::Slide;
 	}
