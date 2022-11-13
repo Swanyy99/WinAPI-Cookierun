@@ -16,16 +16,16 @@ private:
 	CPlayer* pPlayer;
 	CPet* pPet;
 
-	CImage* CookierunTitle;
 
 	CImage* slideImage;
 	CImage* jumpImage;
 
-	CImage* HPIcon;
-	CImage* HPBackBar;
-	CImage* HPBar;
-	CImage* HPProgressBar;
-	CImage* HPEffect;
+	CImages* CookierunTitle;
+	CImages* HPIcon;
+	CImages* HPBackBar;
+	CImages* HPBar;
+	CImages* HPProgressBar;
+	CImages* HPEffect;
 
 	CImage* Tear;
 

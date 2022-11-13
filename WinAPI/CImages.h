@@ -17,6 +17,18 @@ public:
 	CImage* JumpButtonImage;
 	CImage* Image;
 
+
+	CImage* CookierunTitle;
+
+	CImage* slideImage;
+
+	CImage* jumpImage;
+	CImage* HPIcon;
+	CImage* HPEffect;
+	CImage* HPBar;
+	CImage* HPBackBar;
+	CImage* HPProgressBar;
+
 	wstring ImageName;
 
 private:

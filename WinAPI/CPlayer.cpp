@@ -436,10 +436,10 @@ void CPlayer::Render()
 		// 피격 시 무적 텍스트 이미지
 		RENDER->Image(
 			HurtInvincibilityImage,
-			m_vecPos.x + 15 - HurtInvincibilityImage->GetWidth() * 0.15,
-			playerPosY - 92 - HurtInvincibilityImage->GetHeight() * 0.15,
-			m_vecPos.x + 15 + HurtInvincibilityImage->GetWidth() * 0.15,
-			playerPosY - 92 + HurtInvincibilityImage->GetHeight() * 0.15);
+			m_vecPos.x + 11 - HurtInvincibilityImage->GetWidth() * 0.15,
+			playerPosY - 94 - HurtInvincibilityImage->GetHeight() * 0.15,
+			m_vecPos.x + 11 + HurtInvincibilityImage->GetWidth() * 0.15,
+			playerPosY - 94 + HurtInvincibilityImage->GetHeight() * 0.15);
 
 		// 피격 시 화면 붉은색 테두리 이미지
 		if (realHurt == true)

@@ -88,23 +88,23 @@ CSceneStage01::CSceneStage01()
 	TearOn = false;
 	
 
-	CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
+	//CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
 
-	slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
+	//slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
 
-	jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
+	//jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
 
-	HPIcon = RESOURCE->LoadImg(L"HpIcon", L"Image\\Hp_Icon.png");
+	//HPIcon = RESOURCE->LoadImg(L"HpIcon", L"Image\\Hp_Icon.png");
 
-	HPEffect = RESOURCE->LoadImg(L"HpEffect", L"Image\\Hp_Effect.png");
+	//HPEffect = RESOURCE->LoadImg(L"HpEffect", L"Image\\Hp_Effect.png");
 
-	HPBar = RESOURCE->LoadImg(L"HpBar", L"Image\\Hp_Bar.png");
+	//HPBar = RESOURCE->LoadImg(L"HpBar", L"Image\\Hp_Bar.png");
 
-	Tear = RESOURCE->LoadImg(L"Tear", L"Image\\Tear.png");
+	//Tear = RESOURCE->LoadImg(L"Tear", L"Image\\Tear.png");
 
-	HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
+	//HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
 
-	HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");
+	//HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");
 }
 
 CSceneStage01::~CSceneStage01()
@@ -208,6 +208,47 @@ void CSceneStage01::Enter()
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
+	// CookierRun title 이미지
+	CookierunTitle = new CImages();
+	CookierunTitle->SetImageName(L"CookierunTitle.png");
+	CookierunTitle->SetPos(1130, 15);
+	CookierunTitle->SetScale(1270, 80);
+	AddGameObject(CookierunTitle);
+
+	// HP Back Bar 이미지
+	HPBackBar = new CImages();
+	HPBackBar->SetImageName(L"HP_BackBar.png");
+	HPBackBar->SetPos(70, 70);
+	HPBackBar->SetScale(572, 85);
+	AddGameObject(HPBackBar);
+
+	// HP Bar 이미지
+	HPBar = new CImages();
+	HPBar->SetImageName(L"HP_Bar.png");
+	HPBar->SetPos(70, 68);
+	HPBar->SetScale(570, 87);
+	AddGameObject(HPBar);
+
+	// HP Progress Bar 이미지
+	HPProgressBar = new CImages();
+	HPProgressBar->SetImageName(L"HP_ProgressBar.png");
+	HPProgressBar->SetPos(70 + 500 * playerHp / 100, 70);
+	HPProgressBar->SetScale(570, 85);
+	AddGameObject(HPProgressBar);
+
+	// HP Effect 이미지
+	HPEffect = new CImages();
+	HPEffect->SetImageName(L"HP_Effect.png");
+	HPEffect->SetPos(60 + 500 * playerHp / 100, 68);
+	HPEffect->SetScale(80 + 500 * playerHp / 100, 87);
+	AddGameObject(HPEffect);
+
+	// HP Icon 이미지
+	HPIcon = new CImages();
+	HPIcon->SetImageName(L"HP_Icon.png");
+	HPIcon->SetPos(40, 50);
+	HPIcon->SetScale(90, 100);
+	AddGameObject(HPIcon);
 
 	// 슬라이드 버튼 이미지
 	SlideButtonImage = new CImages();
@@ -216,14 +257,13 @@ void CSceneStage01::Enter()
 	SlideButtonImage->SetScale(180, 680);
 	AddGameObject(SlideButtonImage);
 
+
 	// 점프 버튼 이미지
 	JumpButtonImage = new CImages();
 	JumpButtonImage->SetImageName(L"Idle_Jump.png");
 	JumpButtonImage->SetPos(1100, 580);
 	JumpButtonImage->SetScale(1250, 680);
 	AddGameObject(JumpButtonImage);
-
-
 
 	// 일시정지 화면 반투명효과 + 일시정지 글자
 	PauseImage = new CImages();
@@ -1014,53 +1054,14 @@ void CSceneStage01::Render()
 	RENDER->Text(L"Score : " + ScreenScore + L"점", 50, 107, 300, 107, Color(255, 255, 255, 1.f), 20);
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
-	RENDER->Image(
+	// Hp 이미지 효과 업데이트
+	HPProgressBar->SetPos(70 + 500 * playerHp / 100, 70);
+	HPEffect->SetPos(60 + 500 * playerHp / 100, 68);
+	HPEffect->SetScale(80 + 500 * playerHp / 100, 87);
+
+	/*RENDER->Image(
 		CookierunTitle,
-		1130, 15, 1270, 80);
-
-
-	//// 슬라이드 버튼
-	//RENDER->Image(
-	//	slideImage,
-	//	WINSIZEX * 0.86, WINSIZEY * 0.8, WINSIZEX * 0.98, WINSIZEY * 0.95);
-
-	//// 점프 버튼
-	//RENDER->Image(
-	//	jumpImage,
-	//	WINSIZEX * 0.02, WINSIZEY * 0.8, WINSIZEX * 0.14, WINSIZEY * 0.95);
-
-	// HP Back 바
-	RENDER->Image(
-		HPBackBar,
-		70, 70, 572, 85);
-
-	// HP 바
-	RENDER->Image(
-		HPBar,
-		70, 68, 570, 87);
-
-	// HP 프로그레스 바
-	RENDER->Image(
-		HPProgressBar,
-		70 + 500 * playerHp / 100, 70, 570, 85);
-
-	// HP 이펙트
-	RENDER->Image(
-		HPEffect,
-		60 + 500 * playerHp / 100, 68, 80 + 500 * playerHp / 100, 87);
-
-	// HP 아이콘
-	RENDER->Image(
-		HPIcon,
-		40, 50, 90, 100);
-
-	// 슬퍼하기 눈물 이미지
-	/*if (TearOn == true)
-	{
-		RENDER->Image(
-			Tear,
-			playerPosX - 60, playerPosY + 25, playerPosX - 50, playerPosY + 43);
-	}*/
+		1130, 15, 1270, 80);*/
 	
 
 	//일시정지 UI
