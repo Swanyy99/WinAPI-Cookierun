@@ -181,7 +181,7 @@ void CPlayer::Update()
 				playerState = PlayerState::Jump;
 			}
 
-			if (BUTTONDOWN(VK_CONTROL)) // 슬라이드
+			if (BUTTONDOWN(VK_DOWN)) // 슬라이드
 			{
 				playerState = PlayerState::Slide;
 			}
@@ -306,7 +306,7 @@ void CPlayer::Update()
 			else
 				motion = L"HurtSlide";
 
-			if (BUTTONUP(VK_CONTROL)) // 컨트롤키를 떼면
+			if (BUTTONUP(VK_DOWN)) // 컨트롤키를 떼면
 			{
 				playerState = PlayerState::IdleRun;
 			}
@@ -428,10 +428,10 @@ void CPlayer::Update()
 
 
 
-	if (BUTTONDOWN('A')) // 미사일발사
-	{
-		CreateMissile();
-	}
+	//if (BUTTONDOWN('A')) // 미사일발사
+	//{
+	//	CreateMissile();
+	//}
 
 
 }

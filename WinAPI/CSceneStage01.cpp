@@ -333,12 +333,12 @@ void CSceneStage01::Update()
 
 	}
 
-	if (BUTTONSTAY(VK_CONTROL))
+	if (BUTTONSTAY(VK_DOWN))
 	{
 		slideImage = RESOURCE->LoadImg(L"SlideButton2", L"Image\\Pushed_Slide.png");
 		isSliding = true;
 	}
-	if (BUTTONUP(VK_CONTROL))
+	if (BUTTONUP(VK_DOWN))
 	{
 		slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
 		isSliding = false;
@@ -353,11 +353,11 @@ void CSceneStage01::Update()
 		jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
 	}
 
-	if (BUTTONDOWN('D') && isDebugMode == false)
+	if (BUTTONDOWN('G') && isDebugMode == false)
 	{
 		isDebugMode = true;
 	}
-	else if (BUTTONDOWN('D') && isDebugMode == true)
+	else if (BUTTONDOWN('G') && isDebugMode == true)
 	{
 		isDebugMode = false;
 	}
@@ -998,7 +998,7 @@ void CSceneStage01::Update()
 		}
 	}
 
-	if (BUTTONDOWN('Q'))
+	if (BUTTONDOWN('R'))
 	{
 		playerHp = 0;
 	}
