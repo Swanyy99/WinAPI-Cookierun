@@ -71,6 +71,8 @@ CSceneStage01::CSceneStage01()
 
 	slideImage = nullptr;
 	jumpImage = nullptr;
+	SlideButtonImage = nullptr;
+	JumpButtonImage = nullptr;
 	HPProgressBar = nullptr;
 	HPBar = nullptr;
 	HPBackBar = nullptr;
@@ -206,6 +208,23 @@ void CSceneStage01::Enter()
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
+
+	// 슬라이드 버튼 이미지
+	SlideButtonImage = new CImages();
+	SlideButtonImage->SetImageName(L"Idle_Slide.png");
+	SlideButtonImage->SetPos(30, 580);
+	SlideButtonImage->SetScale(180, 680);
+	AddGameObject(SlideButtonImage);
+
+	// 점프 버튼 이미지
+	JumpButtonImage = new CImages();
+	JumpButtonImage->SetImageName(L"Idle_Jump.png");
+	JumpButtonImage->SetPos(1100, 580);
+	JumpButtonImage->SetScale(1250, 680);
+	AddGameObject(JumpButtonImage);
+
+
+
 	// 일시정지 화면 반투명효과 + 일시정지 글자
 	PauseImage = new CImages();
 	PauseImage->SetImageName(L"Pause.png");
@@ -219,6 +238,7 @@ void CSceneStage01::Enter()
 	FailImage->SetPos(0, 0);
 	FailImage->SetScale(0, 0);
 	AddGameObject(FailImage);
+
 
 	CAMERA->FadeIn(0.25f);
 
@@ -333,25 +353,7 @@ void CSceneStage01::Update()
 
 	}
 
-	if (BUTTONSTAY(VK_DOWN)|| BUTTONSTAY(VK_CONTROL))
-	{
-		slideImage = RESOURCE->LoadImg(L"SlideButton2", L"Image\\Pushed_Slide.png");
-		isSliding = true;
-	}
-	if (BUTTONUP(VK_DOWN) || BUTTONUP(VK_CONTROL))
-	{
-		slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
-		isSliding = false;
-	}
-
-	if (BUTTONSTAY(VK_SPACE))
-	{
-		jumpImage = RESOURCE->LoadImg(L"JumpButton2", L"Image\\Pushed_Jump.png");
-	}
-	if (BUTTONUP(VK_SPACE))
-	{
-		jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
-	}
+	
 
 	if (BUTTONDOWN('G') && isDebugMode == false)
 	{
@@ -991,9 +993,9 @@ void CSceneStage01::Update()
 	{
 		HpTimer += ABSDT;
 
-		if (HpTimer >= 0.2)
+		if (HpTimer >= 0.1)
 		{
-			HpTimer -= 0.2;
+			HpTimer -= 0.1;
 			playerHp -= 0.2;
 		}
 	}
@@ -1017,15 +1019,15 @@ void CSceneStage01::Render()
 		1130, 15, 1270, 80);
 
 
-	// 슬라이드 버튼
-	RENDER->Image(
-		slideImage,
-		WINSIZEX * 0.86, WINSIZEY * 0.8, WINSIZEX * 0.98, WINSIZEY * 0.95);
+	//// 슬라이드 버튼
+	//RENDER->Image(
+	//	slideImage,
+	//	WINSIZEX * 0.86, WINSIZEY * 0.8, WINSIZEX * 0.98, WINSIZEY * 0.95);
 
-	// 점프 버튼
-	RENDER->Image(
-		jumpImage,
-		WINSIZEX * 0.02, WINSIZEY * 0.8, WINSIZEX * 0.14, WINSIZEY * 0.95);
+	//// 점프 버튼
+	//RENDER->Image(
+	//	jumpImage,
+	//	WINSIZEX * 0.02, WINSIZEY * 0.8, WINSIZEX * 0.14, WINSIZEY * 0.95);
 
 	// HP Back 바
 	RENDER->Image(
@@ -1082,6 +1084,25 @@ void CSceneStage01::Render()
 		FailImage->SetScale(0, 0);
 	}
 	
+	if (BUTTONSTAY(VK_DOWN) || BUTTONSTAY(VK_CONTROL))
+	{
+		SlideButtonImage->SetImageName(L"Pushed_Slide.png");
+		isSliding = true;
+	}
+	if (BUTTONUP(VK_DOWN) || BUTTONUP(VK_CONTROL))
+	{
+		SlideButtonImage->SetImageName(L"Idle_Slide.png");
+		isSliding = false;
+	}
+
+	if (BUTTONSTAY(VK_SPACE))
+	{
+		JumpButtonImage->SetImageName(L"Pushed_Jump.png");
+	}
+	if (BUTTONUP(VK_SPACE))
+	{
+		JumpButtonImage->SetImageName(L"Idle_Jump.png");
+	}
 
 	// 사망 시 UI
 	/*if (isDead == true)

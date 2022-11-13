@@ -13,6 +13,8 @@ public:
 public:
 	CImage* PauseImage;
 	CImage* FailImage;
+	CImage* SlideButtonImage;
+	CImage* JumpButtonImage;
 	CImage* Image;
 
 	wstring ImageName;

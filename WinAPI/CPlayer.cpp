@@ -127,8 +127,6 @@ void CPlayer::Init()
 	m_pAnimator->CreateAnimation(L"HurtSlide", m_pHurtJumpImage, Vector(2457, 0), Vector(273, 273), Vector(273, 0.f), 0.1f, 2);
 
 
-
-
 	m_pAnimator->CreateAnimation(L"Death", m_pDeathImage, Vector(2457, 1092), Vector(273, 273), Vector(273, 0.f), 0.1f, 1, false);
 
 	m_pAnimator->Play(L"IdleRun", false);
@@ -335,7 +333,9 @@ void CPlayer::Update()
 				isJumpUp = true;
 				isGround = true;
 				isHurt = true;
-				m_fHurtTimer = 2.5;
+				isMagnet = true;
+				m_fMagnetTimer = 2;
+				m_fHurtTimer = 2;
 
 				CRespawnEffect* pRespawnEffect = new CRespawnEffect();
 				pRespawnEffect->SetPos(playerPosX, WINSIZEY * 0.68);
@@ -425,13 +425,6 @@ void CPlayer::Update()
 			m_fDashTimer = 4;
 		}
 	}
-
-
-
-	//if (BUTTONDOWN('A')) // ¹Ì»çÀÏ¹ß»ç
-	//{
-	//	CreateMissile();
-	//}
 
 
 }
@@ -566,14 +559,6 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 
 void CPlayer::OnCollisionStay(CCollider* pOtherCollider)
 {
-
-	/*if (pOtherCollider->GetObjName() == L"GroundTile")
-	{
-		Logger::Debug(L"ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ ´êÀ½");
-		m_vecPos.y -= 1;
-		m_fJumpTimer = 0.4;
-
-	}*/
 
 	if (pOtherCollider->GetObjName() == L"¹Ù´Ú")
 	{

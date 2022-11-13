@@ -35,6 +35,8 @@ private:
 
 	CImages* PauseImage;
 	CImages* FailImage;
+	CImages* SlideButtonImage;
+	CImages* JumpButtonImage;
 
 	float obstacleTimer;
 	float HpTimer;

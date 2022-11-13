@@ -59,8 +59,8 @@ void CTimeManager::Update()
 	}
 
 
-	if (m_fDT >= 0.1f) m_fDT = 0.1f;
-	if (m_fAbsDT >= 0.1f) m_fAbsDT = 0.1f;
+	if (m_fDT > 0.1f) m_fDT = 0.1f;
+	if (m_fAbsDT > 0.1f) m_fAbsDT = 0.1f;
 	prevTime = curTime;
 
 	// 1초가 걸릴때까지 반복한 횟수가 초당프레임수
