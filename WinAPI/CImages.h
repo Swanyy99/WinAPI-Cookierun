@@ -20,6 +20,8 @@ public:
 
 	CImage* CookierunTitle;
 
+	CImage* PrepareScene;
+
 	CImage* slideImage;
 
 	CImage* jumpImage;

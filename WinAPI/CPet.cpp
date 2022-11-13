@@ -35,7 +35,7 @@ CPet::CPet()
 {
 	m_vecPos = Vector(playerPosX - 150, playerPosY);
 	m_vecScale = Vector(100, 100);
-	m_layer = Layer::Player;
+	m_layer = Layer::Pet;
 	m_strName = L"Æê";
 
 	m_pPetImage = nullptr;

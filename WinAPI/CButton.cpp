@@ -6,6 +6,7 @@
 extern bool pause;
 extern bool inTitle;
 extern bool isDead;
+extern bool isPrepare;
 
 
 CButton::CButton()
@@ -50,7 +51,7 @@ void CButton::SetImage(const wstring& image, const wstring& mouseOverImage)
 	m_strImageName = image;
 	m_buttonImage = RESOURCE->LoadImg(m_strImageName, L"Image\\" + m_strImageName);
 	m_strMouseUpImageName = mouseOverImage;
-	m_buttonImageMouseOver = RESOURCE->LoadImg(m_strMouseUpImageName, L"Image\\" + m_strImageName);
+	m_buttonImageMouseOver = RESOURCE->LoadImg(m_strMouseUpImageName, L"Image\\" + m_strMouseUpImageName);
 }
 
 void CButton::Init()
@@ -59,12 +60,12 @@ void CButton::Init()
 
 void CButton::Update()
 {
-	//SetClickedCallback(m_pCallback, m_pParam1, m_pParam2);
+	SetClickedCallback(m_pCallback, m_pParam1, m_pParam2);
 }
 
 void CButton::Render()
 {
-	if (pause == true || inTitle == true || isDead == true)
+	if (pause == true || inTitle == true || isDead == true || isPrepare == true)
 	{
 		if (isMouseOver == false)
 		{

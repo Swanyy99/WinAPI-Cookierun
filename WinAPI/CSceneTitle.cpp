@@ -42,7 +42,8 @@ void CSceneTitle::Enter()
 		pause = false;
 		inTitle = false;
 		CAMERA->FadeIn(0.25f);
-		CHANGESCENE(GroupScene::Stage01);
+		CHANGESCENE(GroupScene::PrePare);
+		//CHANGESCENE(GroupScene::Stage01);
 		//pause = false;
 		//inTitle = false;
 	};
@@ -105,13 +106,6 @@ void CSceneTitle::Update()
 
 void CSceneTitle::Render()
 {
-	/*RENDER->Text(L"press space to start",
-		WINSIZEX * 0.5f - 100,
-		WINSIZEY * 0.5f - 10,
-		WINSIZEX * 0.5f + 100,
-		WINSIZEY * 0.5f + 10,
-		Color(0, 0, 0, 1.f),
-		20.f);*/
 
 	RENDER->Image(
 		TitleBackgroundImage,

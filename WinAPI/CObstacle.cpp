@@ -6,6 +6,7 @@ extern bool isDash;
 extern float playerPosX;
 extern float playerPosY;
 extern bool skillOn;
+extern bool skillOn2;
 
 CObstacle::CObstacle()
 {
@@ -84,6 +85,15 @@ void CObstacle::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"펫미사일" && skillOn == true)
 	{
 		Logger::Debug(L"왕 하프물범이 장애물을 부쉈습니다 ");
+		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
+		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
+		ADDOBJECT(pObstacleBoomEffect);
+		DELETEOBJECT(this);
+	}
+
+	if (pOtherCollider->GetObjName() == L"펫미사일2")
+	{
+		Logger::Debug(L"물보라가 장애물을 부쉈습니다");
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
 		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
 		ADDOBJECT(pObstacleBoomEffect);

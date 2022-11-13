@@ -11,6 +11,7 @@
 
 #include "CPlayer.h"
 #include "CPet.h"
+#include "CPet2.h"
 #include "CMonster.h"
 #include "CCameraController.h"
 #include "CButton.h"
@@ -48,13 +49,15 @@ extern bool revive;
 extern float playerPosX;
 extern float playerPosY;
 
-bool TearOn;
+extern int choicePet;
+int nowPet;
 
 
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
 	pPet = nullptr;
+	pPet2 = nullptr;
 
 
 	RetryButton = nullptr;
@@ -85,26 +88,7 @@ CSceneStage01::CSceneStage01()
 	score = 0;
 	isRetry = false;
 	isDebugMode = false;
-	TearOn = false;
 	
-
-	//CookierunTitle = RESOURCE->LoadImg(L"CookierunTitle", L"Image\\CookierunTitle.png");
-
-	//slideImage = RESOURCE->LoadImg(L"SlideButton1", L"Image\\Idle_Slide.png");
-
-	//jumpImage = RESOURCE->LoadImg(L"JumpButton1", L"Image\\Idle_Jump.png");
-
-	//HPIcon = RESOURCE->LoadImg(L"HpIcon", L"Image\\Hp_Icon.png");
-
-	//HPEffect = RESOURCE->LoadImg(L"HpEffect", L"Image\\Hp_Effect.png");
-
-	//HPBar = RESOURCE->LoadImg(L"HpBar", L"Image\\Hp_Bar.png");
-
-	//Tear = RESOURCE->LoadImg(L"Tear", L"Image\\Tear.png");
-
-	//HPBackBar = RESOURCE->LoadImg(L"HpBackBar", L"Image\\Hp_BackBar.png");
-
-	//HPProgressBar = RESOURCE->LoadImg(L"HpProgressBar", L"Image\\Hp_ProgressBar.png");
 }
 
 CSceneStage01::~CSceneStage01()
@@ -113,11 +97,30 @@ CSceneStage01::~CSceneStage01()
 
 void CSceneStage01::Init()
 {
-
+	
+	
+	
 }
 
 void CSceneStage01::Enter()
 {
+	nowPet = choicePet;
+
+	if (choicePet == 1)
+	{
+		pPet = new CPet();
+		pPet->SetPos(200, WINSIZEY * 0.45f);
+		AddGameObject(pPet);
+	}
+
+	else if (choicePet == 2)
+	{
+		pPet2 = new CPet2();
+		pPet2->SetPos(200, WINSIZEY * 0.45f);
+		AddGameObject(pPet2);
+	}
+	
+
 	obstacleTimer = 0;
 	HpTimer = 0;
 	ScreenScore = L"";
@@ -125,7 +128,6 @@ void CSceneStage01::Enter()
 	isDash = false;
 	isMagnet = false;
 	isDebugMode = false;
-	TearOn = false;
 
 	// ESC 계속하기 && FAIL 부활하기 버튼
 	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
@@ -201,9 +203,7 @@ void CSceneStage01::Enter()
 	pPlayer->SetPos(300, WINSIZEY * 0.65f);
 	AddGameObject(pPlayer);
 
-	pPet = new CPet();
-	pPet->SetPos(200, WINSIZEY * 0.45f);
-	AddGameObject(pPet);
+	
 
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);

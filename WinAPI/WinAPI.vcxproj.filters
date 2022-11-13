@@ -255,6 +255,12 @@
     <ClInclude Include="CRespawnEffect.h">
       <Filter>GameObject\Stage01\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="CPet2.h">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CPetMissile2.h">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -421,6 +427,12 @@
     </ClCompile>
     <ClCompile Include="CRespawnEffect.cpp">
       <Filter>GameObject\Stage01\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CPet2.cpp">
+      <Filter>GameObject\Stage01\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CPetMissile2.cpp">
+      <Filter>GameObject\Stage01\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

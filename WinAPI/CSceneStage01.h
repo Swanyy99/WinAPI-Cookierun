@@ -4,6 +4,7 @@
 
 class CPlayer;
 class CPet;
+class CPet2;
 class CImages;
 
 class CSceneStage01 : public CScene
@@ -15,10 +16,12 @@ public:
 private:
 	CPlayer* pPlayer;
 	CPet* pPet;
+	CPet2* pPet2;
 
 
 	CImage* slideImage;
 	CImage* jumpImage;
+
 
 	CImages* CookierunTitle;
 	CImages* HPIcon;

@@ -172,7 +172,9 @@
     <ClInclude Include="CPanel.h" />
     <ClInclude Include="CPathManager.h" />
     <ClInclude Include="CPet.h" />
+    <ClInclude Include="CPet2.h" />
     <ClInclude Include="CPetMissile.h" />
+    <ClInclude Include="CPetMissile2.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CRenderManager.h" />
     <ClInclude Include="CResource.h" />
@@ -235,7 +237,9 @@
     <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPathManager.cpp" />
     <ClCompile Include="CPet.cpp" />
+    <ClCompile Include="CPet2.cpp" />
     <ClCompile Include="CPetMissile.cpp" />
+    <ClCompile Include="CPetMissile2.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CRenderManager.cpp" />
     <ClCompile Include="CResource.cpp" />

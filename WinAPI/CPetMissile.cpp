@@ -79,13 +79,12 @@ void CPetMissile::OnCollisionEnter(CCollider* pOtherCollider)
 	
 	if (pOtherCollider->GetObjName() == L"장애물" && skillOn == true)
 	{
-		score += 2000;
+		score += 3000;
 	}
 
 	if (pOtherCollider->GetObjName() == L"젤리" && skillOn == true)
 	{
-		Logger::Debug(L"왕 하프물범이 젤리를 먹었습니다!");
-		score += 2000;
+		score += 3000;
 	}
 
 }
