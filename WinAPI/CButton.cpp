@@ -60,7 +60,7 @@ void CButton::Init()
 
 void CButton::Update()
 {
-	//SetClickedCallback(m_pCallback, m_pParam1, m_pParam2);
+	SetClickedCallback(m_pCallback, m_pParam1, m_pParam2);
 }
 
 void CButton::Render()

@@ -81,8 +81,8 @@ void CPet::Init()
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 
 
-	m_fSkillTimer = 5.5;			// 펫 스킬 지속시간
-	m_fSkillCooltimeTimer = 13;		// 펫 스킬 쿨타임
+	m_fSkillTimer = 6;			// 펫 스킬 지속시간
+	m_fSkillCooltimeTimer = 12;		// 펫 스킬 쿨타임
 	skillOn = false;
 	PetMotion = L"IdleRun";
 
@@ -107,7 +107,7 @@ void CPet::Update()
 		pPetMissile2->SetPos(-400, WINSIZEY * 0.7);
 		ADDOBJECT(pPetMissile2);
 
-		m_fSkillCooltimeTimer = 18.5;	// 스킬 쿨은 쿨타임 + 지속 시간 으로 다시 초기화
+		m_fSkillCooltimeTimer = 18;	// 스킬 쿨은 쿨타임 + 지속 시간 으로 다시 초기화
 		skillOn = true;
 	}
 	
@@ -124,7 +124,7 @@ void CPet::Update()
 		if (m_fSkillTimer <= 0)
 		{
 			skillOn = false;
-			m_fSkillTimer = 5.5;
+			m_fSkillTimer = 6;
 			PetMotion = L"IdleRun";
 		}
 	}

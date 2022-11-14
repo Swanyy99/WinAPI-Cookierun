@@ -1168,7 +1168,7 @@ void CSceneStage01::Update()
 
 	if (obstacleTimer >= 55.7 && obstacleTimer <= 55.8)
 	{
-		obstacleTimer = -1;
+		obstacleTimer = -0.2;
 
 		CObstacle3* p3Obs1 = new CObstacle3();
 		p3Obs1->SetPos(WINSIZEX + 50, WINSIZEY * 0.75);

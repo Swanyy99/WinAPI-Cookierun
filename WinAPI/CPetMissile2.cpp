@@ -34,7 +34,7 @@ void CPetMissile2::Init()
 
 
 	m_pAnimatorPetMissile2 = new CAnimator;
-	m_pAnimatorPetMissile2->CreateAnimation(L"PetMissile2", m_pPetMissile2Image, Vector(0, 0), Vector(351, 404), Vector(351, 0.f), 0.1f, 8);
+	m_pAnimatorPetMissile2->CreateAnimation(L"PetMissile2", m_pPetMissile2Image, Vector(0, 0), Vector(351, 404), Vector(351, 0.f), 0.08f, 8);
 
 	m_pAnimatorPetMissile2->Play(L"PetMissile2", false);
 	AddComponent(m_pAnimatorPetMissile2);
@@ -52,7 +52,7 @@ void CPetMissile2::Update()
 
 	m_fWaterTimer += ABSDT;
 
-	if (m_fWaterTimer > 0.8)
+	if (m_fWaterTimer > 0.64)
 	{
 		DELETEOBJECT(this);
 	}
