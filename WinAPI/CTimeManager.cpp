@@ -46,17 +46,17 @@ void CTimeManager::Update()
 	}
 	
 
-	if (pause == true || isDead == true)
+	if (pause == true)
 	{
 		m_fDT = 0;
 		m_fAbsDT = 0;
 	}
 
-	//if (isDead == true)
-	//{
-	//	m_fDT = 0;
-	//	m_fAbsDT = 0;
-	//}
+	if (isDead == true)
+	{
+		m_fDT = 0;
+		m_fAbsDT = 0;
+	}
 
 
 	if (m_fDT > 0.1f) m_fDT = 0.1f;

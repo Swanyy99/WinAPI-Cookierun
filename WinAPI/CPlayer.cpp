@@ -314,7 +314,7 @@ void CPlayer::Update()
 		case PlayerState::Death:	// Á×À½
 
 			
-			if (playerHp <= 0)
+			if (playerHp <= 0 && isDead == false)
 			{
 				
 				motion = L"Death";
@@ -324,8 +324,8 @@ void CPlayer::Update()
 			
 			if (playerHp > 0)
 			{
-				motion = L"IdleRun";
 				playerState = PlayerState::IdleRun;
+				motion = L"IdleRun";
 				isDead = false;
 				
 				m_fSpeed = 500;

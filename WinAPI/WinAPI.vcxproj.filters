@@ -261,6 +261,9 @@
     <ClInclude Include="CPetMissile2.h">
       <Filter>GameObject\Stage01\Player</Filter>
     </ClInclude>
+    <ClInclude Include="CObstacle3.h">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -433,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="CPetMissile2.cpp">
       <Filter>GameObject\Stage01\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacle3.cpp">
+      <Filter>GameObject\Stage01\Obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

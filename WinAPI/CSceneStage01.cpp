@@ -24,6 +24,7 @@
 #include "CGameObject.h"
 #include "CObstacle.h"
 #include "CObstacle2.h"
+#include "CObstacle3.h"
 #include "CJelly1.h"
 #include "CObstacleSky.h"
 #include "CHeartItem.h"
@@ -109,14 +110,14 @@ void CSceneStage01::Enter()
 	
 	nowPet = choicePet;
 
-	if (choicePet == 1)
+	if (choicePet == 1)			// 하프물범 선택
 	{
 		pPet = new CPet();
 		pPet->SetPos(200, WINSIZEY * 0.45f);
 		AddGameObject(pPet);
 	}
 
-	else if (choicePet == 2)
+	else if (choicePet == 2)	// 파도 방울 선택
 	{
 		pPet2 = new CPet2();
 		pPet2->SetPos(200, WINSIZEY * 0.45f);
@@ -165,8 +166,9 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		playerHp += 1;
 		pause = false;
-		isDash = true;
+		isDead = false;
 		isRetry = true;
 		CAMERA->FadeOut(0.1f);
 		DELAYCHANGESCENE(GroupScene::Stage01, 0.1f);
@@ -188,9 +190,11 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(QuitButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		CAMERA->FadeOut(0.1f);
+		playerHp += 1;
+		isDead = false;
 		pause = false;
-		CAMERA->FadeOut(0.2f);
-		DELAYCHANGESCENE(GroupScene::Title, 0.2f);
+		DELAYCHANGESCENE(GroupScene::Title, 0.1f);
 	};
 
 	QuitButton = new CButton;
@@ -856,7 +860,7 @@ void CSceneStage01::Update()
 
 	if (obstacleTimer >= 31 && obstacleTimer <= 31.1)
 	{
-		obstacleTimer = -12.3;
+		obstacleTimer += 1;
 
 		CJelly1* pJelly43 = new CJelly1();
 		pJelly43->SetPos(WINSIZEX + 100, WINSIZEY * 0.7);
@@ -1021,7 +1025,186 @@ void CSceneStage01::Update()
 		CJelly1* pJelly31 = new CJelly1();
 		pJelly31->SetPos(WINSIZEX + 4170, WINSIZEY * 0.7);
 		AddGameObject(pJelly31);
+
+		CJelly1* pJelly32 = new CJelly1();
+		pJelly32->SetPos(WINSIZEX + 4270, WINSIZEY * 0.7);
+		AddGameObject(pJelly32);
+
+		CJelly1* pJelly33 = new CJelly1();
+		pJelly33->SetPos(WINSIZEX + 4370, WINSIZEY * 0.7);
+		AddGameObject(pJelly33);
+
+		CJelly1* pJelly34 = new CJelly1();
+		pJelly34->SetPos(WINSIZEX + 4435, WINSIZEY * 0.65);
+		AddGameObject(pJelly34);
 	
+	}
+
+	if (obstacleTimer >= 47 && obstacleTimer <= 47.1)
+	{
+		obstacleTimer += 1;
+		CJelly1* pJelly50 = new CJelly1();
+		pJelly50->SetPos(WINSIZEX , WINSIZEY * 0.6);
+		AddGameObject(pJelly50);
+
+		CObstacle3* p3Obs1 = new CObstacle3();
+		p3Obs1->SetPos(WINSIZEX + 50, WINSIZEY * 0.75);
+		AddGameObject(p3Obs1);
+
+		CJelly1* pJelly51 = new CJelly1();
+		pJelly51->SetPos(WINSIZEX + 70, WINSIZEY * 0.6);
+		AddGameObject(pJelly51);
+
+		CJelly1* pJelly52 = new CJelly1();
+		pJelly52->SetPos(WINSIZEX + 140, WINSIZEY * 0.6);
+		AddGameObject(pJelly52);
+
+		CJelly1* pJelly53 = new CJelly1();
+		pJelly53->SetPos(WINSIZEX + 210, WINSIZEY * 0.6);
+		AddGameObject(pJelly53);
+
+		CJelly1* pJelly54 = new CJelly1();
+		pJelly54->SetPos(WINSIZEX + 280, WINSIZEY * 0.6);
+		AddGameObject(pJelly54);
+
+		CJelly1* pJelly55 = new CJelly1();
+		pJelly55->SetPos(WINSIZEX + 350, WINSIZEY * 0.6);
+		AddGameObject(pJelly55);
+
+		CJelly1* pJelly56 = new CJelly1();
+		pJelly56->SetPos(WINSIZEX + 420, WINSIZEY * 0.6);
+		AddGameObject(pJelly56);
+
+		CJelly1* pJelly57 = new CJelly1();
+		pJelly57->SetPos(WINSIZEX + 490, WINSIZEY * 0.6);
+		AddGameObject(pJelly57);
+
+		CJelly1* pJelly58 = new CJelly1();
+		pJelly58->SetPos(WINSIZEX + 560, WINSIZEY * 0.6);
+		AddGameObject(pJelly58);
+	}
+
+	if (obstacleTimer >= 49.9 && obstacleTimer <= 50)
+	{
+		obstacleTimer += 1;
+
+		CObstacle3* p3Obs1 = new CObstacle3();
+		p3Obs1->SetPos(WINSIZEX + 50, WINSIZEY * 0.75);
+		AddGameObject(p3Obs1);
+
+		CJelly1* pJelly51 = new CJelly1();
+		pJelly51->SetPos(WINSIZEX + 70, WINSIZEY * 0.6);
+		AddGameObject(pJelly51);
+
+		CJelly1* pJelly52 = new CJelly1();
+		pJelly52->SetPos(WINSIZEX + 140, WINSIZEY * 0.6);
+		AddGameObject(pJelly52);
+
+		CJelly1* pJelly53 = new CJelly1();
+		pJelly53->SetPos(WINSIZEX + 210, WINSIZEY * 0.6);
+		AddGameObject(pJelly53);
+
+		CJelly1* pJelly54 = new CJelly1();
+		pJelly54->SetPos(WINSIZEX + 280, WINSIZEY * 0.6);
+		AddGameObject(pJelly54);
+
+		CJelly1* pJelly55 = new CJelly1();
+		pJelly55->SetPos(WINSIZEX + 350, WINSIZEY * 0.6);
+		AddGameObject(pJelly55);
+
+		CJelly1* pJelly56 = new CJelly1();
+		pJelly56->SetPos(WINSIZEX + 420, WINSIZEY * 0.6);
+		AddGameObject(pJelly56);
+
+		CJelly1* pJelly57 = new CJelly1();
+		pJelly57->SetPos(WINSIZEX + 490, WINSIZEY * 0.6);
+		AddGameObject(pJelly57);
+
+		CJelly1* pJelly58 = new CJelly1();
+		pJelly58->SetPos(WINSIZEX + 560, WINSIZEY * 0.6);
+		AddGameObject(pJelly58);
+	}
+
+	if (obstacleTimer >= 52.8 && obstacleTimer <= 52.9)
+	{
+		obstacleTimer += 1;
+
+		CObstacle3* p3Obs1 = new CObstacle3();
+		p3Obs1->SetPos(WINSIZEX + 50, WINSIZEY * 0.75);
+		AddGameObject(p3Obs1);
+
+		CJelly1* pJelly51 = new CJelly1();
+		pJelly51->SetPos(WINSIZEX + 70, WINSIZEY * 0.6);
+		AddGameObject(pJelly51);
+
+		CJelly1* pJelly52 = new CJelly1();
+		pJelly52->SetPos(WINSIZEX + 140, WINSIZEY * 0.6);
+		AddGameObject(pJelly52);
+
+		CJelly1* pJelly53 = new CJelly1();
+		pJelly53->SetPos(WINSIZEX + 210, WINSIZEY * 0.6);
+		AddGameObject(pJelly53);
+
+		CJelly1* pJelly54 = new CJelly1();
+		pJelly54->SetPos(WINSIZEX + 280, WINSIZEY * 0.6);
+		AddGameObject(pJelly54);
+
+		CJelly1* pJelly55 = new CJelly1();
+		pJelly55->SetPos(WINSIZEX + 350, WINSIZEY * 0.6);
+		AddGameObject(pJelly55);
+
+		CJelly1* pJelly56 = new CJelly1();
+		pJelly56->SetPos(WINSIZEX + 420, WINSIZEY * 0.6);
+		AddGameObject(pJelly56);
+
+		CJelly1* pJelly57 = new CJelly1();
+		pJelly57->SetPos(WINSIZEX + 490, WINSIZEY * 0.6);
+		AddGameObject(pJelly57);
+
+		CJelly1* pJelly58 = new CJelly1();
+		pJelly58->SetPos(WINSIZEX + 560, WINSIZEY * 0.6);
+		AddGameObject(pJelly58);
+	}
+
+	if (obstacleTimer >= 55.7 && obstacleTimer <= 55.8)
+	{
+		obstacleTimer = -1;
+
+		CObstacle3* p3Obs1 = new CObstacle3();
+		p3Obs1->SetPos(WINSIZEX + 50, WINSIZEY * 0.75);
+		AddGameObject(p3Obs1);
+
+		CJelly1* pJelly51 = new CJelly1();
+		pJelly51->SetPos(WINSIZEX + 70, WINSIZEY * 0.6);
+		AddGameObject(pJelly51);
+
+		CJelly1* pJelly52 = new CJelly1();
+		pJelly52->SetPos(WINSIZEX + 140, WINSIZEY * 0.6);
+		AddGameObject(pJelly52);
+
+		CJelly1* pJelly53 = new CJelly1();
+		pJelly53->SetPos(WINSIZEX + 210, WINSIZEY * 0.6);
+		AddGameObject(pJelly53);
+
+		CJelly1* pJelly54 = new CJelly1();
+		pJelly54->SetPos(WINSIZEX + 280, WINSIZEY * 0.6);
+		AddGameObject(pJelly54);
+
+		CJelly1* pJelly55 = new CJelly1();
+		pJelly55->SetPos(WINSIZEX + 350, WINSIZEY * 0.6);
+		AddGameObject(pJelly55);
+
+		CJelly1* pJelly56 = new CJelly1();
+		pJelly56->SetPos(WINSIZEX + 420, WINSIZEY * 0.6);
+		AddGameObject(pJelly56);
+
+		CJelly1* pJelly57 = new CJelly1();
+		pJelly57->SetPos(WINSIZEX + 490, WINSIZEY * 0.6);
+		AddGameObject(pJelly57);
+
+		CJelly1* pJelly58 = new CJelly1();
+		pJelly58->SetPos(WINSIZEX + 560, WINSIZEY * 0.6);
+		AddGameObject(pJelly58);
 	}
 
 

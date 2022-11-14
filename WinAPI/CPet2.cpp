@@ -81,7 +81,7 @@ void CPet2::Init()
 	AddCollider(ColliderType::Rect, Vector(50, 50), Vector(0, 0));
 
 
-	m_fSkillTimer = 1.55;			// 펫 스킬 지속시간
+	m_fSkillTimer = 1.2;			// 펫 스킬 지속시간
 	m_fSkillCooltimeTimer = 7.5;		// 펫 스킬 쿨타임
 	skillOn2 = false;
 	PetMotion2 = L"Pet2IdleRun";
@@ -144,7 +144,7 @@ void CPet2::Update()
 		if (m_fSkillTimer <= 0)
 		{
 			skillOn2 = false;
-			m_fSkillTimer = 1.55;
+			m_fSkillTimer = 1.2;
 			PetMotion2 = L"Pet2IdleRun";
 		}
 	}

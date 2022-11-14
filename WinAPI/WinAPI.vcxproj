@@ -167,6 +167,7 @@
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObstacle.h" />
     <ClInclude Include="CObstacle2.h" />
+    <ClInclude Include="CObstacle3.h" />
     <ClInclude Include="CObstacleBoomEffect.h" />
     <ClInclude Include="CObstacleSky.h" />
     <ClInclude Include="CPanel.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObstacle.cpp" />
     <ClCompile Include="CObstacle2.cpp" />
+    <ClCompile Include="CObstacle3.cpp" />
     <ClCompile Include="CObstacleBoomEffect.cpp" />
     <ClCompile Include="CObstacleSky.cpp" />
     <ClCompile Include="CPanel.cpp" />
