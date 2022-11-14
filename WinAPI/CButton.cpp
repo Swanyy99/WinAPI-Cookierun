@@ -65,8 +65,8 @@ void CButton::Update()
 
 void CButton::Render()
 {
-	if (pause == true || inTitle == true || isDead == true || isPrepare == true)
-	{
+	/*if (pause == true || inTitle == true || isDead == true || isPrepare == true)
+	{*/
 		if (isMouseOver == false)
 		{
 			RENDER->Image(
@@ -97,7 +97,7 @@ void CButton::Render()
 			m_iSizeText
 		);
 
-	}
+	
 		
 }
 

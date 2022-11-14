@@ -27,9 +27,10 @@ void CSceneTitle::Init()
 
 void CSceneTitle::Enter()
 {
-	CAMERA->FadeIn(1);
+	CAMERA->FadeIn(0.25f);
 
 	inTitle = true;
+
 	//pause = true;
 
 	// 게임 시작버튼
@@ -41,8 +42,8 @@ void CSceneTitle::Enter()
 		Logger::Debug(StartButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		pause = false;
 		inTitle = false;
-		CAMERA->FadeIn(0.25f);
-		CHANGESCENE(GroupScene::PrePare);
+		CAMERA->FadeOut(0.25f);
+		DELAYCHANGESCENE(GroupScene::PrePare, 0.25f);
 		//CHANGESCENE(GroupScene::Stage01);
 		//pause = false;
 		//inTitle = false;
@@ -74,6 +75,7 @@ void CSceneTitle::Enter()
 	ExitButton->SetScale(300, 70);
 	ExitButton->SetClickedCallback(ExitButtonClicked, (DWORD_PTR)ExitButton, (DWORD_PTR)1);
 	AddGameObject(ExitButton);
+
 }
 
 void CSceneTitle::Update()

@@ -9,6 +9,7 @@ public:
 private:
 	Vector m_vecDir;
 	float m_fVelocity;
+	float m_fX;
 
 	CImage* m_pImg;
 

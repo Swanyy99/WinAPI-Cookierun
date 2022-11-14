@@ -324,8 +324,8 @@ void CPlayer::Update()
 			
 			if (playerHp > 0)
 			{
-				playerState = PlayerState::IdleRun;
 				motion = L"IdleRun";
+				playerState = PlayerState::IdleRun;
 				isDead = false;
 				
 				m_fSpeed = 500;

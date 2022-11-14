@@ -28,23 +28,23 @@ CObstacle2::~CObstacle2()
 
 void CObstacle2::Init()
 {
-	m_pObstacle2Image = RESOURCE->LoadImg(L"Obstacle2s", L"Image\\Obstacle2.png");
+	m_pObstacle2Image = RESOURCE->LoadImg(L"Obstacle2s", L"Image\\Obstacle2Ver2.png");
 
 
 	m_pAnimatorObstacle2 = new CAnimator;
-	m_pAnimatorObstacle2->CreateAnimation(L"Obstacle2", m_pObstacle2Image, Vector(0, 0), Vector(279, 229), Vector(279, 0.f), 0.1f, 3);
+	m_pAnimatorObstacle2->CreateAnimation(L"Obstacle2", m_pObstacle2Image, Vector(440, 0), Vector(220, 201), Vector(220, 0.f), 0.15f, 4);
 
 	m_pAnimatorObstacle2->Play(L"Obstacle2", false);
 	AddComponent(m_pAnimatorObstacle2);
 
-	AddCollider(ColliderType::Rect, Vector(50, 120), Vector(40, 70));
+	AddCollider(ColliderType::Rect, Vector(50, 100), Vector(20, 40));
 
 }
 
 void CObstacle2::Update()
 {
 
-	m_vecPos -= m_vecDir * m_fVelocity * DT;
+	m_vecPos -= m_vecDir * m_fVelocity * DT * 1;
 
 
 	if (m_vecPos.x < -100)

@@ -42,7 +42,7 @@ void CScenePrepare::Init()
 void CScenePrepare::Enter()
 {
 	isPrepare = true;
-
+	CAMERA->FadeIn(0.2f);
 
 	// 펫 1 버튼
 	auto choosePet1Clicked = [](DWORD_PTR button, DWORD_PTR param) {
@@ -97,8 +97,8 @@ void CScenePrepare::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(stage1Start->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-		//CAMERA->FadeOut(1);
-		CHANGESCENE(GroupScene::Stage01);
+		CAMERA->FadeOut(0.25f);
+		DELAYCHANGESCENE(GroupScene::Stage01, 0.25f);
 	};
 
 	stage1Start = new CButton;
@@ -123,6 +123,11 @@ void CScenePrepare::Enter()
 
 void CScenePrepare::Update()
 {
+	if (BUTTONDOWN(VK_ESCAPE))
+	{
+		CAMERA->FadeOut(0.25f);
+		DELAYCHANGESCENE(GroupScene::Title, 0.25f);
+	}
 }
 
 void CScenePrepare::Render()
