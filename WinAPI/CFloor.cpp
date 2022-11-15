@@ -29,7 +29,7 @@ void CFloor::Update()
 	// 화면 좌측 밖으로 나갈경우 화면 우측 밖에 재배치
 	if (m_vecPos.x <= -160)
 	{
-		this->SetPos(WINSIZEX + 160, WINSIZEY * 0.9);
+		this->SetPos(WINSIZEX + 155, WINSIZEY * 0.9);
 
 	}
 }
