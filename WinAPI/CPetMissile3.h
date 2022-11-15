@@ -21,6 +21,7 @@ private:
 	float m_fVelocity;
 
 	float m_fShieldTimer;
+	float m_fShieldTicTimer;
 
 
 	void Init() override;

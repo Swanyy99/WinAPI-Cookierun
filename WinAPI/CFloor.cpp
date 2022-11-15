@@ -36,8 +36,16 @@ void CFloor::Update()
 
 void CFloor::Render()
 {
+	//m_pImg = RESOURCE->LoadImg(L"Floor", L"Image\\FloorSet1.png");
 	m_pImg = RESOURCE->LoadImg(L"Floor", L"Image\\FloorSet1.png");
 	AddCollider(ColliderType::Rect, Vector(320, 90), Vector(0, 0));
+
+	//RENDER->Image(
+	//	m_pImg,
+	//	m_vecPos.x - m_pImg->GetWidth() * 0.15f,
+	//	m_vecPos.y - m_pImg->GetHeight() * 0.15f,
+	//	m_vecPos.x + m_pImg->GetWidth() * 0.15f,
+	//	m_vecPos.y + m_pImg->GetHeight() * 0.15f);
 
 	RENDER->Image(
 		m_pImg,

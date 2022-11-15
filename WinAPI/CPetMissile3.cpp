@@ -51,9 +51,30 @@ void CPetMissile3::Init()
 
 void CPetMissile3::Update()
 {
+	m_fShieldTicTimer += ABSDT;
 
-	m_vecPos.x = Pet3PosX + 60;
-	m_vecPos.y = Pet3PosY - 20;
+	m_vecPos.x -= (m_vecPos.x - (Pet3PosX + 30)) * DT * 3;
+
+	if (m_fShieldTicTimer > 0 && m_fShieldTicTimer < 1)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 30)) * DT ;
+
+	if (m_fShieldTicTimer > 1 && m_fShieldTicTimer < 2)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 10)) * DT ;
+
+	if (m_fShieldTicTimer > 2 && m_fShieldTicTimer < 3)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 30)) * DT;
+
+	if (m_fShieldTicTimer > 3 && m_fShieldTicTimer < 4)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 10)) * DT ;
+
+	if (m_fShieldTicTimer > 4 && m_fShieldTicTimer < 5)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 30)) * DT ;
+
+	if (m_fShieldTicTimer > 5 && m_fShieldTicTimer < 6)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 10)) * DT;
+
+	if (m_fShieldTicTimer > 6 && m_fShieldTicTimer < 7)
+		m_vecPos.y -= (m_vecPos.y - (Pet3PosY - 30)) * DT;
 
 	m_fShieldTimer += ABSDT;
 

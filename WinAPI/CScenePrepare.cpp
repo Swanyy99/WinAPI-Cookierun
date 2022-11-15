@@ -58,7 +58,7 @@ void CScenePrepare::Enter()
 	choosePet1->SetName(L"펫1 선택 버튼");
 	choosePet1->SetLayer(Layer::Ui);
 	choosePet1->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet1->SetPos(1010, 130);
+	choosePet1->SetPos(970, 130);
 	choosePet1->SetScale(85, 55);
 	choosePet1->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet1->SetClickedCallback(choosePet1Clicked, (DWORD_PTR)choosePet1, (DWORD_PTR)1);
@@ -78,7 +78,7 @@ void CScenePrepare::Enter()
 	choosePet2->SetName(L"펫2 선택 버튼");
 	choosePet2->SetLayer(Layer::Ui);
 	choosePet2->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet2->SetPos(1010, 320);
+	choosePet2->SetPos(970, 310);
 	choosePet2->SetScale(85, 55);
 	choosePet2->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet2->SetClickedCallback(choosePet2Clicked, (DWORD_PTR)choosePet2, (DWORD_PTR)1);
@@ -104,7 +104,7 @@ void CScenePrepare::Enter()
 	choosePet3->SetName(L"펫3 선택 버튼");
 	choosePet3->SetLayer(Layer::Ui);
 	choosePet3->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet3->SetPos(1010, 510);
+	choosePet3->SetPos(970, 490);
 	choosePet3->SetScale(85, 55);
 	choosePet3->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet3->SetClickedCallback(choosePet3Clicked, (DWORD_PTR)choosePet3, (DWORD_PTR)1);
@@ -133,8 +133,8 @@ void CScenePrepare::Enter()
 	stage1Start->SetName(L"스테이지 1 진입 버튼");
 	stage1Start->SetLayer(Layer::Ui);
 	stage1Start->SetImage(L"GameStartButton.png", L"GameStartButtonMouseOver.png");
-	stage1Start->SetPos(530, 645); // 764 658
-	stage1Start->SetScale(200, 65);
+	stage1Start->SetPos(530, 630); // 764 658
+	stage1Start->SetScale(210, 70);
 	stage1Start->SetText(L"", 32, Color(0, 0, 0, 1));
 	stage1Start->SetClickedCallback(stage1StartClicked, (DWORD_PTR)stage1Start, (DWORD_PTR)1);
 	AddGameObject(stage1Start);
@@ -166,21 +166,21 @@ void CScenePrepare::Render()
 	{
 		RENDER->Image(
 			ChoosedImage,
-			240, 120, 320, 190);
+			275, 120, 365, 190);
 	}
 
 	else if (choicePet == 2)
 	{
 		RENDER->Image(
 			ChoosedImage,
-			240, 310, 320, 380);
+			275, 295, 365, 365);
 	}
 
 	else if (choicePet == 3)
 	{
 		RENDER->Image(
 			ChoosedImage,
-			240, 500, 320, 570);
+			275, 470, 365, 540);
 	}
 }
 

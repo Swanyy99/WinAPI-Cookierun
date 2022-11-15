@@ -331,6 +331,7 @@ void CSceneStage01::Enter()
 	pBackground2->SetPos(WINSIZEX * 2, WINSIZEY * 0.5);
 	pBackground2->SetDir(Vector(1, 0));
 	AddGameObject(pBackground2);
+	
 
 	CBottomCloud* pBottomBackground1 = new CBottomCloud();
 	pBottomBackground1->SetPos(WINSIZEX - 1280, WINSIZEY * 0.85);

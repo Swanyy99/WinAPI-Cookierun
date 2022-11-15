@@ -8,6 +8,7 @@ CBottomCloud::CBottomCloud()
 	m_vecScale = Vector(10, 10);
 	m_vecDir = Vector(0, 0);
 	m_fVelocity = 300;
+	//m_layer = Layer::BottomBackGround;
 	m_layer = Layer::BottomBackGround;
 	m_strName = L"배경";
 	m_pImg = nullptr;
@@ -29,11 +30,17 @@ void CBottomCloud::Update()
 
 	// 화면 좌측 밖으로 나갈경우 화면 우측 밖에 재배치
 
-	if (m_vecPos.x <= -638)
+	if (m_vecPos.x <= -1280)
+	{
+		this->SetPos(WINSIZEX + 1280, WINSIZEY * 0.85);
+
+	}
+
+	/*if (m_vecPos.x <= -638)
 	{
 		this->SetPos(WINSIZEX + 640, WINSIZEY * 0.85);
 
-	}
+	}*/
 }
 
 void CBottomCloud::Render()

@@ -134,7 +134,7 @@ void CPet3::Update()
 		isDash = true;
 		}
 
-		m_vecPos.y -= (m_vecPos.y - (playerPosY - 85)) * DT * 3.5;
+		m_vecPos.y -= (m_vecPos.y - (playerPosY - 80)) * DT * 3.5;
 		m_vecPos.x -= (m_vecPos.x - (playerPosX + 300)) * DT * 3;
 
 

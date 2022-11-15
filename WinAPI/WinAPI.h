@@ -46,6 +46,7 @@ enum class Layer
 	Tile,
 	GroundTile,
 	BackGround,
+	OverBackGround,
 	Floor,
 	BottomBackGround,
 	Obstacle,
