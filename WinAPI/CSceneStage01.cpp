@@ -197,11 +197,12 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(QuitButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-		CAMERA->FadeOut(0.1f);
+		CAMERA->FadeOut(0.2f);
 		playerHp += 1;
 		isDead = false;
+		isDash = false;
 		pause = false;
-		DELAYCHANGESCENE(GroupScene::Title, 0.1f);
+		DELAYCHANGESCENE(GroupScene::Title, 0.2f);
 	};
 
 	QuitButton = new CButton;
