@@ -114,6 +114,15 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 		DELETEOBJECT(this);
 	}
+
+	if (pOtherCollider->GetObjName() == L"Æê¹Ì»çÀÏ3")
+	{
+		Logger::Debug(L"ºûÀÇ ¿ìÀ¯ ¹æÆÐ°¡ Á©¸®¸¦ ¸Ô¾ú½À´Ï´Ù");
+		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
+		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
+		ADDOBJECT(pJellyEffect);
+		DELETEOBJECT(this);
+	}
 }
 
 void CJelly1::OnCollisionStay(CCollider* pOtherCollider)

@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CDashItem.h"
 #include "CDashFireEffect.h"
+#include "CJellyEatEffect.h"
 
 extern bool isMagnet;
 extern bool isDash;
@@ -89,8 +90,12 @@ void CDashItem::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{
 		Logger::Debug(L"플레이어가 대쉬 아이템을 먹었습니다.");
+		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
+		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
+		ADDOBJECT(pJellyEffect);
 		DELETEOBJECT(this);
 	}
+
 }
 
 void CDashItem::OnCollisionStay(CCollider* pOtherCollider)

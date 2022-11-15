@@ -5,6 +5,7 @@
 class CPlayer;
 class CPet;
 class CPet2;
+class CPet3;
 class CImages;
 
 class CSceneStage01 : public CScene
@@ -17,6 +18,7 @@ private:
 	CPlayer* pPlayer;
 	CPet* pPet;
 	CPet2* pPet2;
+	CPet3* pPet3;
 
 
 	CImage* slideImage;
@@ -57,4 +59,13 @@ private:
 	void Render()	override;
 	void Exit()		override;
 	void Release()	override;
+
+	void SummonJelly1(float x, float y);
+	void SummonObstacle1(float x, float y);
+	void SummonObstacle2(float x, float y);
+	void SummonObstacle3(float x, float y);
+	void SummonObstacleSky(float x, float y);
+	void SummonDashItem(float x, float y);
+	void SummonHpItem(float x, float y);
+	void SummonMagnetItem(float x, float y);
 };

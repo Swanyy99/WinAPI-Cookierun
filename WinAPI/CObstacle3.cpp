@@ -101,6 +101,15 @@ void CObstacle3::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pObstacleBoomEffect);
 		DELETEOBJECT(this);
 	}
+
+	if (pOtherCollider->GetObjName() == L"펫미사일3")
+	{
+		Logger::Debug(L"빛의 우유 방패가 장애물을 부쉈습니다");
+		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
+		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
+		ADDOBJECT(pObstacleBoomEffect);
+		DELETEOBJECT(this);
+	}
 }
 
 void CObstacle3::OnCollisionStay(CCollider* pOtherCollider)

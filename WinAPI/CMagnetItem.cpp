@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CMagnetItem.h"
+#include "CJellyEatEffect.h"
 
 extern bool isMagnet;
 extern bool isDash;
@@ -84,8 +85,13 @@ void CMagnetItem::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{
 		Logger::Debug(L"플레이어가 자석 아이템을 먹었습니다.");
+		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
+		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
+		ADDOBJECT(pJellyEffect);
 		DELETEOBJECT(this);
 	}
+
+
 }
 
 void CMagnetItem::OnCollisionStay(CCollider* pOtherCollider)

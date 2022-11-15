@@ -61,6 +61,7 @@ enum class Layer
 	RespawnEffect,
 	Pet,
 	PetMissile,
+	PetMissileEatHp,
 	Missile,
 	Monster,
 	OverlayBackGround,

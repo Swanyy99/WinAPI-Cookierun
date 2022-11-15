@@ -17,6 +17,8 @@
 #include "CScene.h"
 #include "CRespawnEffect.h"
 
+#include "CPet3.h"
+
 bool isMagnet;
 bool isDash;
 bool isHurt;
@@ -33,10 +35,14 @@ float playerHp;
 
 float playerPosX;
 float playerPosY;
+float m_fDashTimer;
+float m_fHurtTimer;
+
 
 extern int score;
 extern wstring ScreenScore;
 extern bool pause;
+extern bool skillOn3;
 
 CPlayer::CPlayer()
 {
@@ -402,6 +408,16 @@ void CPlayer::Update()
 		}
 	}
 
+	if (skillOn3 == true)
+	{
+		isDash = true;
+	}
+
+	if (m_fDashTimer >= 4.1)
+	{
+		m_fDashTimer = 4;
+	}
+
 	if (isDash == true && isDead == false)
 	{
 		m_fDashTimer -= ABSDT;
@@ -413,19 +429,27 @@ void CPlayer::Update()
 			CDashFireEffect* pDashFireEffect = new CDashFireEffect();
 			pDashFireEffect->SetPos(playerPosX - 120, playerPosY);
 			ADDOBJECT(pDashFireEffect);
-
-
 		}
+
+
+
+
+		/*if (skillOn3 == true)
+		{
+			m_fDashTimer = 4;
+			isHurt = false;
+			m_fHurtTimer = 2.5;
+		}*/
 
 		if (m_fDashTimer <= 0)
 		{
 			isDash = false;
 			isHurt = true;
 			m_fHurtTimer = 2.5;
-			m_fDashTimer = 4;
+			
 		}
-	}
 
+	}
 
 }
 
@@ -533,7 +557,14 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		m_fMagnetTimer = 4;
 	}
 
-	if (pOtherCollider->GetObjName() == L"대쉬아이템")
+	if (pOtherCollider->GetObjName() == L"대쉬아이템" && m_fDashTimer != 4)
+	{
+		Logger::Debug(L"대쉬아이템 획득!");
+		isDash = true;
+		m_fDashTimer += 4;
+	}
+
+	if (pOtherCollider->GetObjName() == L"대쉬아이템" && m_fDashTimer == 4)
 	{
 		Logger::Debug(L"대쉬아이템 획득!");
 		isDash = true;

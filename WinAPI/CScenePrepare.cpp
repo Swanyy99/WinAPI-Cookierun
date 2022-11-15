@@ -58,8 +58,8 @@ void CScenePrepare::Enter()
 	choosePet1->SetName(L"펫1 선택 버튼");
 	choosePet1->SetLayer(Layer::Ui);
 	choosePet1->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet1->SetPos(1005, 225);
-	choosePet1->SetScale(95, 60);
+	choosePet1->SetPos(1010, 130);
+	choosePet1->SetScale(85, 55);
 	choosePet1->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet1->SetClickedCallback(choosePet1Clicked, (DWORD_PTR)choosePet1, (DWORD_PTR)1);
 	AddGameObject(choosePet1);
@@ -78,8 +78,8 @@ void CScenePrepare::Enter()
 	choosePet2->SetName(L"펫2 선택 버튼");
 	choosePet2->SetLayer(Layer::Ui);
 	choosePet2->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet2->SetPos(1005, 425);
-	choosePet2->SetScale(95, 60);
+	choosePet2->SetPos(1010, 320);
+	choosePet2->SetScale(85, 55);
 	choosePet2->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet2->SetClickedCallback(choosePet2Clicked, (DWORD_PTR)choosePet2, (DWORD_PTR)1);
 	AddGameObject(choosePet2);
@@ -89,6 +89,34 @@ void CScenePrepare::Enter()
 	PrepareSceneBackgroundImages->SetPos(0, 0);
 	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);
 	AddGameObject(PrepareSceneBackgroundImages);
+
+	// 펫 3 버튼
+	auto choosePet3Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* choosePet3 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(choosePet3->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		//CAMERA->FadeOut(1);
+		choicePet = 3;
+	};
+
+	choosePet3 = new CButton;
+	choosePet3->SetName(L"펫3 선택 버튼");
+	choosePet3->SetLayer(Layer::Ui);
+	choosePet3->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
+	choosePet3->SetPos(1010, 510);
+	choosePet3->SetScale(85, 55);
+	choosePet3->SetText(L"", 32, Color(0, 0, 0, 1));
+	choosePet3->SetClickedCallback(choosePet3Clicked, (DWORD_PTR)choosePet3, (DWORD_PTR)1);
+	AddGameObject(choosePet3);
+
+	PrepareSceneBackgroundImages = new CImages();
+	PrepareSceneBackgroundImages->SetImageName(L"PrepareScenePetChoice.png");
+	PrepareSceneBackgroundImages->SetPos(0, 0);
+	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);
+	AddGameObject(PrepareSceneBackgroundImages);
+
+
 
 
 	// 게임시작 버튼
@@ -105,8 +133,8 @@ void CScenePrepare::Enter()
 	stage1Start->SetName(L"스테이지 1 진입 버튼");
 	stage1Start->SetLayer(Layer::Ui);
 	stage1Start->SetImage(L"GameStartButton.png", L"GameStartButtonMouseOver.png");
-	stage1Start->SetPos(510, 580); // 764 658
-	stage1Start->SetScale(220, 75);
+	stage1Start->SetPos(530, 645); // 764 658
+	stage1Start->SetScale(200, 65);
 	stage1Start->SetText(L"", 32, Color(0, 0, 0, 1));
 	stage1Start->SetClickedCallback(stage1StartClicked, (DWORD_PTR)stage1Start, (DWORD_PTR)1);
 	AddGameObject(stage1Start);
@@ -138,14 +166,21 @@ void CScenePrepare::Render()
 	{
 		RENDER->Image(
 			ChoosedImage,
-			200, 210, 310, 290);
+			240, 120, 320, 190);
 	}
 
 	else if (choicePet == 2)
 	{
 		RENDER->Image(
 			ChoosedImage,
-			200, 410, 310, 490);
+			240, 310, 320, 380);
+	}
+
+	else if (choicePet == 3)
+	{
+		RENDER->Image(
+			ChoosedImage,
+			240, 500, 320, 570);
 	}
 }
 

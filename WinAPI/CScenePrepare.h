@@ -16,6 +16,7 @@ private:
 
 	CButton* choosePet1;
 	CButton* choosePet2;
+	CButton* choosePet3;
 	CButton* stage1Start;
 
 	CImages* PrepareSceneBackgroundImages;

@@ -1,11 +1,13 @@
 #include "framework.h"
 #include "CHeartItem.h"
+#include "CJellyEatEffect.h"
 
 extern bool isMagnet;
 extern bool isDash;
 
 extern float playerPosX;
 extern float playerPosY;
+
 
 CHeartItem::CHeartItem()
 {
@@ -87,7 +89,20 @@ void CHeartItem::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"플레이어")
 	{
 		Logger::Debug(L"플레이어가 생명물약을 먹었습니다.");
+		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
+		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
+		ADDOBJECT(pJellyEffect);
 		DELETEOBJECT(this);
+	}
+
+	if (pOtherCollider->GetObjName() == L"펫미사일3")
+	{
+		Logger::Debug(L"빛의 우유 방패가 생명물약을 먹었습니다");
+		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
+		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
+		ADDOBJECT(pJellyEffect);
+		DELETEOBJECT(this);
+		
 	}
 }
 
