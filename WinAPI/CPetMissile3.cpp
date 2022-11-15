@@ -37,9 +37,9 @@ void CPetMissile3::Init()
 
 
 	m_pAnimatorPetMissile3 = new CAnimator;
-	m_pAnimatorPetMissile3->CreateAnimation(L"PetMissile3Appear", m_pPetMissile3Image, Vector(0, 0), Vector(625, 507), Vector(625, 0.f), 0.1f, 7, false);
-	m_pAnimatorPetMissile3->CreateAnimation(L"PetMissile3Ing", m_pPetMissile3Image, Vector(0, 507), Vector(625, 507), Vector(625, 0.f), 0.1f, 7);
-	m_pAnimatorPetMissile3->CreateAnimation(L"PetMissile3Disappear", m_pPetMissile3Image, Vector(0, 1014), Vector(625, 507), Vector(625, 0.f), 0.1f, 5, false);
+	m_pAnimatorPetMissile3->CreateAnimation(L"PetMissile3Appear", m_pPetMissile3Image, Vector(0, 0), Vector(626, 507), Vector(626, 0.f), 0.08f, 7, false);
+	m_pAnimatorPetMissile3->CreateAnimation(L"PetMissile3Ing", m_pPetMissile3Image, Vector(0, 507), Vector(626, 507), Vector(626, 0.f), 0.08f, 7);
+	m_pAnimatorPetMissile3->CreateAnimation(L"PetMissile3Disappear", m_pPetMissile3Image, Vector(0, 1014), Vector(626, 507), Vector(626, 0.f), 0.08f, 5, false);
 
 	m_pAnimatorPetMissile3->Play(L"PetMissile3Appear", false);
 	AddComponent(m_pAnimatorPetMissile3);
@@ -57,18 +57,18 @@ void CPetMissile3::Update()
 
 	m_fShieldTimer += ABSDT;
 
-	if (m_fShieldTimer > 0 && m_fShieldTimer < 0.7)
+	if (m_fShieldTimer > 0 && m_fShieldTimer < 0.56)
 	{
 		PetMissile3Image = L"PetMissile3Appear";
 	}
 
-	if (m_fShieldTimer > 0.7 && m_fShieldTimer < 6.7)
+	if (m_fShieldTimer > 0.56 && m_fShieldTimer < 6.7)
 	{
 		AddCollider(ColliderType::Rect, Vector(350, 450), Vector(0, 0));
 		PetMissile3Image = L"PetMissile3Ing";
 	}
 
-	if (m_fShieldTimer > 6.7 && m_fShieldTimer < 7.2)
+	if (m_fShieldTimer > 6.8 && m_fShieldTimer < 7.2)
 	{
 		PetMissile3Image = L"PetMissile3Disappear";
 	}

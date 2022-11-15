@@ -567,7 +567,7 @@ void CSceneStage01::Update()
 
 	if (obstacleTimer >= 31 && obstacleTimer <= 31.1)
 	{
-		obstacleTimer += 1;
+		obstacleTimer = -13.8;
 
 		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.7);
@@ -648,12 +648,14 @@ void CSceneStage01::Update()
 		SummonJelly1(WINSIZEX + 4170, WINSIZEY * 0.6);
 		SummonJelly1(WINSIZEX + 4270, WINSIZEY * 0.65);
 		SummonJelly1(WINSIZEX + 4370, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4435, WINSIZEY * 0.65);
+		SummonJelly1(WINSIZEX + 4470, WINSIZEY * 0.7);
+		SummonJelly1(WINSIZEX + 4570, WINSIZEY * 0.7);
+		SummonJelly1(WINSIZEX + 4650, WINSIZEY * 0.65);
 
 	
 	}
 
-	if (obstacleTimer >= 47 && obstacleTimer <= 47.1)
+	/*if (obstacleTimer >= 47 && obstacleTimer <= 47.1)
 	{
 		obstacleTimer += 1;
 		CJelly1* pJelly50 = new CJelly1();
@@ -818,7 +820,7 @@ void CSceneStage01::Update()
 		CJelly1* pJelly58 = new CJelly1();
 		pJelly58->SetPos(WINSIZEX + 560, WINSIZEY * 0.6);
 		AddGameObject(pJelly58);
-	}
+	}*/
 
 
 	#pragma endregion
