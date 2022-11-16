@@ -23,6 +23,18 @@ private:
 	CButton* purchasePet2;
 	CButton* choosePet3;
 	CButton* purchasePet3;
+
+	CButton* chooseJelly1;
+	CButton* purchaseJelly1;
+	CButton* chooseJelly2;
+	CButton* purchaseJelly2;
+	CButton* chooseJelly3;
+	CButton* purchaseJelly3;
+	CButton* chooseJelly4;
+	CButton* purchaseJelly4;
+	CButton* chooseJelly5;
+	CButton* purchaseJelly5;
+
 	CButton* stage1Start;
 	CButton* purchaseDisable;
 

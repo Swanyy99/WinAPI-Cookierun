@@ -13,12 +13,20 @@ extern bool inTitle;
 bool isPrepare;
 int choicePet;
 
+int choiceJelly;
+
 int myJem;
 int myCoin;
 
 bool	ownPet1;
 bool	ownPet2;
 bool	ownPet3;
+
+bool	ownJelly1;
+bool	ownJelly2;
+bool	ownJelly3;
+bool	ownJelly4;
+bool	ownJelly5;
 
 bool MoneyWarning;
 bool PetWarning;
@@ -42,10 +50,17 @@ CScenePrepare::CScenePrepare()
 	purchaseDisable = nullptr;
 	stage1Start = nullptr;
 	choicePet = 0;
+	choiceJelly = 2;
 
 	ownPet1 = false;
 	ownPet2 = false;
 	ownPet3 = false;
+
+	ownJelly1 = true;
+	ownJelly2 = false;
+	ownJelly3 = false;
+	ownJelly4 = false;
+	ownJelly5 = false;
 
 	Price5000 = nullptr;
 
@@ -102,7 +117,7 @@ void CScenePrepare::Enter()
 	choosePet1->SetName(L"펫1 선택 버튼");
 	choosePet1->SetLayer(Layer::Ui);
 	choosePet1->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet1->SetPos(970, 180);
+	choosePet1->SetPos(870, 180);
 	choosePet1->SetScale(75, 48);
 	choosePet1->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet1->SetClickedCallback(choosePet1Clicked, (DWORD_PTR)choosePet1, (DWORD_PTR)1);
@@ -132,7 +147,7 @@ void CScenePrepare::Enter()
 	purchasePet1->SetName(L"펫1 구매 버튼");
 	purchasePet1->SetLayer(Layer::Ui);
 	purchasePet1->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
-	purchasePet1->SetPos(970, 120);
+	purchasePet1->SetPos(870, 120);
 	purchasePet1->SetScale(75, 48);
 	purchasePet1->SetText(L"", 32, Color(0, 0, 0, 1));
 	purchasePet1->SetClickedCallback(purchasePet1Clicked, (DWORD_PTR)purchasePet1, (DWORD_PTR)1);
@@ -160,17 +175,11 @@ void CScenePrepare::Enter()
 	choosePet2->SetName(L"펫2 선택 버튼");
 	choosePet2->SetLayer(Layer::Ui);
 	choosePet2->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet2->SetPos(970, 360);
+	choosePet2->SetPos(870, 360);
 	choosePet2->SetScale(75, 48);
 	choosePet2->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet2->SetClickedCallback(choosePet2Clicked, (DWORD_PTR)choosePet2, (DWORD_PTR)1);
 	AddGameObject(choosePet2);
-
-	PrepareSceneBackgroundImages = new CImages();
-	PrepareSceneBackgroundImages->SetImageName(L"PrepareScenePetChoice.png");
-	PrepareSceneBackgroundImages->SetPos(0, 0);
-	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);
-	AddGameObject(PrepareSceneBackgroundImages);
 
 
 	// 펫 2 구매버튼
@@ -194,7 +203,7 @@ void CScenePrepare::Enter()
 	purchasePet2->SetName(L"펫2 구매 버튼");
 	purchasePet2->SetLayer(Layer::Ui);
 	purchasePet2->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
-	purchasePet2->SetPos(970, 300);
+	purchasePet2->SetPos(870, 300);
 	purchasePet2->SetScale(75, 48);
 	purchasePet2->SetText(L"", 32, Color(0, 0, 0, 1));
 	purchasePet2->SetClickedCallback(purchasePet2Clicked, (DWORD_PTR)purchasePet2, (DWORD_PTR)1);
@@ -223,17 +232,12 @@ void CScenePrepare::Enter()
 	choosePet3->SetName(L"펫3 선택 버튼");
 	choosePet3->SetLayer(Layer::Ui);
 	choosePet3->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	choosePet3->SetPos(970, 540);
+	choosePet3->SetPos(870, 540);
 	choosePet3->SetScale(75, 48);
 	choosePet3->SetText(L"", 32, Color(0, 0, 0, 1));
 	choosePet3->SetClickedCallback(choosePet3Clicked, (DWORD_PTR)choosePet3, (DWORD_PTR)1);
 	AddGameObject(choosePet3);
 
-	PrepareSceneBackgroundImages = new CImages();
-	PrepareSceneBackgroundImages->SetImageName(L"PrepareScenePetChoice.png");
-	PrepareSceneBackgroundImages->SetPos(0, 0);
-	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);
-	AddGameObject(PrepareSceneBackgroundImages);
 
 	// 펫 3 구매버튼
 	auto purchasePet3Clicked = [](DWORD_PTR button, DWORD_PTR param) {
@@ -256,11 +260,78 @@ void CScenePrepare::Enter()
 	purchasePet3->SetName(L"펫3 구매 버튼");
 	purchasePet3->SetLayer(Layer::Ui);
 	purchasePet3->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
-	purchasePet3->SetPos(970, 480);
+	purchasePet3->SetPos(870, 480);
 	purchasePet3->SetScale(75, 48);
 	purchasePet3->SetText(L"", 32, Color(0, 0, 0, 1));
 	purchasePet3->SetClickedCallback(purchasePet3Clicked, (DWORD_PTR)purchasePet3, (DWORD_PTR)1);
 	AddGameObject(purchasePet3);
+
+
+
+
+
+
+
+	// 젤리스킨2 구매버튼
+	auto purchaseJelly2Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* purchaseJelly2 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(purchaseJelly2->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (myCoin >= 5000 && ownPet3 == false)
+		{
+			myCoin -= 5000;
+			ownPet3 = true;
+		}
+		else if (myCoin < 5000 && ownPet3 == false)
+		{
+			MoneyWarning = true;
+		}
+	};
+
+	purchaseJelly2 = new CButton;
+	purchaseJelly2->SetName(L"젤리2 구매 버튼");
+	purchaseJelly2->SetLayer(Layer::Ui);
+	purchaseJelly2->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
+	purchaseJelly2->SetPos(1100, 110);
+	purchaseJelly2->SetScale(55, 35);
+	purchaseJelly2->SetText(L"", 32, Color(0, 0, 0, 1));
+	purchaseJelly2->SetClickedCallback(purchaseJelly2Clicked, (DWORD_PTR)purchaseJelly2, (DWORD_PTR)1);
+	AddGameObject(purchaseJelly2);
+
+	// 젤리스킨2 착용 버튼
+	auto chooseJelly2Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* chooseJelly2 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(chooseJelly2->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (myCoin >= 5000 && ownPet3 == false)
+		{
+			myCoin -= 5000;
+			ownPet3 = true;
+		}
+		else if (myCoin < 5000 && ownPet3 == false)
+		{
+			MoneyWarning = true;
+		}
+	};
+
+	chooseJelly2 = new CButton;
+	chooseJelly2->SetName(L"젤리2 선택 버튼");
+	chooseJelly2->SetLayer(Layer::Ui);
+	chooseJelly2->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
+	chooseJelly2->SetPos(1100, 150);
+	chooseJelly2->SetScale(55, 35);
+	chooseJelly2->SetText(L"", 32, Color(0, 0, 0, 1));
+	chooseJelly2->SetClickedCallback(chooseJelly2Clicked, (DWORD_PTR)chooseJelly2, (DWORD_PTR)1);
+	AddGameObject(chooseJelly2);
+
+
+
+
+
+
+
 
 
 	// 게임시작 버튼
@@ -286,7 +357,7 @@ void CScenePrepare::Enter()
 
 
 	PrepareSceneBackgroundImages = new CImages();
-	PrepareSceneBackgroundImages->SetImageName(L"PrepareScenePetChoice.png");
+	PrepareSceneBackgroundImages->SetImageName(L"PrepareScenePetChoice2.png");
 	PrepareSceneBackgroundImages->SetPos(0, 0);
 	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);
 	AddGameObject(PrepareSceneBackgroundImages);
@@ -311,7 +382,26 @@ void CScenePrepare::Update()
 		myJem += 10000;
 	}
 
-	
+	if (BUTTONDOWN('Z'))
+	{
+		choiceJelly = 1;
+	}
+	if (BUTTONDOWN('X'))
+	{
+		choiceJelly = 2;
+	}
+	if (BUTTONDOWN('C'))
+	{
+		choiceJelly = 3;
+	}
+	if (BUTTONDOWN('V'))
+	{
+		choiceJelly = 4;
+	}
+	if (BUTTONDOWN('B'))
+	{
+		choiceJelly = 5;
+	}
 
 	/*
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
@@ -332,21 +422,21 @@ void CScenePrepare::Render()
 	{
 		RENDER->Image(
 			ChoosedImage,
-			275, 135, 365, 205);
+			165, 135, 255, 205);
 	}
 
 	else if (choicePet == 2 && ownPet2 == true)
 	{
 		RENDER->Image(
 			ChoosedImage,
-			275, 310, 365, 380);
+			165, 310, 255, 380);
 	}
 
 	else if (choicePet == 3 && ownPet3 == true)
 	{
 		RENDER->Image(
 			ChoosedImage,
-			275, 485, 365, 555);
+			165, 490, 255, 560);
 	}
 
 
@@ -359,7 +449,7 @@ void CScenePrepare::Render()
 	{
 		RENDER->Image(
 			Price5000,
-			980, 95, 1055, 125);
+			880, 95, 955, 125);
 	}
 
 
@@ -372,7 +462,7 @@ void CScenePrepare::Render()
 	{
 		RENDER->Image(
 			Price5000,
-			980, 275, 1055, 305);
+			880, 275, 955, 305);
 	}
 
 	if (ownPet3 == true)
@@ -383,7 +473,7 @@ void CScenePrepare::Render()
 	{
 		RENDER->Image(
 			Price5000,
-			980, 455, 1055, 485);
+			880, 455, 955, 485);
 	}
 
 	if (MoneyWarning == true)
@@ -413,7 +503,7 @@ void CScenePrepare::Render()
 
 		RENDER->Image(
 			NoPetWarning,
-			200, 290, 1080, 395);
+			220, 290, 1060, 395);
 
 		if (NoPetWordTimer >= 0.7)
 		{

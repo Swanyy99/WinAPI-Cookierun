@@ -11,7 +11,11 @@ public:
 	virtual ~CJelly1();
 
 private:
-	CAnimator* m_pAnimatorJelly;
+	CAnimator* m_pAnimatorJelly1;
+	CAnimator* m_pAnimatorJelly2;
+	CAnimator* m_pAnimatorJelly3;
+	CAnimator* m_pAnimatorJelly4;
+	CAnimator* m_pAnimatorJelly5;
 	CImage* m_pObstacle1Image;
 
 	CImage* m_pJellyImage;

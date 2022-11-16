@@ -9,6 +9,8 @@ extern bool isMagnet;
 extern bool isDash;
 extern bool skillOn;
 
+extern int choiceJelly;
+
 Vector DistanceGap;
 
 CJelly1::CJelly1()
@@ -18,7 +20,9 @@ CJelly1::CJelly1()
 	m_layer = Layer::Jelly;
 	m_vecDir = Vector(1, 0);
 	m_fVelocity = 300;
-	m_pAnimatorJelly = nullptr;
+	m_pAnimatorJelly1 = nullptr;
+	m_pAnimatorJelly2 = nullptr;
+	m_pAnimatorJelly3 = nullptr;
 	m_pObstacle1Image = nullptr;
 
 }
@@ -29,14 +33,62 @@ CJelly1::~CJelly1()
 
 void CJelly1::Init()
 {
-	m_pJellyImage = RESOURCE->LoadImg(L"FlowerJelly", L"Image\\RabbitJelly.png");
+	if (choiceJelly == 1)
+	{
+		m_pJellyImage = RESOURCE->LoadImg(L"RabbitJelly", L"Image\\RabbitJelly.png");
+		m_pAnimatorJelly1 = new CAnimator;
+		m_pAnimatorJelly1->CreateAnimation(L"Jelly1", m_pJellyImage, Vector(0, 0), Vector(84, 89), Vector(84, 0.f), 0.2f, 2);
+		m_pAnimatorJelly1->Play(L"Jelly1", false);
+		AddComponent(m_pAnimatorJelly1);
 
 
-	m_pAnimatorJelly = new CAnimator;
-	m_pAnimatorJelly->CreateAnimation(L"Jelly1", m_pJellyImage, Vector(0, 0), Vector(84, 89), Vector(84, 0.f), 0.2f, 2);
+	}
 
-	m_pAnimatorJelly->Play(L"Jelly1", false);
-	AddComponent(m_pAnimatorJelly);
+	if (choiceJelly == 2)
+	{
+		m_pJellyImage = RESOURCE->LoadImg(L"MagicJelly", L"Image\\MagicJelly.png");
+		m_pAnimatorJelly2 = new CAnimator;
+
+		m_pAnimatorJelly2->CreateAnimation(L"Jelly2", m_pJellyImage, Vector(0, 0), Vector(82, 102), Vector(82, 0.f), 0.07f, 10);
+		m_pAnimatorJelly2->Play(L"Jelly2", false);
+		AddComponent(m_pAnimatorJelly2);
+
+	}
+
+	if (choiceJelly == 3)
+	{
+		m_pJellyImage = RESOURCE->LoadImg(L"LibraryJelly", L"Image\\LibraryJelly.png");
+		m_pAnimatorJelly3 = new CAnimator;
+
+		m_pAnimatorJelly3->CreateAnimation(L"Jelly3", m_pJellyImage, Vector(0, 0), Vector(88.5, 88), Vector(88.5, 0.f), 0.1f, 8);
+		m_pAnimatorJelly3->Play(L"Jelly3", false);
+		AddComponent(m_pAnimatorJelly3);
+
+	}
+
+	if (choiceJelly == 4)
+	{
+		m_pJellyImage = RESOURCE->LoadImg(L"UFOJelly", L"Image\\UFOJelly.png");
+		m_pAnimatorJelly4 = new CAnimator;
+
+		m_pAnimatorJelly4->CreateAnimation(L"Jelly4", m_pJellyImage, Vector(0, 0), Vector(133, 97), Vector(133, 0.f), 0.1f, 8);
+		m_pAnimatorJelly4->Play(L"Jelly4", false);
+		AddComponent(m_pAnimatorJelly4);
+
+	}
+
+	if (choiceJelly == 5)
+	{
+		m_pJellyImage = RESOURCE->LoadImg(L"Kingjelly", L"Image\\Kingjelly.png");
+		m_pAnimatorJelly5 = new CAnimator;
+
+		m_pAnimatorJelly5->CreateAnimation(L"Jelly5", m_pJellyImage, Vector(0, 0), Vector(100, 84), Vector(100, 0.f), 0.13f, 4);
+		m_pAnimatorJelly5->Play(L"Jelly5", false);
+		AddComponent(m_pAnimatorJelly5);
+
+	}
+		
+
 
 	AddCollider(ColliderType::Rect, Vector(70, 70), Vector(0, 0));
 
@@ -64,7 +116,20 @@ void CJelly1::Update()
 	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);
 
-	jellyImage = L"Jelly1";
+	if (choiceJelly == 1)
+		jellyImage = L"Jelly1";
+
+	if (choiceJelly == 2)
+		jellyImage = L"Jelly2";
+
+	if (choiceJelly == 3)
+		jellyImage = L"Jelly3";
+
+	if (choiceJelly == 4)
+		jellyImage = L"Jelly4";
+
+	if (choiceJelly == 5)
+		jellyImage = L"Jelly5";
 
 	AnimatorUpdate();
 }
@@ -82,7 +147,20 @@ void CJelly1::Release()
 void CJelly1::AnimatorUpdate()
 {
 	//m_pAnimators->Play(obstacleImage, false);
-	m_pAnimatorJelly->Play(jellyImage, false);
+	if (choiceJelly == 1)
+		m_pAnimatorJelly1->Play(jellyImage, false);
+
+	if (choiceJelly == 2)
+		m_pAnimatorJelly2->Play(jellyImage, false);
+
+	if (choiceJelly == 3)
+		m_pAnimatorJelly3->Play(jellyImage, false);
+
+	if (choiceJelly == 4)
+		m_pAnimatorJelly4->Play(jellyImage, false);
+
+	if (choiceJelly == 5)
+		m_pAnimatorJelly5->Play(jellyImage, false);
 }
 
 
