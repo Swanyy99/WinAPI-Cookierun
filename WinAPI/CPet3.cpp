@@ -92,6 +92,7 @@ void CPet3::Init()
 	skillOn3 = false;
 	PetMotion3 = L"Pet3IdleRun";
 
+	isDash = false;
 
 
 }

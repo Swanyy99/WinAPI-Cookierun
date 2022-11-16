@@ -146,6 +146,14 @@ void CPlayer::Init()
 	DashFireDom = RESOURCE->LoadImg(L"DashFireDom", L"Image\\DashFireDom.png");
 
 	AddCollider(ColliderType::Rect, Vector(70, 120), Vector(10, 70));
+
+
+	m_fJumpTimer = 0.4;
+	m_fHurtTimer = 2.5;
+	m_fMagnetTimer = 4;
+	m_fDashTimer = 4;
+	m_fDashEffectTimer = 0.3;
+	isDash = false;
 }
 
 void CPlayer::Update()
