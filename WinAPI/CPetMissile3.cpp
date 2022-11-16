@@ -17,6 +17,9 @@ extern float Pet3PosY;
 extern int myJem;
 extern int myCoin;
 
+extern int JemADD;
+extern int CoinADD;
+
 CPetMissile3::CPetMissile3()
 {
 	m_vecScale = Vector(10, 10);
@@ -141,11 +144,13 @@ void CPetMissile3::OnCollisionEnter(CCollider* pOtherCollider)
 
 	if (pOtherCollider->GetObjName() == L"Áª")
 	{
+		JemADD += 100;
 		myJem += 100;
 	}
 
 	if (pOtherCollider->GetObjName() == L"ÄÚÀÎ")
 	{
+		CoinADD += 100;
 		myCoin += 100;
 	}
 

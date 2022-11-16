@@ -46,6 +46,9 @@ extern wstring ScreenScore;
 extern bool pause;
 extern bool skillOn3;
 
+extern int JemADD;
+extern int CoinADD;
+
 CPlayer::CPlayer()
 {
 	m_vecPos = Vector(0, 0);
@@ -557,12 +560,14 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"다이아 획득!");
 		myJem += 100;
+		JemADD += 100;
 	}
 
 	if (pOtherCollider->GetObjName() == L"코인")
 	{
 		Logger::Debug(L"코인 획득!");
 		myCoin += 100;
+		CoinADD += 100;
 	}
 
 	if (pOtherCollider->GetObjName() == L"하트아이템")

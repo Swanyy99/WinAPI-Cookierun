@@ -50,7 +50,7 @@ CScenePrepare::CScenePrepare()
 	purchaseDisable = nullptr;
 	stage1Start = nullptr;
 	choicePet = 0;
-	choiceJelly = 2;
+	choiceJelly = 1;
 
 	ownPet1 = false;
 	ownPet2 = false;
@@ -63,6 +63,7 @@ CScenePrepare::CScenePrepare()
 	ownJelly5 = false;
 
 	Price5000 = nullptr;
+	Price500 = nullptr;
 
 	NoPetWarning = nullptr;
 	NoMoneyWarning = nullptr;
@@ -87,6 +88,7 @@ void CScenePrepare::Init()
 	PrepareScenePetChoiceImage = RESOURCE->LoadImg(L"PrepareScenePetChoice", L"Image\\PrepareScenePetChoice.png");
 	ChoosedImage = RESOURCE->LoadImg(L"ChoosedImage", L"Image\\Choiced.png");
 	Price5000 = RESOURCE->LoadImg(L"Price5000", L"Image\\5000Price.png");
+	Price500 = RESOURCE->LoadImg(L"Price500", L"Image\\500Price.png");
 	NoPetWarning = RESOURCE->LoadImg(L"NoPetWarning", L"Image\\NoPetWarning.png");
 	NoMoneyWarning = RESOURCE->LoadImg(L"NoMoneyWarning", L"Image\\NoMoneyWarning.png");
 
@@ -272,18 +274,73 @@ void CScenePrepare::Enter()
 
 
 
-	// 젤리스킨2 구매버튼
+	// 젤리스킨1 구매 버튼
+	auto purchaseJelly1Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* purchaseJelly1 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(purchaseJelly1->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (myJem >= 500 && ownJelly1 == false)
+		{
+			myJem -= 500;
+			ownJelly1 = true;
+		}
+		else if (myJem < 500 && ownJelly1 == false)
+		{
+			MoneyWarning = true;
+		}
+	};
+
+	purchaseJelly1 = new CButton;
+	purchaseJelly1->SetName(L"젤리1 구매 버튼");
+	purchaseJelly1->SetLayer(Layer::Ui);
+	purchaseJelly1->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
+	purchaseJelly1->SetPos(1115, 100);
+	purchaseJelly1->SetScale(55, 35);
+	purchaseJelly1->SetText(L"", 32, Color(0, 0, 0, 1));
+	purchaseJelly1->SetClickedCallback(purchaseJelly1Clicked, (DWORD_PTR)purchaseJelly1, (DWORD_PTR)1);
+	AddGameObject(purchaseJelly1);
+
+	// 젤리스킨1 선택 버튼
+	auto chooseJelly1Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* chooseJelly1 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(chooseJelly1->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (ownJelly1 == true)
+			choiceJelly = 1;
+		else if (ownJelly1 == false)
+		{
+			PetWarning = true;
+		}
+	};
+
+	chooseJelly1 = new CButton;
+	chooseJelly1->SetName(L"젤리1 선택 버튼");
+	chooseJelly1->SetLayer(Layer::Ui);
+	chooseJelly1->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
+	chooseJelly1->SetPos(1115, 140);
+	chooseJelly1->SetScale(55, 35);
+	chooseJelly1->SetText(L"", 32, Color(0, 0, 0, 1));
+	chooseJelly1->SetClickedCallback(chooseJelly1Clicked, (DWORD_PTR)chooseJelly1, (DWORD_PTR)1);
+	AddGameObject(chooseJelly1);
+
+
+
+
+
+	// 젤리스킨2 구매 버튼
 	auto purchaseJelly2Clicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* purchaseJelly2 = (CButton*)(button);
 		int paramInt = (int)(param);
 
 		Logger::Debug(purchaseJelly2->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-		if (myCoin >= 5000 && ownPet3 == false)
+		if (myJem >= 500 && ownJelly2 == false)
 		{
-			myCoin -= 5000;
-			ownPet3 = true;
+			myJem -= 500;
+			ownJelly2 = true;
 		}
-		else if (myCoin < 5000 && ownPet3 == false)
+		else if (myJem < 500 && ownJelly2 == false)
 		{
 			MoneyWarning = true;
 		}
@@ -293,26 +350,23 @@ void CScenePrepare::Enter()
 	purchaseJelly2->SetName(L"젤리2 구매 버튼");
 	purchaseJelly2->SetLayer(Layer::Ui);
 	purchaseJelly2->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
-	purchaseJelly2->SetPos(1100, 110);
+	purchaseJelly2->SetPos(1115, 210);
 	purchaseJelly2->SetScale(55, 35);
 	purchaseJelly2->SetText(L"", 32, Color(0, 0, 0, 1));
 	purchaseJelly2->SetClickedCallback(purchaseJelly2Clicked, (DWORD_PTR)purchaseJelly2, (DWORD_PTR)1);
 	AddGameObject(purchaseJelly2);
 
-	// 젤리스킨2 착용 버튼
+	// 젤리스킨2 선택 버튼
 	auto chooseJelly2Clicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* chooseJelly2 = (CButton*)(button);
 		int paramInt = (int)(param);
 
 		Logger::Debug(chooseJelly2->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
-		if (myCoin >= 5000 && ownPet3 == false)
+		if (ownJelly2 == true)
+			choiceJelly = 2;
+		else if (ownJelly2 == false)
 		{
-			myCoin -= 5000;
-			ownPet3 = true;
-		}
-		else if (myCoin < 5000 && ownPet3 == false)
-		{
-			MoneyWarning = true;
+			PetWarning = true;
 		}
 	};
 
@@ -320,12 +374,173 @@ void CScenePrepare::Enter()
 	chooseJelly2->SetName(L"젤리2 선택 버튼");
 	chooseJelly2->SetLayer(Layer::Ui);
 	chooseJelly2->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
-	chooseJelly2->SetPos(1100, 150);
+	chooseJelly2->SetPos(1115, 250);
 	chooseJelly2->SetScale(55, 35);
 	chooseJelly2->SetText(L"", 32, Color(0, 0, 0, 1));
 	chooseJelly2->SetClickedCallback(chooseJelly2Clicked, (DWORD_PTR)chooseJelly2, (DWORD_PTR)1);
 	AddGameObject(chooseJelly2);
 
+
+
+
+	// 젤리스킨3 구매 버튼
+	auto purchaseJelly3Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* purchaseJelly3 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(purchaseJelly3->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (myJem >= 500 && ownJelly3 == false)
+		{
+			myJem -= 500;
+			ownJelly3 = true;
+		}
+		else if (myJem < 500 && ownJelly3 == false)
+		{
+			MoneyWarning = true;
+		}
+	};
+
+	purchaseJelly3 = new CButton;
+	purchaseJelly3->SetName(L"젤리3 구매 버튼");
+	purchaseJelly3->SetLayer(Layer::Ui);
+	purchaseJelly3->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
+	purchaseJelly3->SetPos(1115, 320);
+	purchaseJelly3->SetScale(55, 35);
+	purchaseJelly3->SetText(L"", 32, Color(0, 0, 0, 1));
+	purchaseJelly3->SetClickedCallback(purchaseJelly3Clicked, (DWORD_PTR)purchaseJelly3, (DWORD_PTR)1);
+	AddGameObject(purchaseJelly3);
+
+	// 젤리스킨3 선택 버튼
+	auto chooseJelly3Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* chooseJelly3 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(chooseJelly3->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (ownJelly3 == true)
+			choiceJelly = 3;
+		else if (ownJelly3 == false)
+		{
+			PetWarning = true;
+		}
+	};
+
+	chooseJelly3 = new CButton;
+	chooseJelly3->SetName(L"젤리3 선택 버튼");
+	chooseJelly3->SetLayer(Layer::Ui);
+	chooseJelly3->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
+	chooseJelly3->SetPos(1115, 360);
+	chooseJelly3->SetScale(55, 35);
+	chooseJelly3->SetText(L"", 32, Color(0, 0, 0, 1));
+	chooseJelly3->SetClickedCallback(chooseJelly3Clicked, (DWORD_PTR)chooseJelly3, (DWORD_PTR)1);
+	AddGameObject(chooseJelly3);
+
+
+
+
+	// 젤리스킨4 구매 버튼
+	auto purchaseJelly4Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* purchaseJelly4 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(purchaseJelly4->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (myJem >= 500 && ownJelly4 == false)
+		{
+			myJem -= 500;
+			ownJelly4 = true;
+		}
+		else if (myJem < 500 && ownJelly4 == false)
+		{
+			MoneyWarning = true;
+		}
+	};
+
+	purchaseJelly4 = new CButton;
+	purchaseJelly4->SetName(L"젤리4 구매 버튼");
+	purchaseJelly4->SetLayer(Layer::Ui);
+	purchaseJelly4->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
+	purchaseJelly4->SetPos(1115, 430);
+	purchaseJelly4->SetScale(55, 35);
+	purchaseJelly4->SetText(L"", 32, Color(0, 0, 0, 1));
+	purchaseJelly4->SetClickedCallback(purchaseJelly4Clicked, (DWORD_PTR)purchaseJelly4, (DWORD_PTR)1);
+	AddGameObject(purchaseJelly4);
+
+	// 젤리스킨4 선택 버튼
+	auto chooseJelly4Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* chooseJelly4 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(chooseJelly4->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (ownJelly4 == true)
+			choiceJelly = 4;
+		else if (ownJelly4 == false)
+		{
+			PetWarning = true;
+		}
+	};
+
+	chooseJelly4 = new CButton;
+	chooseJelly4->SetName(L"젤리4 선택 버튼");
+	chooseJelly4->SetLayer(Layer::Ui);
+	chooseJelly4->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
+	chooseJelly4->SetPos(1115, 470);
+	chooseJelly4->SetScale(55, 35);
+	chooseJelly4->SetText(L"", 32, Color(0, 0, 0, 1));
+	chooseJelly4->SetClickedCallback(chooseJelly4Clicked, (DWORD_PTR)chooseJelly4, (DWORD_PTR)1);
+	AddGameObject(chooseJelly4);
+
+
+
+
+	// 젤리스킨5 구매 버튼
+	auto purchaseJelly5Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* purchaseJelly5 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(purchaseJelly5->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (myJem >= 500 && ownJelly5 == false)
+		{
+			myJem -= 500;
+			ownJelly5 = true;
+		}
+		else if (myJem < 500 && ownJelly5 == false)
+		{
+			MoneyWarning = true;
+		}
+	};
+
+	purchaseJelly5 = new CButton;
+	purchaseJelly5->SetName(L"젤리5 구매 버튼");
+	purchaseJelly5->SetLayer(Layer::Ui);
+	purchaseJelly5->SetImage(L"PurchaseButtonIdle.png", L"PurchaseButtonMouseOver.png");
+	purchaseJelly5->SetPos(1115, 540);
+	purchaseJelly5->SetScale(55, 35);
+	purchaseJelly5->SetText(L"", 32, Color(0, 0, 0, 1));
+	purchaseJelly5->SetClickedCallback(purchaseJelly5Clicked, (DWORD_PTR)purchaseJelly5, (DWORD_PTR)1);
+	AddGameObject(purchaseJelly5);
+
+	// 젤리스킨5 선택 버튼
+	auto chooseJelly5Clicked = [](DWORD_PTR button, DWORD_PTR param) {
+		CButton* chooseJelly5 = (CButton*)(button);
+		int paramInt = (int)(param);
+
+		Logger::Debug(chooseJelly5->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+		if (ownJelly5 == true)
+			choiceJelly = 5;
+		else if (ownJelly5 == false)
+		{
+			PetWarning = true;
+		}
+	};
+
+	chooseJelly5 = new CButton;
+	chooseJelly5->SetName(L"젤리5 선택 버튼");
+	chooseJelly5->SetLayer(Layer::Ui);
+	chooseJelly5->SetImage(L"ChoiceButtonIdle.png", L"ChoiceButtonMouseOver.png");
+	chooseJelly5->SetPos(1115, 580);
+	chooseJelly5->SetScale(55, 35);
+	chooseJelly5->SetText(L"", 32, Color(0, 0, 0, 1));
+	chooseJelly5->SetClickedCallback(chooseJelly5Clicked, (DWORD_PTR)chooseJelly5, (DWORD_PTR)1);
+	AddGameObject(chooseJelly5);
 
 
 
@@ -441,6 +656,8 @@ void CScenePrepare::Render()
 
 
 
+
+
 	if (ownPet1 == true)
 	{
 		purchasePet1->SetImage(L"PurchaseButtonDisableIdle.png", L"PurchaseButtonDisableMouseOver.png");
@@ -475,6 +692,102 @@ void CScenePrepare::Render()
 			Price5000,
 			880, 455, 955, 485);
 	}
+
+
+
+	if (choiceJelly == 1 && ownJelly1 == true)
+	{
+		RENDER->Image(
+			ChoosedImage,
+			1030, 110, 1090, 160);
+	}
+
+	if (choiceJelly == 2 && ownJelly2 == true)
+	{
+		RENDER->Image(
+			ChoosedImage,
+			1030, 220, 1090, 270);
+	}
+
+	if (choiceJelly == 3 && ownJelly3 == true)
+	{
+		RENDER->Image(
+			ChoosedImage,
+			1030, 315, 1090, 375);
+	}
+
+	if (choiceJelly == 4 && ownJelly4 == true)
+	{
+		RENDER->Image(
+			ChoosedImage,
+			1030, 435, 1090, 485);
+	}
+
+	if (choiceJelly == 5 && ownJelly5 == true)
+	{
+		RENDER->Image(
+			ChoosedImage,
+			1030, 545, 1090, 595);
+	}
+
+	if (ownJelly1 == true)
+	{
+		purchaseJelly1->SetImage(L"PurchaseButtonDisableIdle.png", L"PurchaseButtonDisableMouseOver.png");
+	}
+	else
+	{
+		RENDER->Image(
+			Price500,
+			1000, 445, 1050, 475);
+	}
+
+	if (ownJelly2 == true)
+	{
+		purchaseJelly2->SetImage(L"PurchaseButtonDisableIdle.png", L"PurchaseButtonDisableMouseOver.png");
+	}
+	else
+	{
+		RENDER->Image(
+			Price500,
+			1122, 190, 1185, 215);
+	}
+
+
+	if (ownJelly3 == true)
+	{
+		purchaseJelly3->SetImage(L"PurchaseButtonDisableIdle.png", L"PurchaseButtonDisableMouseOver.png");
+	}
+	else
+	{
+		RENDER->Image(
+			Price500,
+			1122, 300, 1185, 325);
+	}
+	
+
+	if (ownJelly4 == true)
+	{
+		purchaseJelly4->SetImage(L"PurchaseButtonDisableIdle.png", L"PurchaseButtonDisableMouseOver.png");
+	}
+	else
+	{
+		RENDER->Image(
+			Price500,
+			1122, 410, 1185, 435);
+	}
+
+	if (ownJelly5 == true)
+	{
+		purchaseJelly5->SetImage(L"PurchaseButtonDisableIdle.png", L"PurchaseButtonDisableMouseOver.png");
+	}
+	else
+	{
+		RENDER->Image(
+			Price500,
+			1122, 520, 1185, 545);
+	}
+
+
 
 	if (MoneyWarning == true)
 	{

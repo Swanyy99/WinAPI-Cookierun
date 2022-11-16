@@ -13,6 +13,9 @@ extern int score;
 extern int myCoin;
 extern int myJem;
 
+extern int JemADD;
+extern int CoinADD;
+
 CPetMissile::CPetMissile()
 {
 	m_vecScale = Vector(10, 10);
@@ -92,11 +95,13 @@ void CPetMissile::OnCollisionEnter(CCollider* pOtherCollider)
 
 	if (pOtherCollider->GetObjName() == L"Áª")
 	{
+		JemADD += 100;
 		myJem += 100;
 	}
 
 	if (pOtherCollider->GetObjName() == L"ÄÚÀÎ")
 	{
+		CoinADD += 100;
 		myCoin += 100;
 	}
 

@@ -24,6 +24,10 @@ private:
 	CImage* slideImage;
 	CImage* jumpImage;
 
+	CImage* JemAcquire;
+	CImage* CoinAcquire;
+
+
 
 	CImages* CookierunTitle;
 	CImages* HPIcon;
@@ -42,6 +46,9 @@ private:
 	CImages* FailImage;
 	CImages* SlideButtonImage;
 	CImages* JumpButtonImage;
+
+	wstring ScreenJem;
+	wstring ScreenCoin;
 
 	float obstacleTimer;
 	float HpTimer;

@@ -14,6 +14,7 @@ private:
 	CImage* PrepareScenePetChoiceImage;
 	CImage* ChoosedImage;
 	CImage* Price5000;
+	CImage* Price500;
 	CImage* NoPetWarning;
 	CImage* NoMoneyWarning;
 

@@ -51,7 +51,7 @@ void CObstacle3::Update()
 
 	m_fJemBoxDropTimer += DT;
 
-	if (m_fJemBoxDropTimer > 1.1)
+	if (m_fJemBoxDropTimer > 1.2)
 	{
 		m_fJemBoxDropTimer -= 100;
 		CJemBottle* Jem = new CJemBottle();
