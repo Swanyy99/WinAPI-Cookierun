@@ -68,4 +68,6 @@ private:
 	void SummonDashItem(float x, float y);
 	void SummonHpItem(float x, float y);
 	void SummonMagnetItem(float x, float y);
+	void SummonJemBottle(float x, float y);
+	void SummonCoin(float x, float y);
 };

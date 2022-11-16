@@ -38,6 +38,8 @@ float playerPosY;
 float m_fDashTimer;
 float m_fHurtTimer;
 
+extern int myJem;
+extern int myCoin;
 
 extern int score;
 extern wstring ScreenScore;
@@ -541,6 +543,18 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 	{
 		Logger::Debug(L"젤리 점수 획득!");
 		score += 1000;
+	}
+
+	if (pOtherCollider->GetObjName() == L"젬")
+	{
+		Logger::Debug(L"다이아 획득!");
+		myJem += 100;
+	}
+
+	if (pOtherCollider->GetObjName() == L"코인")
+	{
+		Logger::Debug(L"코인 획득!");
+		myCoin += 100;
 	}
 
 	if (pOtherCollider->GetObjName() == L"하트아이템")

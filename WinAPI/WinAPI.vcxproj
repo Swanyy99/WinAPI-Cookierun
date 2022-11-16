@@ -146,6 +146,7 @@
     <ClInclude Include="CButton.h" />
     <ClInclude Include="CCameraController.h" />
     <ClInclude Include="CCameraManager.h" />
+    <ClInclude Include="CCoin.h" />
     <ClInclude Include="CCollider.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CComponent.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CJelly1.h" />
     <ClInclude Include="CJellyEatEffect.h" />
+    <ClInclude Include="CJemBottle.h" />
     <ClInclude Include="CMagnetItem.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
@@ -214,6 +216,7 @@
     <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CCameraController.cpp" />
     <ClCompile Include="CCameraManager.cpp" />
+    <ClCompile Include="CCoin.cpp" />
     <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CComponent.cpp" />
@@ -230,6 +233,7 @@
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CJelly1.cpp" />
     <ClCompile Include="CJellyEatEffect.cpp" />
+    <ClCompile Include="CJemBottle.cpp" />
     <ClCompile Include="CMagnetItem.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />

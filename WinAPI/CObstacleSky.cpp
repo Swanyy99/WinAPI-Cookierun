@@ -47,7 +47,7 @@ void CObstacleSky::Update()
 
 void CObstacleSky::Render()
 {
-	m_pImg = RESOURCE->LoadImg(L"ObstacleSky", L"Image\\ObstacleSky1.png");
+	m_pImg = RESOURCE->LoadImg(L"ObstacleSky", L"Image\\ObstacleSky2.png");
 
 	RENDER->Image(
 		m_pImg,

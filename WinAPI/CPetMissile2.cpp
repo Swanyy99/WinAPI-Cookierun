@@ -11,6 +11,9 @@ extern bool skillOn;
 extern int score;
 extern float playerHp;
 
+extern int myCoin;
+extern int myJem;
+
 CPetMissile2::CPetMissile2()
 {
 	m_vecScale = Vector(10, 10);
@@ -91,6 +94,15 @@ void CPetMissile2::OnCollisionEnter(CCollider* pOtherCollider)
 		score += 2000;
 	}
 
+	if (pOtherCollider->GetObjName() == L"Áª")
+	{
+		myJem += 100;
+	}
+
+	if (pOtherCollider->GetObjName() == L"ÄÚÀÎ")
+	{
+		myCoin += 100;
+	}
 }
 
 void CPetMissile2::OnCollisionStay(CCollider* pOtherCollider)

@@ -3,6 +3,7 @@
 #include "framework.h"
 #include "CObstacle2.h"
 #include "CObstacleBoomEffect.h"
+#include "CJemBottle.h"
 
 extern float playerPosX;
 extern float playerPosY;
@@ -21,7 +22,7 @@ CObstacle3::CObstacle3()
 	m_fVelocity = 300;
 	m_pAnimatorObstacle3 = nullptr;
 	m_pObstacle3Image = nullptr;
-
+	m_fJemBoxDropTimer = 0;
 }
 
 CObstacle3::~CObstacle3()
@@ -48,6 +49,15 @@ void CObstacle3::Update()
 
 	m_vecPos -= m_vecDir * m_fVelocity * DT;
 
+	m_fJemBoxDropTimer += DT;
+
+	if (m_fJemBoxDropTimer > 1.1)
+	{
+		m_fJemBoxDropTimer -= 100;
+		CJemBottle* Jem = new CJemBottle();
+		Jem->SetPos(m_vecPos.x - 100, m_vecPos.y + 30);
+		ADDOBJECT(Jem);
+	}
 
 	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);

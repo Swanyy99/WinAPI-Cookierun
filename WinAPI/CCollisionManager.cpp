@@ -24,14 +24,17 @@ void CCollisionManager::Init()
 	CheckLayer(Layer::Floor, Layer::Player);
 	CheckLayer(Layer::Obstacle, Layer::Player);
 	CheckLayer(Layer::Jelly, Layer::Player);
+	CheckLayer(Layer::Coin, Layer::Player);
 	CheckLayer(Layer::HeartItem, Layer::Player);
 	CheckLayer(Layer::MagnetItem, Layer::Player);
 	CheckLayer(Layer::DashItem, Layer::Player);
 	CheckLayer(Layer::PetMissile, Layer::Obstacle);
 	CheckLayer(Layer::PetMissile, Layer::Jelly);
+	CheckLayer(Layer::PetMissile, Layer::Coin);
 	CheckLayer(Layer::PetMissileEatHp, Layer::HeartItem);
 	CheckLayer(Layer::PetMissileEatHp, Layer::Obstacle);
 	CheckLayer(Layer::PetMissileEatHp, Layer::Jelly);
+	CheckLayer(Layer::PetMissileEatHp, Layer::Coin);
 }
 
 void CCollisionManager::Update()

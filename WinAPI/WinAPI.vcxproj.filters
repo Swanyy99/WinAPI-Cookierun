@@ -270,6 +270,12 @@
     <ClInclude Include="CPetMissile3.h">
       <Filter>GameObject\Stage01\Player</Filter>
     </ClInclude>
+    <ClInclude Include="CJemBottle.h">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoin.h">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -451,6 +457,12 @@
     </ClCompile>
     <ClCompile Include="CPetMissile3.cpp">
       <Filter>GameObject\Stage01\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CJemBottle.cpp">
+      <Filter>GameObject\Stage01\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoin.cpp">
+      <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,9 @@ extern float playerHp;
 extern float Pet3PosX;
 extern float Pet3PosY;
 
+extern int myJem;
+extern int myCoin;
+
 CPetMissile3::CPetMissile3()
 {
 	m_vecScale = Vector(10, 10);
@@ -134,6 +137,16 @@ void CPetMissile3::OnCollisionEnter(CCollider* pOtherCollider)
 	if (pOtherCollider->GetObjName() == L"하트아이템")
 	{
 		playerHp += 20;
+	}
+
+	if (pOtherCollider->GetObjName() == L"젬")
+	{
+		myJem += 100;
+	}
+
+	if (pOtherCollider->GetObjName() == L"코인")
+	{
+		myCoin += 100;
 	}
 
 }

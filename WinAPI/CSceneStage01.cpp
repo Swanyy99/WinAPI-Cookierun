@@ -33,6 +33,9 @@
 #include "CDashItem.h"
 #include "CImages.h"
 
+#include "CJemBottle.h"
+#include "CCoin.h"
+
 bool pause;
 bool isRetry;
 bool isDebugMode;
@@ -61,6 +64,7 @@ CSceneStage01::CSceneStage01()
 	pPlayer = nullptr;
 	pPet = nullptr;
 	pPet2 = nullptr;
+	pPet3 = nullptr;
 
 
 	RetryButton = nullptr;
@@ -422,6 +426,7 @@ void CSceneStage01::Update()
 	{
 		obstacleTimer += 1;
 
+		SummonCoin(WINSIZEX, WINSIZEY * 0.5);
 		SummonObstacle1(WINSIZEX, WINSIZEY * 0.79);
 		SummonJelly1(WINSIZEX, WINSIZEY * 0.65);
 		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
@@ -534,6 +539,13 @@ void CSceneStage01::Update()
 		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.63);
 		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.75);
 
+		SummonCoin(WINSIZEX + 100, WINSIZEY * 0.4);
+		SummonCoin(WINSIZEX + 200, WINSIZEY * 0.4);
+		SummonCoin(WINSIZEX + 300, WINSIZEY * 0.4);
+		SummonCoin(WINSIZEX + 400, WINSIZEY * 0.4);
+		SummonCoin(WINSIZEX + 500, WINSIZEY * 0.4);
+		SummonCoin(WINSIZEX + 600, WINSIZEY * 0.4);
+
 	}
 
 	if (obstacleTimer >= 21.7 && obstacleTimer <= 21.8)
@@ -549,27 +561,37 @@ void CSceneStage01::Update()
 		SummonJelly1(WINSIZEX + 640, WINSIZEY * 0.5);
 		SummonJelly1(WINSIZEX + 790, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 890, WINSIZEY * 0.7);
+		SummonCoin(WINSIZEX + 790, WINSIZEY * 0.55);
+		SummonCoin(WINSIZEX + 890, WINSIZEY * 0.55);
 		SummonObstacle2(WINSIZEX + 1000, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 1040, WINSIZEY * 0.5);
 		SummonJelly1(WINSIZEX + 1190, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 1290, WINSIZEY * 0.7);
+		SummonCoin(WINSIZEX + 1190, WINSIZEY * 0.55);
+		SummonCoin(WINSIZEX + 1290, WINSIZEY * 0.55);
 		SummonObstacle2(WINSIZEX + 1400, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 1440, WINSIZEY * 0.5);
 		SummonJelly1(WINSIZEX + 1590, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 1690, WINSIZEY * 0.7);
+		SummonCoin(WINSIZEX + 1590, WINSIZEY * 0.55);
+		SummonCoin(WINSIZEX + 1690, WINSIZEY * 0.55);
 		SummonObstacle2(WINSIZEX + 1800, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 1840, WINSIZEY * 0.5);
 		SummonJelly1(WINSIZEX + 1990, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 2090, WINSIZEY * 0.7);
+		SummonCoin(WINSIZEX + 1990, WINSIZEY * 0.55);
+		SummonCoin(WINSIZEX + 2090, WINSIZEY * 0.55);
 		SummonObstacle2(WINSIZEX + 2200, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 2240, WINSIZEY * 0.5);
 		SummonJelly1(WINSIZEX + 2390, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 2490, WINSIZEY * 0.7);
+		SummonCoin(WINSIZEX + 2390, WINSIZEY * 0.55);
+		SummonCoin(WINSIZEX + 2490, WINSIZEY * 0.55);
 	}
 
 	if (obstacleTimer >= 31 && obstacleTimer <= 31.1)
 	{
-		obstacleTimer = -13.8;
+		obstacleTimer += 1;
 
 		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.7);
@@ -652,10 +674,16 @@ void CSceneStage01::Update()
 		SummonJelly1(WINSIZEX + 4370, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 4470, WINSIZEY * 0.7);
 		SummonJelly1(WINSIZEX + 4570, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4650, WINSIZEY * 0.65);
 
 	
 	}
+
+	if (obstacleTimer >= 48 && obstacleTimer <= 48.1)
+	{
+		obstacleTimer = 1;
+		SummonObstacle3(WINSIZEX, WINSIZEY * 0.75);
+	}
+
 
 	/*if (obstacleTimer >= 47 && obstacleTimer <= 47.1)
 	{
@@ -979,6 +1007,20 @@ void CSceneStage01::SummonMagnetItem(float x, float y)
 	CMagnetItem* MI = new CMagnetItem();
 	MI->SetPos(x, y);
 	AddGameObject(MI);
+}
+
+void CSceneStage01::SummonJemBottle(float x, float y)
+{
+	CJemBottle* JB = new CJemBottle();
+	JB->SetPos(x, y);
+	AddGameObject(JB);
+}
+
+void CSceneStage01::SummonCoin(float x, float y)
+{
+	CCoin* C = new CCoin();
+	C->SetPos(x, y);
+	AddGameObject(C);
 }
 
 

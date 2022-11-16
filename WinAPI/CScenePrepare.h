@@ -13,13 +13,23 @@ private:
 	CImage* PrepareSceneBackgroundImage;
 	CImage* PrepareScenePetChoiceImage;
 	CImage* ChoosedImage;
+	CImage* Price5000;
+	CImage* NoPetWarning;
+	CImage* NoMoneyWarning;
 
 	CButton* choosePet1;
+	CButton* purchasePet1;
 	CButton* choosePet2;
+	CButton* purchasePet2;
 	CButton* choosePet3;
+	CButton* purchasePet3;
 	CButton* stage1Start;
+	CButton* purchaseDisable;
 
 	CImages* PrepareSceneBackgroundImages;
+
+	float NoMoneyWordTimer;
+	float NoPetWordTimer;
 
 
 private:

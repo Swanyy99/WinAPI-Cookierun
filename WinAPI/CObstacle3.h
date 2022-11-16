@@ -20,6 +20,8 @@ private:
 	Vector m_vecDir;
 	float m_fVelocity;
 
+	float m_fJemBoxDropTimer;
+
 
 	void Init() override;
 	void Update() override;
