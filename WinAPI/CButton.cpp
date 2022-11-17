@@ -125,7 +125,9 @@ void CButton::OnMouseUp()
 
 void CButton::OnMouseDown()
 {
-	
+	CSound* pSound = RESOURCE->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav");
+	SOUND->Play(pSound, 1.f, false);
+
 	if (nullptr != m_pCallback)
 		m_pCallback(m_pParam1, m_pParam2);
 	

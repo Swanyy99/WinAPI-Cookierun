@@ -290,8 +290,7 @@ void CScenePrepare::Enter()
 			MoneyWarning = true;
 		}
 
-		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
-		SOUND->Play(pSound, 1.f, false);
+
 
 	};
 
@@ -352,8 +351,7 @@ void CScenePrepare::Enter()
 			MoneyWarning = true;
 		}
 
-		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
-		SOUND->Play(pSound, 1.f, false);
+
 
 	};
 
@@ -410,8 +408,6 @@ void CScenePrepare::Enter()
 			MoneyWarning = true;
 		}
 
-		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
-		SOUND->Play(pSound, 1.f, false);
 
 	};
 
@@ -468,8 +464,7 @@ void CScenePrepare::Enter()
 			MoneyWarning = true;
 		}
 
-		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
-		SOUND->Play(pSound, 1.f, false);
+
 
 	};
 
@@ -526,8 +521,7 @@ void CScenePrepare::Enter()
 			MoneyWarning = true;
 		}
 
-		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
-		SOUND->Play(pSound, 1.f, false);
+
 
 	};
 
