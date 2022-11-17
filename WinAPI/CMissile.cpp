@@ -63,6 +63,8 @@ void CMissile::OnCollisionEnter(CCollider* pOtherCollider)
 		Logger::Debug(L"미사일이 장애물을 부쉈습니다.");
 		score += 5000;
 		DELETEOBJECT(this);
+
+		
 	}
 }
 

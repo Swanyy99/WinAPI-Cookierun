@@ -70,6 +70,9 @@
     <Filter Include="GameObject\Stage01\Floor">
       <UniqueIdentifier>{9109c520-cf50-4d7b-aed0-ab7011e09295}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\Pet">
+      <UniqueIdentifier>{b145d376-6241-4bd1-83ed-607c8b29f4ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -231,12 +234,6 @@
     <ClInclude Include="CPlayer.h">
       <Filter>GameObject\Stage01\Player</Filter>
     </ClInclude>
-    <ClInclude Include="CPet.h">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="CPetMissile.h">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClInclude>
     <ClInclude Include="CScenePrepare.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -255,26 +252,32 @@
     <ClInclude Include="CRespawnEffect.h">
       <Filter>GameObject\Stage01\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="CPet2.h">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="CPetMissile2.h">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClInclude>
     <ClInclude Include="CObstacle3.h">
       <Filter>GameObject\Stage01\Obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="CPet3.h">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="CPetMissile3.h">
-      <Filter>GameObject\Stage01\Player</Filter>
     </ClInclude>
     <ClInclude Include="CJemBottle.h">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClInclude>
     <ClInclude Include="CCoin.h">
       <Filter>GameObject\Stage01\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPet.h">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPet2.h">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPet3.h">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPetMissile.h">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPetMissile2.h">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPetMissile3.h">
+      <Filter>GameObject\Stage01\Pet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,12 +422,6 @@
     <ClCompile Include="CPlayer.cpp">
       <Filter>GameObject\Stage01\Player</Filter>
     </ClCompile>
-    <ClCompile Include="CPet.cpp">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CPetMissile.cpp">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CScenePrepare.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -443,26 +440,32 @@
     <ClCompile Include="CRespawnEffect.cpp">
       <Filter>GameObject\Stage01\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="CPet2.cpp">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CPetMissile2.cpp">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CObstacle3.cpp">
       <Filter>GameObject\Stage01\Obstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="CPet3.cpp">
-      <Filter>GameObject\Stage01\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CPetMissile3.cpp">
-      <Filter>GameObject\Stage01\Player</Filter>
     </ClCompile>
     <ClCompile Include="CJemBottle.cpp">
       <Filter>GameObject\Stage01\Item</Filter>
     </ClCompile>
     <ClCompile Include="CCoin.cpp">
       <Filter>GameObject\Stage01\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPet.cpp">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPet2.cpp">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPet3.cpp">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPetMissile.cpp">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPetMissile2.cpp">
+      <Filter>GameObject\Stage01\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPetMissile3.cpp">
+      <Filter>GameObject\Stage01\Pet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

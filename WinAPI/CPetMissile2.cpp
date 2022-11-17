@@ -97,6 +97,12 @@ void CPetMissile2::OnCollisionEnter(CCollider* pOtherCollider)
 		score += 2000;
 	}
 
+	//if (pOtherCollider->GetOwner()->GetLayer() == Layer::Jelly)
+	//{
+	//	score += 2000;
+	//}
+
+
 	if (pOtherCollider->GetObjName() == L"Áª")
 	{
 		JemADD += 100;

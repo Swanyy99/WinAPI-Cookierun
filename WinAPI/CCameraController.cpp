@@ -18,12 +18,8 @@ void CCameraController::Init()
 
 void CCameraController::Update()
 {
-	//if (LMOUSEDOWN(false))
-	//{
-	//	CAMERA->SetTargetPos(MOUSEWORLDPOS, 1);
-	//}
-	//CAMERA->SetTargetPos(MOUSEWORLDPOS, 1);
-	CAMERA->SetTargetPos(Vector(WINSIZEX * 0.5, WINSIZEY * 0.5), 1);
+	
+	CAMERA->SetTargetPos(Vector(WINSIZEX * 0.5, WINSIZEY * 0.5), 0.2);
 
 	Vector dir;
 	if (BUTTONSTAY('A'))

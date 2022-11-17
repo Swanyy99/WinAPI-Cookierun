@@ -65,7 +65,7 @@ void CCameraManager::Scroll(Vector dir, float velocity)
 
 	// 스크롤의 목표 위치는 현재위치에서 스크롤 방향으로 떨어진 위치
 	m_vecTargetPos = m_vecLookAt;
-	m_vecTargetPos += dir.Normalized() * velocity * DT;
+	m_vecTargetPos += dir.Normalized() * velocity * ABSDT;
 	m_fTimeToTarget = 0;	// 스크롤은 시간차를 두지 않은 즉각 이동
 }
 

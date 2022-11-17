@@ -419,17 +419,15 @@ void CSceneStage01::Update()
 	ScreenJem = to_wstring(JemADD);
 	ScreenCoin = to_wstring(CoinADD);
 
+
 	if (BUTTONDOWN(VK_ESCAPE) && pause == false && isDead == false)
 	{
 		pause = true;
-
-		/*CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Title, 0.25f);*/
 	}
+
 	else if (BUTTONDOWN(VK_ESCAPE) && pause == true && isDead == false)
 	{
 		pause = false;
-
 	}
 
 	
@@ -438,6 +436,7 @@ void CSceneStage01::Update()
 	{
 		isDebugMode = true;
 	}
+
 	else if (BUTTONDOWN('G') && isDebugMode == true)
 	{
 		isDebugMode = false;

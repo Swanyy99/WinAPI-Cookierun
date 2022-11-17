@@ -33,16 +33,16 @@ void CTimeManager::Update()
 	curTime = chrono::high_resolution_clock::now();
 	chrono::duration<float> elapsed = curTime - prevTime;
 
-	if (pause == false && isDead == false && isDash == false)
+	if (isDash == false && pause == false && isDead == false)
 	{
 		m_fDT = elapsed.count();
 		m_fAbsDT = elapsed.count();
 	}
 
-	if (isDash == true && pause == false && isDead == false)
+	else if (isDash == true && pause == false && isDead == false)
 	{
-		m_fDT = elapsed.count() * 3;
 		m_fAbsDT = elapsed.count();
+		m_fDT = elapsed.count() * 3;
 	}
 	
 
