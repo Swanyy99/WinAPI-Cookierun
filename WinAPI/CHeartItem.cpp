@@ -92,6 +92,10 @@ void CHeartItem::OnCollisionEnter(CCollider* pOtherCollider)
 		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
 		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
 		ADDOBJECT(pJellyEffect);
+
+		CSound* pSound = RESOURCE->LoadSound(L"HpEatSound", L"Sound\\HpEat.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 		DELETEOBJECT(this);
 	}
 
@@ -101,6 +105,10 @@ void CHeartItem::OnCollisionEnter(CCollider* pOtherCollider)
 		CJellyEatEffect* pJellyEffect = new CJellyEatEffect();
 		pJellyEffect->SetPos(m_vecPos.x - 10, m_vecPos.y);
 		ADDOBJECT(pJellyEffect);
+
+		CSound* pSound = RESOURCE->LoadSound(L"HpEatSound", L"Sound\\HpEat.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 		DELETEOBJECT(this);
 		
 	}

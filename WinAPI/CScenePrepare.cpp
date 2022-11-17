@@ -289,6 +289,10 @@ void CScenePrepare::Enter()
 		{
 			MoneyWarning = true;
 		}
+
+		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 	};
 
 	purchaseJelly1 = new CButton;
@@ -313,6 +317,9 @@ void CScenePrepare::Enter()
 		{
 			PetWarning = true;
 		}
+
+
+
 	};
 
 	chooseJelly1 = new CButton;
@@ -344,6 +351,10 @@ void CScenePrepare::Enter()
 		{
 			MoneyWarning = true;
 		}
+
+		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 	};
 
 	purchaseJelly2 = new CButton;
@@ -398,6 +409,10 @@ void CScenePrepare::Enter()
 		{
 			MoneyWarning = true;
 		}
+
+		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 	};
 
 	purchaseJelly3 = new CButton;
@@ -452,6 +467,10 @@ void CScenePrepare::Enter()
 		{
 			MoneyWarning = true;
 		}
+
+		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 	};
 
 	purchaseJelly4 = new CButton;
@@ -506,6 +525,10 @@ void CScenePrepare::Enter()
 		{
 			MoneyWarning = true;
 		}
+
+		CSound* pSound = RESOURCE->LoadSound(L"BuySound", L"Sound\\Buy.wav");
+		SOUND->Play(pSound, 1.f, false);
+
 	};
 
 	purchaseJelly5 = new CButton;
