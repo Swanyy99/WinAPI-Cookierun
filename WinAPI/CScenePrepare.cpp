@@ -593,8 +593,8 @@ void CScenePrepare::Update()
 
 	if (BUTTONDOWN('A'))
 	{
-		myCoin += 10000;
-		myJem += 10000;
+		myCoin += 1000;
+		myJem += 100;
 	}
 
 	if (BUTTONDOWN('Z'))

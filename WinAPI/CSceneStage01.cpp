@@ -321,25 +321,29 @@ void CSceneStage01::Enter()
 	AddGameObject(pFloor2);
 
 	CFloor* pFloor3 = new CFloor();
-	pFloor3->SetPos(320, WINSIZEY * 0.9);
+	pFloor3->SetPos(319, WINSIZEY * 0.9);
 	pFloor3->SetDir(Vector(1, 0));
 	AddGameObject(pFloor3);
 
 	CFloor* pFloor4 = new CFloor();
-	pFloor4->SetPos(640, WINSIZEY * 0.9);
+	pFloor4->SetPos(638, WINSIZEY * 0.9);
 	pFloor4->SetDir(Vector(1, 0));
 	AddGameObject(pFloor4);
 
 	CFloor* pFloor5 = new CFloor();
-	pFloor5->SetPos(960, WINSIZEY * 0.9);
+	pFloor5->SetPos(957, WINSIZEY * 0.9);
 	pFloor5->SetDir(Vector(1, 0));
 	AddGameObject(pFloor5);
 
 	CFloor* pFloor1 = new CFloor();
-	pFloor1->SetPos(1280, WINSIZEY * 0.9);
+	pFloor1->SetPos(1276, WINSIZEY * 0.9);
 	pFloor1->SetDir(Vector(1, 0));
 	AddGameObject(pFloor1);
 
+	CFloor* pFloor6 = new CFloor();
+	pFloor6->SetPos(1595, WINSIZEY * 0.9);
+	pFloor6->SetDir(Vector(1, 0));
+	AddGameObject(pFloor6);
 
 	CBackground* pBackground = new CBackground();
 	pBackground->SetPos(WINSIZEX * 0.5, WINSIZEY * 0.5);
@@ -351,6 +355,7 @@ void CSceneStage01::Enter()
 	pBackground2->SetDir(Vector(1, 0));
 	AddGameObject(pBackground2);
 	
+
 
 	CBottomCloud* pBottomBackground1 = new CBottomCloud();
 	pBottomBackground1->SetPos(WINSIZEX - 1280, WINSIZEY * 0.85);
@@ -801,14 +806,6 @@ void CSceneStage01::Render()
 	{
 		JumpButtonImage->SetImageName(L"Idle_Jump.png");
 	}
-
-	// »ç¸Á ½Ã UI
-	/*if (isDead == true)
-	{
-		RENDER->Image(
-			failImage,
-			0, 0, WINSIZEX, WINSIZEY);
-	}*/
 
 }
 

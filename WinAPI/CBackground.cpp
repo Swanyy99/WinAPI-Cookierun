@@ -27,8 +27,8 @@ void CBackground::Update()
 	m_vecPos -= m_vecDir * m_fVelocity * DT * 0.3;
 
 	// 화면 좌측 밖으로 나갈경우 화면 우측 밖에 재배치
-	if (m_vecPos.x < -1280)
-		this->SetPos(WINSIZEX + 1280, WINSIZEY * 0.5);
+	if (m_vecPos.x <= -1300)
+		this->SetPos(WINSIZEX + 1300, WINSIZEY * 0.5);
 }
 
 void CBackground::Render()

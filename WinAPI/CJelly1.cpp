@@ -46,10 +46,10 @@ void CJelly1::Init()
 
 	if (choiceJelly == 2)
 	{
-		m_pJellyImage = RESOURCE->LoadImg(L"MagicJelly", L"Image\\MagicJelly.png");
+		m_pJellyImage = RESOURCE->LoadImg(L"CuteJelly", L"Image\\CuteJelly.png");
 		m_pAnimatorJelly2 = new CAnimator;
 
-		m_pAnimatorJelly2->CreateAnimation(L"Jelly2", m_pJellyImage, Vector(0, 0), Vector(82, 102), Vector(82, 0.f), 0.07f, 10);
+		m_pAnimatorJelly2->CreateAnimation(L"Jelly2", m_pJellyImage, Vector(0, 0), Vector(87.5, 80), Vector(87.5, 0.f), 0.11f, 7);
 		m_pAnimatorJelly2->Play(L"Jelly2", false);
 		AddComponent(m_pAnimatorJelly2);
 
@@ -79,10 +79,10 @@ void CJelly1::Init()
 
 	if (choiceJelly == 5)
 	{
-		m_pJellyImage = RESOURCE->LoadImg(L"Kingjelly", L"Image\\Kingjelly.png");
+		m_pJellyImage = RESOURCE->LoadImg(L"Christmasjelly", L"Image\\Christmasjelly.png");
 		m_pAnimatorJelly5 = new CAnimator;
 
-		m_pAnimatorJelly5->CreateAnimation(L"Jelly5", m_pJellyImage, Vector(0, 0), Vector(100, 84), Vector(100, 0.f), 0.13f, 4);
+		m_pAnimatorJelly5->CreateAnimation(L"Jelly5", m_pJellyImage, Vector(0, 0), Vector(80.5, 91), Vector(80.5, 0.f), 0.15f, 6);
 		m_pAnimatorJelly5->Play(L"Jelly5", false);
 		AddComponent(m_pAnimatorJelly5);
 
