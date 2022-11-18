@@ -152,6 +152,9 @@ void CScenePrepare::Enter()
 			ownPet1 = true;
 			Purchase = true;
 
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
 		}
 
 		else if (myCoin < 5000 && ownPet1 == false)
@@ -213,6 +216,9 @@ void CScenePrepare::Enter()
 			myCoin -= 5000;
 			ownPet2 = true;
 			Purchase = true;
+
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
 
 		}
 		else if (myCoin < 5000 && ownPet2 == false)
@@ -276,6 +282,9 @@ void CScenePrepare::Enter()
 			ownPet3 = true;
 			Purchase = true;
 
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
 		}
 		else if (myCoin < 5000 && ownPet3 == false)
 		{
@@ -310,6 +319,9 @@ void CScenePrepare::Enter()
 			myJem -= 500;
 			ownJelly1 = true;
 			Purchase = true;
+
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
 
 		}
 		else if (myJem < 500 && ownJelly1 == false)
@@ -377,6 +389,10 @@ void CScenePrepare::Enter()
 			ownJelly2 = true;
 			Purchase = true;
 
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
+
 		}
 		else if (myJem < 500 && ownJelly2 == false)
 		{
@@ -439,6 +455,10 @@ void CScenePrepare::Enter()
 			ownJelly3 = true;
 			Purchase = true;
 
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
+
 		}
 		else if (myJem < 500 && ownJelly3 == false)
 		{
@@ -499,6 +519,10 @@ void CScenePrepare::Enter()
 			myJem -= 500;
 			ownJelly4 = true;
 			Purchase = true;
+
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
 
 		}
 		else if (myJem < 500 && ownJelly4 == false)
@@ -562,6 +586,8 @@ void CScenePrepare::Enter()
 			ownJelly5 = true;
 			Purchase = true;
 
+			CSound* pSound = RESOURCE->LoadSound(L"Buy", L"Sound\\Buy.wav");
+			SOUND->Play(pSound, 0.2f, false);
 		}
 		else if (myJem < 500 && ownJelly5 == false)
 		{
