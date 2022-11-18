@@ -46,8 +46,7 @@ private:
 	CSound* MagentSound = RESOURCE->LoadSound(L"Magnet", L"Sound\\Magnet.wav");
 	bool MagnetSoundAble = true;
 
-	CSound* DashSound = RESOURCE->LoadSound(L"Dash", L"Sound\\Dash.wav");
-	bool DashSoundAble = true;
+
 
 private:
 	void Init() override;

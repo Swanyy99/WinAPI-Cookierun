@@ -482,7 +482,6 @@ void CPlayer::Update()
 			isDash = false;
 			isHurt = true;
 			m_fHurtTimer = 2.5;
-			DashSoundAble = true;
 			
 		}
 
