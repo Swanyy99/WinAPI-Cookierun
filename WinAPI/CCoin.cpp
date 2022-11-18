@@ -95,7 +95,7 @@ void CCoin::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"CoinEatSound", L"Sound\\CoinEat.wav");
-		SOUND->Play(pSound, 0.15f, false);
+		SOUND->Play(pSound, 0.2f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -108,7 +108,7 @@ void CCoin::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"CoinEatSound", L"Sound\\CoinEat.wav");
-		SOUND->Play(pSound, 0.15f, false);
+		SOUND->Play(pSound, 0.2f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -121,7 +121,7 @@ void CCoin::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"CoinEatSound", L"Sound\\CoinEat.wav");
-		SOUND->Play(pSound, 0.15f, false);
+		SOUND->Play(pSound, 0.2f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -134,7 +134,7 @@ void CCoin::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"CoinEatSound", L"Sound\\CoinEat.wav");
-		SOUND->Play(pSound, 0.15f, false);
+		SOUND->Play(pSound, 0.2f, false);
 
 		DELETEOBJECT(this);
 	}

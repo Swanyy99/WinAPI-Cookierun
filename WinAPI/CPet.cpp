@@ -111,7 +111,7 @@ void CPet::Update()
 		skillOn = true;
 
 		CSound* pSound = RESOURCE->LoadSound(L"Pet1SkillOn", L"Sound\\Pet1SkillOn.wav");
-		SOUND->Play(pSound, 0.15f, false);
+		SOUND->Play(pSound, 0.1f, false);
 	}
 	
 

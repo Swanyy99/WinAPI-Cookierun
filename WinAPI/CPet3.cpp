@@ -120,7 +120,7 @@ void CPet3::Update()
 		m_fSkillCooltimeTimer = 20;	// 스킬 쿨은 쿨타임 + 지속 시간 으로 다시 초기화
 		
 		CSound* pSound = RESOURCE->LoadSound(L"Pet3ShieldOn", L"Sound\\Pet3ShieldOn.wav");
-		SOUND->Play(pSound, 0.15f, false);
+		SOUND->Play(pSound, 0.2f, false);
 
 	}
 

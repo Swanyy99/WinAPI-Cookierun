@@ -95,7 +95,7 @@ void CObstacle2::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pObstacleBoomEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
-		SOUND->Play(pSound, 0.1f, false);
+		SOUND->Play(pSound, 0.08f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -107,7 +107,7 @@ void CObstacle2::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pObstacleBoomEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
-		SOUND->Play(pSound, 0.1f, false);
+		SOUND->Play(pSound, 0.08f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -120,7 +120,7 @@ void CObstacle2::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pObstacleBoomEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
-		SOUND->Play(pSound, 0.1f, false);
+		SOUND->Play(pSound, 0.08f, false);
 
 		DELETEOBJECT(this);
 	}
