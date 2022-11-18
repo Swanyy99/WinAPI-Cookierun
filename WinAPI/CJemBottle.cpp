@@ -78,7 +78,7 @@ void CJemBottle::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JemEatSound", L"Sound\\CrystalEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -91,7 +91,7 @@ void CJemBottle::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JemEatSound", L"Sound\\CrystalEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -104,7 +104,7 @@ void CJemBottle::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JemEatSound", L"Sound\\CrystalEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -117,7 +117,7 @@ void CJemBottle::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JemEatSound", L"Sound\\CrystalEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}

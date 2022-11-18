@@ -53,6 +53,7 @@ private:
 	float obstacleTimer;
 	float HpTimer;
 
+	CSound* pSound = RESOURCE->LoadSound(L"Stage1", L"Sound\\Stage1.wav");
 
 
 public:

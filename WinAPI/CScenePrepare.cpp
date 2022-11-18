@@ -28,6 +28,9 @@ bool	ownJelly3;
 bool	ownJelly4;
 bool	ownJelly5;
 
+bool	Equip;
+bool	Purchase;
+
 bool MoneyWarning;
 bool PetWarning;
 
@@ -70,9 +73,14 @@ CScenePrepare::CScenePrepare()
 
 	NoMoneyWordTimer = 0;
 	NoPetWordTimer = 0;
+	PurchaseTimer = 0;
+	EquipTimer = 0;
 
 	PetWarning = false;
 	MoneyWarning = false;
+
+	Equip = false;
+	Purchase = false;
 
 	myCoin = 0;
 	myJem = 0;
@@ -91,6 +99,8 @@ void CScenePrepare::Init()
 	Price500 = RESOURCE->LoadImg(L"Price500", L"Image\\500Price.png");
 	NoPetWarning = RESOURCE->LoadImg(L"NoPetWarning", L"Image\\NoPetWarning.png");
 	NoMoneyWarning = RESOURCE->LoadImg(L"NoMoneyWarning", L"Image\\NoMoneyWarning.png");
+	EquipAlarm = RESOURCE->LoadImg(L"EquipAlarm", L"Image\\EquipAlarm.png");
+	PurchaseAlarm = RESOURCE->LoadImg(L"PurchaseAlarm", L"Image\\PurchaseAlarm.png");
 
 }
 
@@ -108,7 +118,10 @@ void CScenePrepare::Enter()
 		Logger::Debug(choosePet1->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		//CAMERA->FadeOut(1);
 		if (ownPet1 == true)
+		{
 			choicePet = 1;
+			Equip = true;
+		}
 		else if (ownPet1 == false)
 		{
 			PetWarning = true;
@@ -137,6 +150,8 @@ void CScenePrepare::Enter()
 		{
 			myCoin -= 5000;
 			ownPet1 = true;
+			Purchase = true;
+
 		}
 
 		else if (myCoin < 5000 && ownPet1 == false)
@@ -166,7 +181,10 @@ void CScenePrepare::Enter()
 		Logger::Debug(choosePet2->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		//CAMERA->FadeOut(1);
 		if (ownPet2 == true)
+		{
 			choicePet = 2;
+			Equip = true;
+		}
 		else if (ownPet2 == false)
 		{
 			PetWarning = true;
@@ -194,6 +212,8 @@ void CScenePrepare::Enter()
 		{
 			myCoin -= 5000;
 			ownPet2 = true;
+			Purchase = true;
+
 		}
 		else if (myCoin < 5000 && ownPet2 == false)
 		{
@@ -215,7 +235,7 @@ void CScenePrepare::Enter()
 
 
 
-	// 펫 3 버튼
+	// 펫 3 선택 버튼
 	auto choosePet3Clicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* choosePet3 = (CButton*)(button);
 		int paramInt = (int)(param);
@@ -223,7 +243,10 @@ void CScenePrepare::Enter()
 		Logger::Debug(choosePet3->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		//CAMERA->FadeOut(1);
 		if (ownPet3 == true)
+		{
 			choicePet = 3;
+			Equip = true;
+		}
 		else if (ownPet3 == false)
 		{
 			PetWarning = true;
@@ -251,6 +274,8 @@ void CScenePrepare::Enter()
 		{
 			myCoin -= 5000;
 			ownPet3 = true;
+			Purchase = true;
+
 		}
 		else if (myCoin < 5000 && ownPet3 == false)
 		{
@@ -284,6 +309,8 @@ void CScenePrepare::Enter()
 		{
 			myJem -= 500;
 			ownJelly1 = true;
+			Purchase = true;
+
 		}
 		else if (myJem < 500 && ownJelly1 == false)
 		{
@@ -311,7 +338,10 @@ void CScenePrepare::Enter()
 
 		Logger::Debug(chooseJelly1->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		if (ownJelly1 == true)
+		{
 			choiceJelly = 1;
+			Equip = true;
+		}
 		else if (ownJelly1 == false)
 		{
 			PetWarning = true;
@@ -345,6 +375,8 @@ void CScenePrepare::Enter()
 		{
 			myJem -= 500;
 			ownJelly2 = true;
+			Purchase = true;
+
 		}
 		else if (myJem < 500 && ownJelly2 == false)
 		{
@@ -372,7 +404,10 @@ void CScenePrepare::Enter()
 
 		Logger::Debug(chooseJelly2->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		if (ownJelly2 == true)
+		{
 			choiceJelly = 2;
+			Equip = true;
+		}
 		else if (ownJelly2 == false)
 		{
 			PetWarning = true;
@@ -402,6 +437,8 @@ void CScenePrepare::Enter()
 		{
 			myJem -= 500;
 			ownJelly3 = true;
+			Purchase = true;
+
 		}
 		else if (myJem < 500 && ownJelly3 == false)
 		{
@@ -428,7 +465,10 @@ void CScenePrepare::Enter()
 
 		Logger::Debug(chooseJelly3->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		if (ownJelly3 == true)
+		{
 			choiceJelly = 3;
+			Equip = true;
+		}
 		else if (ownJelly3 == false)
 		{
 			PetWarning = true;
@@ -458,6 +498,8 @@ void CScenePrepare::Enter()
 		{
 			myJem -= 500;
 			ownJelly4 = true;
+			Purchase = true;
+
 		}
 		else if (myJem < 500 && ownJelly4 == false)
 		{
@@ -485,7 +527,10 @@ void CScenePrepare::Enter()
 
 		Logger::Debug(chooseJelly4->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		if (ownJelly4 == true)
+		{
 			choiceJelly = 4;
+			Equip = true;
+		}
 		else if (ownJelly4 == false)
 		{
 			PetWarning = true;
@@ -515,6 +560,8 @@ void CScenePrepare::Enter()
 		{
 			myJem -= 500;
 			ownJelly5 = true;
+			Purchase = true;
+
 		}
 		else if (myJem < 500 && ownJelly5 == false)
 		{
@@ -542,7 +589,10 @@ void CScenePrepare::Enter()
 
 		Logger::Debug(chooseJelly5->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		if (ownJelly5 == true)
+		{
 			choiceJelly = 5;
+			Equip = true;
+		}
 		else if (ownJelly5 == false)
 		{
 			PetWarning = true;
@@ -593,6 +643,9 @@ void CScenePrepare::Enter()
 	PrepareSceneBackgroundImages->SetPos(0, 0);
 	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);
 	AddGameObject(PrepareSceneBackgroundImages);
+
+
+	SOUND->Play(pSound, 0.1f, true);
 
 }
 
@@ -808,8 +861,8 @@ void CScenePrepare::Render()
 
 	if (MoneyWarning == true)
 	{
-		PetWarning = false;
 		NoPetWordTimer = 0;
+		PetWarning = false;
 
 		NoMoneyWordTimer += DT;
 
@@ -819,15 +872,15 @@ void CScenePrepare::Render()
 
 		if (NoMoneyWordTimer >= 0.7)
 		{
-			MoneyWarning = false;
 			NoMoneyWordTimer = 0;
+			MoneyWarning = false;
 		}
 	}
 
 	if (PetWarning == true)
 	{
-		MoneyWarning = false;
 		NoMoneyWordTimer = 0;
+		MoneyWarning = false;
 
 		NoPetWordTimer += DT;
 
@@ -837,8 +890,57 @@ void CScenePrepare::Render()
 
 		if (NoPetWordTimer >= 0.7)
 		{
-			PetWarning = false;
 			NoPetWordTimer = 0;
+			PetWarning = false;
+		}
+	}
+
+
+	if (Equip == true)
+	{
+		NoMoneyWordTimer = 0;
+		MoneyWarning = false;
+
+		NoPetWordTimer = 0;
+		PetWarning = false;
+
+		PurchaseTimer = 0;
+		Purchase = false;
+
+		EquipTimer += DT;
+
+		RENDER->Image(
+			EquipAlarm,
+			220, 290, 1060, 395);
+
+		if (EquipTimer >= 0.7)
+		{
+			EquipTimer = 0;
+			Equip = false;
+		}
+	}
+
+	if (Purchase == true)
+	{
+		NoMoneyWordTimer = 0;
+		MoneyWarning = false;
+
+		NoPetWordTimer = 0;
+		PetWarning = false;
+
+		EquipTimer = 0;
+		Equip = false;
+
+		PurchaseTimer += DT;
+
+		RENDER->Image(
+			PurchaseAlarm,
+			220, 290, 1060, 395);
+
+		if (PurchaseTimer >= 0.7)
+		{
+			PurchaseTimer = 0;
+			Purchase = false;
 		}
 	}
 }
@@ -846,6 +948,8 @@ void CScenePrepare::Render()
 
 void CScenePrepare::Exit()
 {
+	SOUND->Pause(pSound);
+
 }
 
 void CScenePrepare::Release()

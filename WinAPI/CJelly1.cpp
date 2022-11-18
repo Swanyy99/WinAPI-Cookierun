@@ -174,7 +174,7 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JellyEatSound", L"Sound\\JellyEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -187,7 +187,7 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JellyEatSound", L"Sound\\JellyEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -200,7 +200,7 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JellyEatSound", L"Sound\\JellyEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -213,7 +213,7 @@ void CJelly1::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"JellyEatSound", L"Sound\\JellyEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.15f, false);
 
 		DELETEOBJECT(this);
 	}

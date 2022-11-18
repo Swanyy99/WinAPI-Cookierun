@@ -76,6 +76,8 @@ void CSceneTitle::Enter()
 	ExitButton->SetClickedCallback(ExitButtonClicked, (DWORD_PTR)ExitButton, (DWORD_PTR)1);
 	AddGameObject(ExitButton);
 
+	SOUND->Play(pSound, 0.3f, true);
+
 }
 
 void CSceneTitle::Update()
@@ -117,6 +119,8 @@ void CSceneTitle::Render()
 
 void CSceneTitle::Exit()
 {
+
+	SOUND->Pause(pSound);
 }
 
 void CSceneTitle::Release()

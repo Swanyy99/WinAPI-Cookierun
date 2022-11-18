@@ -175,6 +175,16 @@ void CPlayer::Update()
 	}
 
 
+	if (BUTTONSTAY(VK_DOWN) || BUTTONSTAY(VK_CONTROL))
+	{
+		isSliding = true;
+	}
+
+	if (BUTTONUP(VK_DOWN) || BUTTONUP(VK_CONTROL))
+	{
+		isSliding = false;
+	}
+
 	if (pause == false)
 	{
 
@@ -195,16 +205,24 @@ void CPlayer::Update()
 
 			if (BUTTONDOWN(VK_SPACE)) // 점프
 			{
+				CSound* pSound = RESOURCE->LoadSound(L"Jump", L"Sound\\Jump.wav");
+				SOUND->Play(pSound, 0.1f, false);
 				playerState = PlayerState::Jump;
+				break;
 			}
 
 			if (BUTTONDOWN(VK_DOWN) || BUTTONDOWN(VK_CONTROL)) // 슬라이드
 			{
+				CSound* pSound = RESOURCE->LoadSound(L"Slide", L"Sound\\Slide.wav");
+				SOUND->Play(pSound, 0.1f, false);
 				playerState = PlayerState::Slide;
+				break;
 			}
 
 			if (isSliding == true)
 			{
+				CSound* pSound = RESOURCE->LoadSound(L"Slide", L"Sound\\Slide.wav");
+				SOUND->Play(pSound, 0.02f, false);
 				playerState = PlayerState::Slide;
 			}
 
@@ -251,6 +269,8 @@ void CPlayer::Update()
 
 				if (BUTTONDOWN(VK_SPACE)) // 내려오는 중에 2단 점프 진입
 				{
+					CSound* pSound = RESOURCE->LoadSound(L"Jump", L"Sound\\Jump.wav");
+					SOUND->Play(pSound, 0.1f, false);
 					playerState = PlayerState::DoubleJump;
 					m_fJumpTimer = 0.25;
 					isJumpUp = true;
@@ -262,6 +282,8 @@ void CPlayer::Update()
 
 			if (BUTTONDOWN(VK_SPACE)) // 2단 점프 진입
 			{
+				CSound* pSound = RESOURCE->LoadSound(L"Jump", L"Sound\\Jump.wav");
+				SOUND->Play(pSound, 0.1f, false);
 				playerState = PlayerState::DoubleJump;
 				m_fJumpTimer = 0.25;
 				isJumpUp = true;
@@ -335,7 +357,8 @@ void CPlayer::Update()
 			
 			if (playerHp <= 0 && isDead == false)
 			{
-				
+				CSound* pSound = RESOURCE->LoadSound(L"Die", L"Sound\\Die.wav");
+				SOUND->Play(pSound, 0.1f, false);
 				motion = L"Death";
 				isDead = true;
 				break;
@@ -371,6 +394,7 @@ void CPlayer::Update()
 
 	if (playerHp <= 0)
 	{
+		
 		playerState = PlayerState::Death;
 		playerHp = 0;
 	}
@@ -414,11 +438,19 @@ void CPlayer::Update()
 	{
 		m_fMagnetTimer -= ABSDT;
 
+		if (MagnetSoundAble == true)
+		{
+			SOUND->Play(MagentSound, 0.2f);
+			MagnetSoundAble = false;
+		}
+
 		if (m_fMagnetTimer <= 0)
 		{
 			isMagnet = false;
 			m_fMagnetTimer = 4;
+			MagnetSoundAble = true;
 		}
+
 	}
 
 	if (skillOn3 == true)
@@ -436,6 +468,7 @@ void CPlayer::Update()
 		m_fDashTimer -= ABSDT;
 		m_fDashEffectTimer += ABSDT;
 
+
 		if (m_fDashEffectTimer > 0.12)
 		{
 			m_fDashEffectTimer -= 0.12;
@@ -444,21 +477,12 @@ void CPlayer::Update()
 			ADDOBJECT(pDashFireEffect);
 		}
 
-
-
-
-		/*if (skillOn3 == true)
-		{
-			m_fDashTimer = 4;
-			isHurt = false;
-			m_fHurtTimer = 2.5;
-		}*/
-
 		if (m_fDashTimer <= 0)
 		{
 			isDash = false;
 			isHurt = true;
 			m_fHurtTimer = 2.5;
+			DashSoundAble = true;
 			
 		}
 
@@ -598,16 +622,16 @@ void CPlayer::OnCollisionEnter(CCollider* pOtherCollider)
 		m_fDashTimer = 4;
 	}
 
-	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
-	{
-		playerState = PlayerState::Slide;
+	//if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_CONTROL)) // 슬라이드
+	//{
+	//	playerState = PlayerState::Slide;
 
-	}
-	
-	if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_DOWN)) // 슬라이드
-	{
-		playerState = PlayerState::Slide;
-	}
+	//}
+	//
+	//if (pOtherCollider->GetObjName() == L"바닥" && BUTTONDOWN(VK_DOWN)) // 슬라이드
+	//{
+	//	playerState = PlayerState::Slide;
+	//}
 
 	else if (pOtherCollider->GetObjName() == L"바닥")
 	{

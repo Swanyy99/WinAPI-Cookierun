@@ -92,6 +92,10 @@ void CObstacle3::OnCollisionEnter(CCollider* pOtherCollider)
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
 		pObstacleBoomEffect->SetPos(playerPosX, playerPosY);
 		ADDOBJECT(pObstacleBoomEffect);
+
+		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
+		SOUND->Play(pSound, 0.1f, false);
+
 		DELETEOBJECT(this);
 	}
 
@@ -101,6 +105,10 @@ void CObstacle3::OnCollisionEnter(CCollider* pOtherCollider)
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
 		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
 		ADDOBJECT(pObstacleBoomEffect);
+
+		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
+		SOUND->Play(pSound, 0.1f, false);
+
 		DELETEOBJECT(this);
 	}
 	if (pOtherCollider->GetObjName() == L"Æê¹Ì»çÀÏ2")
@@ -109,6 +117,10 @@ void CObstacle3::OnCollisionEnter(CCollider* pOtherCollider)
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
 		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
 		ADDOBJECT(pObstacleBoomEffect);
+
+		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
+		SOUND->Play(pSound, 0.1f, false);
+
 		DELETEOBJECT(this);
 	}
 
@@ -118,6 +130,10 @@ void CObstacle3::OnCollisionEnter(CCollider* pOtherCollider)
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
 		pObstacleBoomEffect->SetPos(m_vecPos.x, m_vecPos.y);
 		ADDOBJECT(pObstacleBoomEffect);
+
+		CSound* pSound = RESOURCE->LoadSound(L"Explosion", L"Sound\\Explosion.wav");
+		SOUND->Play(pSound, 0.1f, false);
+
 		DELETEOBJECT(this);
 	}
 }

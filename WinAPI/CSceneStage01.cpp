@@ -61,6 +61,7 @@ int nowPet;
 int JemADD;
 int CoinADD;
 
+
 CSceneStage01::CSceneStage01()
 {
 	pPlayer = nullptr;
@@ -122,6 +123,9 @@ void CSceneStage01::Enter()
 {
 	CAMERA->FadeIn(0.1f);
 	
+
+	
+
 	nowPet = choicePet;
 
 	if (choicePet == 1)			// 하프물범 선택
@@ -162,12 +166,14 @@ void CSceneStage01::Enter()
 
 		Logger::Debug(ResumeButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		pause = false;
+
 		if (isDead == true)
 		{
 			//TearOn = true;
 			playerHp += 50;
 			isDead = false;
 			revive = true;
+
 		}
 	};
 
@@ -372,6 +378,8 @@ void CSceneStage01::Enter()
 	pBottomBackground3->SetDir(Vector(1, 0));
 	AddGameObject(pBottomBackground3);
 
+
+	SOUND->Play(pSound, 0.2f, true);
 
 }
 
@@ -789,12 +797,10 @@ void CSceneStage01::Render()
 	if (BUTTONSTAY(VK_DOWN) || BUTTONSTAY(VK_CONTROL))
 	{
 		SlideButtonImage->SetImageName(L"Pushed_Slide.png");
-		isSliding = true;
 	}
 	if (BUTTONUP(VK_DOWN) || BUTTONUP(VK_CONTROL))
 	{
 		SlideButtonImage->SetImageName(L"Idle_Slide.png");
-		isSliding = false;
 	}
 
 	if (BUTTONSTAY(VK_SPACE))
@@ -811,6 +817,7 @@ void CSceneStage01::Render()
 void CSceneStage01::Exit()
 {
 	DeleteAll();
+	SOUND->Pause(pSound);
 }
 
 void CSceneStage01::Release()

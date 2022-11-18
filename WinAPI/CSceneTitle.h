@@ -10,6 +10,8 @@ public:
 private:
 	CImage* TitleBackgroundImage;
 
+	CSound* pSound = RESOURCE->LoadSound(L"TitleScene1", L"Sound\\TitleScene.wav");
+
 private:
 	void Init()		override;
 	void Enter()	override;

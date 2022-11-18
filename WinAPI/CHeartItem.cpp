@@ -94,7 +94,7 @@ void CHeartItem::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"HpEatSound", L"Sound\\HpEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.1f, false);
 
 		DELETEOBJECT(this);
 	}
@@ -107,7 +107,7 @@ void CHeartItem::OnCollisionEnter(CCollider* pOtherCollider)
 		ADDOBJECT(pJellyEffect);
 
 		CSound* pSound = RESOURCE->LoadSound(L"HpEatSound", L"Sound\\HpEat.wav");
-		SOUND->Play(pSound, 1.f, false);
+		SOUND->Play(pSound, 0.1f, false);
 
 		DELETEOBJECT(this);
 		

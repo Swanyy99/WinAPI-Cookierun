@@ -17,6 +17,8 @@ private:
 	CImage* Price500;
 	CImage* NoPetWarning;
 	CImage* NoMoneyWarning;
+	CImage* EquipAlarm;
+	CImage* PurchaseAlarm;
 
 	CButton* choosePet1;
 	CButton* purchasePet1;
@@ -44,6 +46,10 @@ private:
 	float NoMoneyWordTimer;
 	float NoPetWordTimer;
 
+	float EquipTimer;
+	float PurchaseTimer;
+
+	CSound* pSound = RESOURCE->LoadSound(L"PrepareSceneSound", L"Sound\\PrepareScene.wav");
 
 private:
 	void Init()		override;

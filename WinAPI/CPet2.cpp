@@ -105,6 +105,10 @@ void CPet2::Update()
 			skillOn2 = true;
 			skillNum += 1;
 			playerHp += 5;
+
+			CSound* pSound = RESOURCE->LoadSound(L"Pet2WaterWave", L"Sound\\Pet2WaterWave.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
 			CPetMissile2* pPetMissile1 = new CPetMissile2();
 			pPetMissile1->SetPos(WINSIZEX * 0.55, WINSIZEY * 0.58);
 			ADDOBJECT(pPetMissile1);
@@ -114,6 +118,10 @@ void CPet2::Update()
 		if (m_fSkillTicTimer >= 0.25 && skillNum == 1)
 		{
 			skillNum += 1;
+
+			CSound* pSound = RESOURCE->LoadSound(L"Pet2WaterWave", L"Sound\\Pet2WaterWave.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
 			CPetMissile2* pPetMissile2 = new CPetMissile2();
 			pPetMissile2->SetPos(WINSIZEX * 0.75, WINSIZEY * 0.58);
 			ADDOBJECT(pPetMissile2);
@@ -122,6 +130,9 @@ void CPet2::Update()
 
 		if (m_fSkillTicTimer >= 0.25 && skillNum == 2)
 		{
+			CSound* pSound = RESOURCE->LoadSound(L"Pet2WaterWave", L"Sound\\Pet2WaterWave.wav");
+			SOUND->Play(pSound, 0.2f, false);
+
 			CPetMissile2* pPetMissile3 = new CPetMissile2();
 			pPetMissile3->SetPos(WINSIZEX * 0.95, WINSIZEY * 0.58);
 			ADDOBJECT(pPetMissile3);

@@ -107,6 +107,8 @@ void CButton::Release()
 
 void CButton::OnMouseEnter()
 {
+	CSound* pSound = RESOURCE->LoadSound(L"ButtonOver", L"Sound\\ButtonOver.wav");
+	SOUND->Play(pSound, 0.08f, false);
 }
 
 void CButton::OnMouseOver()
@@ -121,12 +123,12 @@ void CButton::OnMouseExit()
 
 void CButton::OnMouseUp()
 {
+	
 }
 
 void CButton::OnMouseDown()
 {
-	CSound* pSound = RESOURCE->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav");
-	SOUND->Play(pSound, 1.f, false);
+
 
 	if (nullptr != m_pCallback)
 		m_pCallback(m_pParam1, m_pParam2);
@@ -135,4 +137,6 @@ void CButton::OnMouseDown()
 
 void CButton::OnMouseClicked()
 {
+	CSound* pSound = RESOURCE->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav");
+	SOUND->Play(pSound, 0.15f, false);
 }
