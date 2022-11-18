@@ -118,7 +118,7 @@ void CPet::Update()
 	// 스킬 발동 시
 	if (skillOn == true)
 	{
-		PetMotion = L"Skill";
+		PetMotion = L"Skill"; 
 		m_fSkillTimer -= ABSDT;
 
 		m_vecPos.y -= (m_vecPos.y - (playerPosY - 100)) * DT * 3.5;
