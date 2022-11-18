@@ -705,12 +705,13 @@ void CSceneStage01::Update()
 		SummonJelly1(WINSIZEX + 3700, WINSIZEY * 0.53);
 		SummonJelly1(WINSIZEX + 3800, WINSIZEY * 0.53);
 		SummonJelly1(WINSIZEX + 3900, WINSIZEY * 0.53);								   
-		SummonJelly1(WINSIZEX + 4070, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 4170, WINSIZEY * 0.6);
-		SummonJelly1(WINSIZEX + 4270, WINSIZEY * 0.65);
-		SummonJelly1(WINSIZEX + 4370, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4470, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4570, WINSIZEY * 0.7);
+		SummonJelly1(WINSIZEX + 4000, WINSIZEY * 0.53);
+		SummonJelly1(WINSIZEX + 4100, WINSIZEY * 0.6);
+		SummonJelly1(WINSIZEX + 4200, WINSIZEY * 0.65);
+		SummonJelly1(WINSIZEX + 4300, WINSIZEY * 0.7);
+		SummonJelly1(WINSIZEX + 4400, WINSIZEY * 0.7);
+		SummonJelly1(WINSIZEX + 4500, WINSIZEY * 0.7);
+		SummonJelly1(WINSIZEX + 4600, WINSIZEY * 0.7);
 
 	
 	}
