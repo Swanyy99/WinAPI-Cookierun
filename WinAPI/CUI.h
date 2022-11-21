@@ -34,7 +34,7 @@ public:
 protected:
 	void MouseOnCheck();
 
-private:
+protected:
 	// UI 부모 전용 함수들 :
 	// UI에 있는 모든 자식 UI를 갱신
 	void GameObjectInit() override;

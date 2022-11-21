@@ -94,7 +94,7 @@ void CEventManager::ProgressChangeScene()
 		return;
 
 	// 지연실행 이벤트가 잔여시간이 모두 소진되었을 경우 이벤트 진행
-	m_pChangeScene->second -= DT;
+	m_pChangeScene->second -= ABSDT;
 	if (m_pChangeScene->second <= 0)
 	{
 		GroupScene scene = m_pChangeScene->first;

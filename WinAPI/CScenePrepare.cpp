@@ -6,7 +6,7 @@
 #include "CInputManager.h"
 #include "CEventManager.h"
 #include "CCameraManager.h"
-#include "CImages.h"
+#include "CUnderUI.h"
 
 extern bool pause;
 extern bool inTitle;
@@ -40,7 +40,6 @@ wstring myCoinStr;
 CScenePrepare::CScenePrepare()
 {
 	PrepareSceneBackgroundImages = nullptr;
-	PrepareSceneBackgroundImage = nullptr;
 	PrepareScenePetChoiceImage = nullptr;
 	PrepareSceneBackgroundImage = nullptr;
 	ChoosedImage = nullptr;
@@ -93,7 +92,6 @@ CScenePrepare::~CScenePrepare()
 void CScenePrepare::Init()
 {
 	PrepareSceneBackgroundImage = RESOURCE->LoadImg(L"PrepareSceneBackgroundImage", L"Image\\PrepareSceneBackground.png");
-	PrepareScenePetChoiceImage = RESOURCE->LoadImg(L"PrepareScenePetChoice", L"Image\\PrepareScenePetChoice.png");
 	ChoosedImage = RESOURCE->LoadImg(L"ChoosedImage", L"Image\\Choiced.png");
 	Price5000 = RESOURCE->LoadImg(L"Price5000", L"Image\\5000Price.png");
 	Price500 = RESOURCE->LoadImg(L"Price500", L"Image\\500Price.png");
@@ -664,7 +662,7 @@ void CScenePrepare::Enter()
 
 
 
-	PrepareSceneBackgroundImages = new CImages();
+	PrepareSceneBackgroundImages = new CUnderUI();
 	PrepareSceneBackgroundImages->SetImageName(L"PrepareScenePetChoice2.png");
 	PrepareSceneBackgroundImages->SetPos(0, 0);
 	PrepareSceneBackgroundImages->SetScale(WINSIZEX, WINSIZEY);

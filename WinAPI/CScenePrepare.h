@@ -1,7 +1,7 @@
 #pragma once
 #include "CScene.h"
-#include "CImages.h"
-class CImages;
+#include "CUnderUI.h"
+class CUnderUI;
 
 class CScenePrepare : public CScene
 {
@@ -41,7 +41,7 @@ private:
 	CButton* stage1Start;
 	CButton* purchaseDisable;
 
-	CImages* PrepareSceneBackgroundImages;
+	CUnderUI* PrepareSceneBackgroundImages;
 
 	float NoMoneyWordTimer;
 	float NoPetWordTimer;

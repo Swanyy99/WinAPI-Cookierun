@@ -1,12 +1,12 @@
 #pragma once
 #include "CScene.h"
-#include "CImages.h"
+#include "CUnderUI.h"
 
 class CPlayer;
 class CPet;
 class CPet2;
 class CPet3;
-class CImages;
+class CUnderUI;
 
 class CSceneStage01 : public CScene
 {
@@ -29,12 +29,13 @@ private:
 
 
 
-	CImages* CookierunTitle;
-	CImages* HPIcon;
-	CImages* HPBackBar;
-	CImages* HPBar;
-	CImages* HPProgressBar;
-	CImages* HPEffect;
+	CUnderUI* CookierunTitle;
+	CUnderUI* LoadingImage;
+	CUnderUI* HPIcon;
+	CUnderUI* HPBackBar;
+	CUnderUI* HPBar;
+	CUnderUI* HPProgressBar;
+	CUnderUI* HPEffect;
 
 	CImage* Tear;
 
@@ -42,10 +43,10 @@ private:
 	CButton* ResumeButton;
 	CButton* QuitButton;
 
-	CImages* PauseImage;
-	CImages* FailImage;
-	CImages* SlideButtonImage;
-	CImages* JumpButtonImage;
+	CUnderUI* PauseImage;
+	CUnderUI* FailImage;
+	CUnderUI* SlideButtonImage;
+	CUnderUI* JumpButtonImage;
 
 	wstring ScreenJem;
 	wstring ScreenCoin;

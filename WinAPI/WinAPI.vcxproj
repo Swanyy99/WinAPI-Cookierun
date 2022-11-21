@@ -159,7 +159,7 @@
     <ClInclude Include="CGroundTile.h" />
     <ClInclude Include="CHeartItem.h" />
     <ClInclude Include="CImageObject.h" />
-    <ClInclude Include="CImages.h" />
+    <ClInclude Include="CUnderUI.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CJelly1.h" />
     <ClInclude Include="CJellyEatEffect.h" />
@@ -229,7 +229,7 @@
     <ClCompile Include="CGroundTile.cpp" />
     <ClCompile Include="CHeartItem.cpp" />
     <ClCompile Include="CImageObject.cpp" />
-    <ClCompile Include="CImages.cpp" />
+    <ClCompile Include="CUnderUI.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CJelly1.cpp" />
     <ClCompile Include="CJellyEatEffect.cpp" />

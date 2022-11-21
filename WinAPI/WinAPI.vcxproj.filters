@@ -246,7 +246,7 @@
     <ClInclude Include="CBottomCloud.h">
       <Filter>GameObject\Stage01\Image</Filter>
     </ClInclude>
-    <ClInclude Include="CImages.h">
+    <ClInclude Include="CUnderUI.h">
       <Filter>GameObject\Stage01\Image</Filter>
     </ClInclude>
     <ClInclude Include="CRespawnEffect.h">
@@ -434,7 +434,7 @@
     <ClCompile Include="CBottomCloud.cpp">
       <Filter>GameObject\Stage01\Image</Filter>
     </ClCompile>
-    <ClCompile Include="CImages.cpp">
+    <ClCompile Include="CUnderUI.cpp">
       <Filter>GameObject\Stage01\Image</Filter>
     </ClCompile>
     <ClCompile Include="CRespawnEffect.cpp">

@@ -3,11 +3,6 @@
 
 #include "CRenderManager.h"
 
-extern bool pause;
-extern bool inTitle;
-extern bool isDead;
-extern bool isPrepare;
-
 
 CButton::CButton()
 {
@@ -18,6 +13,8 @@ CButton::CButton()
 	m_strText = L"";
 	m_iSizeText = 12;
 	m_colorText = Color(0, 0, 0, 1);
+
+	m_layer = Layer::Ui;
 
 	isMouseOver = false;
 
@@ -50,6 +47,7 @@ void CButton::SetImage(const wstring& image, const wstring& mouseOverImage)
 {
 	m_strImageName = image;
 	m_buttonImage = RESOURCE->LoadImg(m_strImageName, L"Image\\" + m_strImageName);
+
 	m_strMouseUpImageName = mouseOverImage;
 	m_buttonImageMouseOver = RESOURCE->LoadImg(m_strMouseUpImageName, L"Image\\" + m_strMouseUpImageName);
 }
@@ -65,37 +63,36 @@ void CButton::Update()
 
 void CButton::Render()
 {
-	/*if (pause == true || inTitle == true || isDead == true || isPrepare == true)
-	{*/
-		if (isMouseOver == false)
-		{
-			RENDER->Image(
-				m_buttonImage,
-				m_vecRenderPos.x,
-				m_vecRenderPos.y,
-				m_vecRenderPos.x + m_vecScale.x,
-				m_vecRenderPos.y + m_vecScale.y);
-		}
-
-		else if (isMouseOver == true)
-		{
-			RENDER->Image(
-				m_buttonImageMouseOver,
-				m_vecRenderPos.x,
-				m_vecRenderPos.y,
-				m_vecRenderPos.x + m_vecScale.x,
-				m_vecRenderPos.y + m_vecScale.y);
-		}
-
-		RENDER->Text(
-			m_strText,
+	
+	if (isMouseOver == false)
+	{
+		RENDER->Image(
+			m_buttonImage,
 			m_vecRenderPos.x,
 			m_vecRenderPos.y,
 			m_vecRenderPos.x + m_vecScale.x,
-			m_vecRenderPos.y + m_vecScale.y,
-			m_colorText,
-			m_iSizeText
-		);
+			m_vecRenderPos.y + m_vecScale.y);
+	}
+
+	else if (isMouseOver == true)
+	{
+		RENDER->Image(
+			m_buttonImageMouseOver,
+			m_vecRenderPos.x,
+			m_vecRenderPos.y,
+			m_vecRenderPos.x + m_vecScale.x,
+			m_vecRenderPos.y + m_vecScale.y);
+	}
+
+	RENDER->Text(
+		m_strText,
+		m_vecRenderPos.x,
+		m_vecRenderPos.y,
+		m_vecRenderPos.x + m_vecScale.x,
+		m_vecRenderPos.y + m_vecScale.y,
+		m_colorText,
+		m_iSizeText
+	);
 
 	
 		

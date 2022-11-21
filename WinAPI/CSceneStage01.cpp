@@ -31,7 +31,7 @@
 #include "CHeartItem.h"
 #include "CMagnetItem.h"
 #include "CDashItem.h"
-#include "CImages.h"
+#include "CUnderUI.h"
 
 #include "CJemBottle.h"
 #include "CCoin.h"
@@ -54,9 +54,9 @@ extern bool revive;
 extern float playerPosX;
 extern float playerPosY;
 extern bool skillOn;
+extern bool skillOn3;
 
 extern int choicePet;
-int nowPet;
 
 int JemADD;
 int CoinADD;
@@ -121,12 +121,12 @@ void CSceneStage01::Init()
 
 void CSceneStage01::Enter()
 {
-	CAMERA->FadeIn(0.1f);
-	
+	/*LoadingImage = new CUnderUI();
+	LoadingImage->SetImageName(L"Loading.png");
+	LoadingImage->SetPos(-100, 0);
+	LoadingImage->SetScale(WINSIZEX + 100, WINSIZEY);
+	AddGameObject(LoadingImage);*/
 
-	
-
-	nowPet = choicePet;
 
 	if (choicePet == 1)			// 하프물범 선택
 	{
@@ -142,7 +142,7 @@ void CSceneStage01::Enter()
 		AddGameObject(pPet2);
 	}
 	
-	else if (choicePet == 3)	// 3 선택
+	else if (choicePet == 3)	// 우유 엔젤 선택
 	{
 		pPet3 = new CPet3();
 		pPet3->SetPos(200, WINSIZEY * 0.45f);
@@ -167,14 +167,18 @@ void CSceneStage01::Enter()
 		Logger::Debug(ResumeButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		pause = false;
 
+		CSound* pSound = RESOURCE->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav");
+		SOUND->Play(pSound, 0.15f, false);
+
 		if (isDead == true)
 		{
-			//TearOn = true;
 			playerHp += 50;
 			isDead = false;
 			revive = true;
 
 		}
+
+
 	};
 
 	ResumeButton = new CButton;
@@ -194,6 +198,10 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(RetryButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+
+		CSound* pSound = RESOURCE->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav");
+		SOUND->Play(pSound, 0.15f, false);
+
 		playerHp += 1;
 		pause = false;
 		isDead = false;
@@ -218,11 +226,16 @@ void CSceneStage01::Enter()
 		int paramInt = (int)(param);
 
 		Logger::Debug(QuitButton->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
+
+		CSound* pSound = RESOURCE->LoadSound(L"ButtonClick", L"Sound\\ButtonClick.wav");
+		SOUND->Play(pSound, 0.15f, false);
+
 		CAMERA->FadeOut(0.2f);
 		playerHp += 1;
 		isDead = false;
 		isDash = false;
 		pause = false;
+		skillOn3 = false;
 		DELAYCHANGESCENE(GroupScene::Title, 0.2f);
 	};
 
@@ -244,50 +257,10 @@ void CSceneStage01::Enter()
 	CCameraController* pCamController = new CCameraController;
 	AddGameObject(pCamController);
 
-	// CookierRun title 이미지
-	CookierunTitle = new CImages();
-	CookierunTitle->SetImageName(L"CookierunTitle.png");
-	CookierunTitle->SetPos(1130, 15);
-	CookierunTitle->SetScale(1270, 80);
-	AddGameObject(CookierunTitle);
-
-	// HP Back Bar 이미지
-	HPBackBar = new CImages();
-	HPBackBar->SetImageName(L"HP_BackBar.png");
-	HPBackBar->SetPos(70, 70);
-	HPBackBar->SetScale(572, 85);
-	AddGameObject(HPBackBar);
-
-	// HP Bar 이미지
-	HPBar = new CImages();
-	HPBar->SetImageName(L"HP_Bar.png");
-	HPBar->SetPos(70, 68);
-	HPBar->SetScale(570, 87);
-	AddGameObject(HPBar);
-
-	// HP Progress Bar 이미지
-	HPProgressBar = new CImages();
-	HPProgressBar->SetImageName(L"HP_ProgressBar.png");
-	HPProgressBar->SetPos(70 + 500 * playerHp / 100, 70);
-	HPProgressBar->SetScale(570, 85);
-	AddGameObject(HPProgressBar);
-
-	// HP Effect 이미지
-	HPEffect = new CImages();
-	HPEffect->SetImageName(L"HP_Effect.png");
-	HPEffect->SetPos(60 + 500 * playerHp / 100, 68);
-	HPEffect->SetScale(80 + 500 * playerHp / 100, 87);
-	AddGameObject(HPEffect);
-
-	// HP Icon 이미지
-	HPIcon = new CImages();
-	HPIcon->SetImageName(L"HP_Icon.png");
-	HPIcon->SetPos(40, 50);
-	HPIcon->SetScale(90, 100);
-	AddGameObject(HPIcon);
+	
 
 	// 슬라이드 버튼 이미지
-	SlideButtonImage = new CImages();
+	SlideButtonImage = new CUnderUI();
 	SlideButtonImage->SetImageName(L"Idle_Slide.png");
 	SlideButtonImage->SetPos(30, 580);
 	SlideButtonImage->SetScale(180, 680);
@@ -295,25 +268,68 @@ void CSceneStage01::Enter()
 
 
 	// 점프 버튼 이미지
-	JumpButtonImage = new CImages();
+	JumpButtonImage = new CUnderUI();
 	JumpButtonImage->SetImageName(L"Idle_Jump.png");
 	JumpButtonImage->SetPos(1100, 580);
 	JumpButtonImage->SetScale(1250, 680);
 	AddGameObject(JumpButtonImage);
 
 	// 일시정지 화면 반투명효과 + 일시정지 글자
-	PauseImage = new CImages();
+	PauseImage = new CUnderUI();
 	PauseImage->SetImageName(L"Pause.png");
 	PauseImage->SetPos(0, 0);
 	PauseImage->SetScale(0, 0);
 	AddGameObject(PauseImage);
 
 	// 사망 화면 반투명효과 + 으앙주금 글자
-	FailImage = new CImages();
+	FailImage = new CUnderUI();
 	FailImage->SetImageName(L"Fail.png");
 	FailImage->SetPos(0, 0);
 	FailImage->SetScale(0, 0);
 	AddGameObject(FailImage);
+
+
+	// CookierRun title 이미지
+	CookierunTitle = new CUnderUI();
+	CookierunTitle->SetImageName(L"CookierunTitle.png");
+	CookierunTitle->SetPos(1130, 15);
+	CookierunTitle->SetScale(1270, 80);
+	AddGameObject(CookierunTitle);
+
+	// HP Back Bar 이미지
+	HPBackBar = new CUnderUI();
+	HPBackBar->SetImageName(L"HP_BackBar.png");
+	HPBackBar->SetPos(70, 70);
+	HPBackBar->SetScale(572, 85);
+	AddGameObject(HPBackBar);
+
+	// HP Bar 이미지
+	HPBar = new CUnderUI();
+	HPBar->SetImageName(L"HP_Bar.png");
+	HPBar->SetPos(70, 68);
+	HPBar->SetScale(570, 87);
+	AddGameObject(HPBar);
+
+	// HP Progress Bar 이미지
+	HPProgressBar = new CUnderUI();
+	HPProgressBar->SetImageName(L"HP_ProgressBar.png");
+	HPProgressBar->SetPos(70 + 500 * playerHp / 100, 70);
+	HPProgressBar->SetScale(570, 85);
+	AddGameObject(HPProgressBar);
+
+	// HP Effect 이미지
+	HPEffect = new CUnderUI();
+	HPEffect->SetImageName(L"HP_Effect.png");
+	HPEffect->SetPos(60 + 500 * playerHp / 100, 68);
+	HPEffect->SetScale(80 + 500 * playerHp / 100, 87);
+	AddGameObject(HPEffect);
+
+	// HP Icon 이미지
+	HPIcon = new CUnderUI();
+	HPIcon->SetImageName(L"HP_Icon.png");
+	HPIcon->SetPos(40, 50);
+	HPIcon->SetScale(90, 100);
+	AddGameObject(HPIcon);
 
 
 	JemAcquire = RESOURCE->LoadImg(L"JemScreen", L"Image\\Jem.png");
@@ -379,7 +395,10 @@ void CSceneStage01::Enter()
 	AddGameObject(pBottomBackground3);
 
 
+	CAMERA->FadeIn(0.1f);
+
 	SOUND->Play(pSound, 0.2f, true);
+
 
 }
 
