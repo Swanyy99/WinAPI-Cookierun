@@ -31,11 +31,11 @@ CObstacle3::~CObstacle3()
 
 void CObstacle3::Init()
 {
-	m_pObstacle3Image = RESOURCE->LoadImg(L"Obstacle3s", L"Image\\Obstacle3.png");
+	m_pObstacle3Image = RESOURCE->LoadImg(L"Obstacle3s", L"Image\\Obstacle3Ver2.png");
 
 
 	m_pAnimatorObstacle3 = new CAnimator;
-	m_pAnimatorObstacle3->CreateAnimation(L"Obstacle3", m_pObstacle3Image, Vector(0, 0), Vector(114, 130), Vector(114, 0.f), 0.1f, 11, false);
+	m_pAnimatorObstacle3->CreateAnimation(L"Obstacle3", m_pObstacle3Image, Vector(0, 0), Vector(114, 130), Vector(114, 0.f), 0.09f, 11, false);
 
 	m_pAnimatorObstacle3->Play(L"Obstacle3", false);
 	AddComponent(m_pAnimatorObstacle3);
