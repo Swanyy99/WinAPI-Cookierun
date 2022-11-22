@@ -159,6 +159,7 @@
     <ClInclude Include="CGroundTile.h" />
     <ClInclude Include="CHeartItem.h" />
     <ClInclude Include="CImageObject.h" />
+    <ClInclude Include="CStage01MapPattern.h" />
     <ClInclude Include="CUnderUI.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CJelly1.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="CGroundTile.cpp" />
     <ClCompile Include="CHeartItem.cpp" />
     <ClCompile Include="CImageObject.cpp" />
+    <ClCompile Include="CStage01MapPattern.cpp" />
     <ClCompile Include="CUnderUI.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CJelly1.cpp" />

@@ -32,6 +32,7 @@ public:
 	CImage* HPProgressBar;
 	CImage* Loading;
 
+
 	wstring ImageName;
 
 private:
@@ -51,7 +52,7 @@ public:
 	CImage GetPauseImage();
 	void SetPauseImage(CImage* target);
 	void SetImageName(const wstring& name);
-
+	void SetUI();
 
 };
 

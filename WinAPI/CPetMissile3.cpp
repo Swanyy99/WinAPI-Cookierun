@@ -84,6 +84,7 @@ void CPetMissile3::Update()
 
 	m_fShieldTimer += ABSDT;
 
+
 	if (m_fShieldTimer > 0 && m_fShieldTimer < 0.56)
 	{
 		PetMissile3Image = L"PetMissile3Appear";

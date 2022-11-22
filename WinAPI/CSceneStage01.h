@@ -69,14 +69,14 @@ private:
 	void Exit()		override;
 	void Release()	override;
 
-	void SummonJelly1(float x, float y);
-	void SummonObstacle1(float x, float y);
-	void SummonObstacle2(float x, float y);
-	void SummonObstacle3(float x, float y);
-	void SummonObstacleSky(float x, float y);
-	void SummonDashItem(float x, float y);
-	void SummonHpItem(float x, float y);
-	void SummonMagnetItem(float x, float y);
-	void SummonJemBottle(float x, float y);
-	void SummonCoin(float x, float y);
+	//void SummonJelly1(float x, float y);
+	//void SummonObstacle1(float x, float y);
+	//void SummonObstacle2(float x, float y);
+	//void SummonObstacle3(float x, float y);
+	//void SummonObstacleSky(float x, float y);
+	//void SummonDashItem(float x, float y);
+	//void SummonHpItem(float x, float y);
+	//void SummonMagnetItem(float x, float y);
+	//void SummonJemBottle(float x, float y);
+	//void SummonCoin(float x, float y);
 };

@@ -96,3 +96,8 @@ void CUnderUI::SetImageName(const wstring& name)
 	ImageName = name;
 	Image = RESOURCE->LoadImg(ImageName, L"Image\\" + ImageName);
 }
+
+void CUnderUI::SetUI()
+{
+	
+}

@@ -73,6 +73,9 @@
     <Filter Include="GameObject\Stage01\Pet">
       <UniqueIdentifier>{b145d376-6241-4bd1-83ed-607c8b29f4ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Stage01\MapPattern">
+      <UniqueIdentifier>{454dbc00-896d-4d42-a2bf-e136ec2c954d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -279,6 +282,9 @@
     <ClInclude Include="CPetMissile3.h">
       <Filter>GameObject\Stage01\Pet</Filter>
     </ClInclude>
+    <ClInclude Include="CStage01MapPattern.h">
+      <Filter>GameObject\Stage01\MapPattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -466,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="CPetMissile3.cpp">
       <Filter>GameObject\Stage01\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01MapPattern.cpp">
+      <Filter>GameObject\Stage01\MapPattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

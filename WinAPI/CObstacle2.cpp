@@ -87,7 +87,7 @@ void CObstacle2::OnCollisionEnter(CCollider* pOtherCollider)
 		DELETEOBJECT(this);
 	}
 
-	if (pOtherCollider->GetObjName() == L"펫미사일" && skillOn == true)
+	if (pOtherCollider->GetObjName() == L"펫미사일")
 	{
 		Logger::Debug(L"왕 하프물범이 장애물을 부쉈습니다 ");
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();

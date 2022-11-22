@@ -36,6 +36,10 @@
 #include "CJemBottle.h"
 #include "CCoin.h"
 
+#include "CStage01MapPattern.h"
+
+CStage01MapPattern* Stage01;
+
 bool pause;
 bool isRetry;
 bool isDebugMode;
@@ -471,35 +475,20 @@ void CSceneStage01::Update()
 
 	obstacleTimer += DT;
 
-	#pragma region 맵패턴노가다
+	#pragma region 맵패턴 생성
 	if (obstacleTimer >= 2 && obstacleTimer <= 2.1)
 	{
 		obstacleTimer += 1;
 
-		SummonCoin(WINSIZEX, WINSIZEY * 0.5);
-		SummonObstacle1(WINSIZEX, WINSIZEY * 0.79);
-		SummonJelly1(WINSIZEX, WINSIZEY * 0.65);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.75);
-		SummonObstacleSky(WINSIZEX + 300, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.77);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.7);
+		Stage01->Stage01MapPattern01();
+
 	}
 
 	if (obstacleTimer >= 5 && obstacleTimer <= 5.1)
 	{
 		obstacleTimer += 1;
 
-		SummonObstacle1(WINSIZEX, WINSIZEY * 0.79);
-		SummonJelly1(WINSIZEX, WINSIZEY * 0.65);
-		SummonDashItem(WINSIZEX, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.77);
-		SummonObstacleSky(WINSIZEX + 300, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.7);
+		Stage01->Stage01MapPattern02();
 
 	}
 
@@ -507,23 +496,7 @@ void CSceneStage01::Update()
 	{
 		obstacleTimer += 1;
 
-		SummonObstacle1(WINSIZEX, WINSIZEY * 0.79);
-		SummonJelly1(WINSIZEX, WINSIZEY * 0.65);
-		SummonMagnetItem(WINSIZEX, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.77);
-		SummonObstacleSky(WINSIZEX + 300, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.6);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.6);
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.6);
-		SummonJelly1(WINSIZEX + 700, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 700, WINSIZEY * 0.6);
-		SummonJelly1(WINSIZEX + 800, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 800, WINSIZEY * 0.6);
+		Stage01->Stage01MapPattern03();
 
 	}
 
@@ -531,19 +504,7 @@ void CSceneStage01::Update()
 	{
 		obstacleTimer += 1;
 
-		SummonObstacleSky(WINSIZEX + 100, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.77);
-		SummonJelly1(WINSIZEX + 175, WINSIZEY * 0.77);
-		SummonObstacleSky(WINSIZEX + 250, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 255, WINSIZEY * 0.77);
-		SummonJelly1(WINSIZEX + 325, WINSIZEY * 0.77);
-		SummonObstacleSky(WINSIZEX + 400, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.77);
-		SummonJelly1(WINSIZEX + 475, WINSIZEY * 0.77);
-		SummonObstacleSky(WINSIZEX + 550, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 550, WINSIZEY * 0.77);
-		SummonJelly1(WINSIZEX + 650, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 750, WINSIZEY * 0.7);
+		Stage01->Stage01MapPattern04();
 
 	}
 
@@ -551,18 +512,7 @@ void CSceneStage01::Update()
 	{
 		obstacleTimer += 1;
 
-		SummonObstacle1(WINSIZEX, WINSIZEY * 0.79);
-		SummonObstacle1(WINSIZEX + 20, WINSIZEY * 0.79);
-		SummonHpItem(WINSIZEX + 10, WINSIZEY * 0.35);
-		SummonJelly1(WINSIZEX + 10, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 10, WINSIZEY * 0.62);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.77);
-		SummonObstacleSky(WINSIZEX + 300, WINSIZEY * 0.3);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.7);
+		Stage01->Stage01MapPattern05();
 
 	}
 
@@ -570,31 +520,7 @@ void CSceneStage01::Update()
 	{
 		obstacleTimer += 1;
 
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.51);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.63);
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.51);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.63);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.51);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.63);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.51);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.63);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.51);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.63);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.75);
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.51);
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.63);
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.75);
-
-		SummonCoin(WINSIZEX + 100, WINSIZEY * 0.4);
-		SummonCoin(WINSIZEX + 200, WINSIZEY * 0.4);
-		SummonCoin(WINSIZEX + 300, WINSIZEY * 0.4);
-		SummonCoin(WINSIZEX + 400, WINSIZEY * 0.4);
-		SummonCoin(WINSIZEX + 500, WINSIZEY * 0.4);
-		SummonCoin(WINSIZEX + 600, WINSIZEY * 0.4);
+		Stage01->Stage01MapPattern06();
 
 	}
 
@@ -602,135 +528,14 @@ void CSceneStage01::Update()
 	{
 		obstacleTimer += 1;
 
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 500, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 600, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 640, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 790, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 890, WINSIZEY * 0.7);
-		SummonCoin(WINSIZEX + 790, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 890, WINSIZEY * 0.55);
-		SummonObstacle2(WINSIZEX + 1000, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 1040, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 1190, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 1290, WINSIZEY * 0.7);
-		SummonCoin(WINSIZEX + 1190, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 1290, WINSIZEY * 0.55);
-		SummonObstacle2(WINSIZEX + 1400, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 1440, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 1590, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 1690, WINSIZEY * 0.7);
-		SummonCoin(WINSIZEX + 1590, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 1690, WINSIZEY * 0.55);
-		SummonObstacle2(WINSIZEX + 1800, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 1840, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 1990, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 2090, WINSIZEY * 0.7);
-		SummonCoin(WINSIZEX + 1990, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 2090, WINSIZEY * 0.55);
-		SummonObstacle2(WINSIZEX + 2200, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 2240, WINSIZEY * 0.5);
-		SummonJelly1(WINSIZEX + 2390, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 2490, WINSIZEY * 0.7);
-		SummonCoin(WINSIZEX + 2390, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 2490, WINSIZEY * 0.55);
+		Stage01->Stage01MapPattern07();
 	}
 
 	if (obstacleTimer >= 31 && obstacleTimer <= 31.1)
 	{
 		obstacleTimer += 1;
 
-		SummonJelly1(WINSIZEX + 100, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 200, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 300, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 400, WINSIZEY * 0.7);
-
-		SummonCoin(WINSIZEX + 100, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 200, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 300, WINSIZEY * 0.55);
-		SummonCoin(WINSIZEX + 400, WINSIZEY * 0.55);
-
-		SummonDashItem(WINSIZEX + 500, WINSIZEY * 0.7);
-		SummonMagnetItem(WINSIZEX + 500, WINSIZEY * 0.6);
-		SummonObstacle2(WINSIZEX + 600, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 700, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 800, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 900, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1000, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1100, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1200, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1300, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1400, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1500, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1600, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1700, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1800, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 1900, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2000, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2100, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2200, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2300, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2400, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2500, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2600, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2700, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2800, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 2900, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3000, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3100, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3200, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3300, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3400, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3500, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3600, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3700, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3800, WINSIZEY * 0.7);
-		SummonObstacle2(WINSIZEX + 3900, WINSIZEY * 0.7);
-
-		SummonJelly1(WINSIZEX + 600, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 700, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 800, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 900, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1000, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1100, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1200, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1300, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1400, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1500, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1600, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1700, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1800, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 1900, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2000, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2100, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2200, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2300, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2400, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2500, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2600, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2700, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2800, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 2900, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3000, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3100, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3200, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3300, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3400, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3500, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3600, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3700, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3800, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 3900, WINSIZEY * 0.53);								   
-		SummonJelly1(WINSIZEX + 4000, WINSIZEY * 0.53);
-		SummonJelly1(WINSIZEX + 4100, WINSIZEY * 0.6);
-		SummonJelly1(WINSIZEX + 4200, WINSIZEY * 0.65);
-		SummonJelly1(WINSIZEX + 4300, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4400, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4500, WINSIZEY * 0.7);
-		SummonJelly1(WINSIZEX + 4600, WINSIZEY * 0.7);
+		Stage01->Stage01MapPattern08();
 
 	
 	}
@@ -738,7 +543,7 @@ void CSceneStage01::Update()
 	if (obstacleTimer >= 48 && obstacleTimer <= 48.1)
 	{
 		obstacleTimer = 1;
-		SummonObstacle3(WINSIZEX, WINSIZEY * 0.75);
+		Stage01->Stage01MapPattern09();
 	}
 
 
@@ -767,7 +572,7 @@ void CSceneStage01::Update()
 
 void CSceneStage01::Render()
 {
-
+	// Score
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 	RENDER->Text(L"Score : " + ScreenScore + L"점", 50, 109, 300, 109, Color(255, 255, 255, 1.f), 21);
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
@@ -793,7 +598,7 @@ void CSceneStage01::Render()
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
 
-	//일시정지 UI
+	// 일시정지 UI
 	if (pause == true)
 	{
 		PauseImage->SetScale(WINSIZEX, WINSIZEY);
@@ -804,6 +609,7 @@ void CSceneStage01::Render()
 		PauseImage->SetScale(0, 0);
 	}
 
+	// 사망 UI
 	if (isDead == true)
 	{
 		FailImage->SetScale(WINSIZEX, WINSIZEY);
@@ -844,75 +650,7 @@ void CSceneStage01::Release()
 {
 }
 
-void CSceneStage01::SummonJelly1(float x, float y)
-{
-	CJelly1* J1 = new CJelly1();
-	J1->SetPos(x, y);
-	AddGameObject(J1);
-}
 
-void CSceneStage01::SummonObstacle1(float x, float y)
-{
-	CObstacle* O1 = new CObstacle();
-	O1->SetPos(x, y);
-	AddGameObject(O1);
-}
-
-void CSceneStage01::SummonObstacle2(float x, float y)
-{
-	CObstacle2* O2 = new CObstacle2();
-	O2->SetPos(x, y);
-	AddGameObject(O2);
-}
-
-void CSceneStage01::SummonObstacle3(float x, float y)
-{
-	CObstacle3* O3 = new CObstacle3();
-	O3->SetPos(x, y);
-	AddGameObject(O3);
-}
-
-void CSceneStage01::SummonObstacleSky(float x, float y)
-{
-	CObstacleSky* OS = new CObstacleSky();
-	OS->SetPos(x, y);
-	AddGameObject(OS);
-}
-
-void CSceneStage01::SummonDashItem(float x, float y)
-{
-	CDashItem* DI = new CDashItem();
-	DI->SetPos(x, y);
-	AddGameObject(DI);
-}
-
-void CSceneStage01::SummonHpItem(float x, float y)
-{
-	CHeartItem* HI = new CHeartItem();
-	HI->SetPos(x, y);
-	AddGameObject(HI);
-}
-
-void CSceneStage01::SummonMagnetItem(float x, float y)
-{
-	CMagnetItem* MI = new CMagnetItem();
-	MI->SetPos(x, y);
-	AddGameObject(MI);
-}
-
-void CSceneStage01::SummonJemBottle(float x, float y)
-{
-	CJemBottle* JB = new CJemBottle();
-	JB->SetPos(x, y);
-	AddGameObject(JB);
-}
-
-void CSceneStage01::SummonCoin(float x, float y)
-{
-	CCoin* C = new CCoin();
-	C->SetPos(x, y);
-	AddGameObject(C);
-}
 
 
 

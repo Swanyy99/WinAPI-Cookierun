@@ -1,7 +1,5 @@
 #include "framework.h"
 #include "CObstacle3.h"
-#include "framework.h"
-#include "CObstacle2.h"
 #include "CObstacleBoomEffect.h"
 #include "CJemBottle.h"
 
@@ -10,8 +8,10 @@ extern float playerPosY;
 
 extern bool isMagnet;
 extern bool isDash;
+
 extern bool skillOn;
 extern bool skillOn2;
+extern bool skillOn3;
 
 CObstacle3::CObstacle3()
 {
@@ -51,13 +51,28 @@ void CObstacle3::Update()
 
 	m_fJemBoxDropTimer += DT;
 
-	if (m_fJemBoxDropTimer > 1.2)
+	if (skillOn3 == false)
 	{
-		m_fJemBoxDropTimer -= 100;
-		CJemBottle* Jem = new CJemBottle();
-		Jem->SetPos(m_vecPos.x - 100, m_vecPos.y + 30);
-		ADDOBJECT(Jem);
+		if (m_fJemBoxDropTimer > 1)
+		{
+			m_fJemBoxDropTimer -= 100;
+			CJemBottle* Jem = new CJemBottle();
+			Jem->SetPos(m_vecPos.x - 100, m_vecPos.y + 30);
+			ADDOBJECT(Jem);
+		}
 	}
+
+	else if (skillOn3 == true)
+	{
+		if (m_fJemBoxDropTimer > 1.5)
+		{
+			m_fJemBoxDropTimer -= 100;
+			CJemBottle* Jem = new CJemBottle();
+			Jem->SetPos(m_vecPos.x - 100, m_vecPos.y + 30);
+			ADDOBJECT(Jem);
+		}
+	}
+
 
 	if (m_vecPos.x < -100)
 		DELETEOBJECT(this);
@@ -99,7 +114,7 @@ void CObstacle3::OnCollisionEnter(CCollider* pOtherCollider)
 		DELETEOBJECT(this);
 	}
 
-	if (pOtherCollider->GetObjName() == L"펫미사일" && skillOn == true)
+	if (pOtherCollider->GetObjName() == L"펫미사일")
 	{
 		Logger::Debug(L"왕 하프물범이 장애물을 부쉈습니다 ");
 		CObstacleBoomEffect* pObstacleBoomEffect = new CObstacleBoomEffect();
