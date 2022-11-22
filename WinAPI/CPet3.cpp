@@ -104,6 +104,7 @@ void CPet3::Update()
 	Pet3PosY = m_vecPos.y;
 
 	m_fSkillCooltimeTimer -= ABSDT;
+
 	// 스킬 발동
 	if (m_fSkillCooltimeTimer <= 0)
 	{

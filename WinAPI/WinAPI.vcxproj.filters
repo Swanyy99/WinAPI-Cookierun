@@ -285,6 +285,9 @@
     <ClInclude Include="CStage01MapPattern.h">
       <Filter>GameObject\Stage01\MapPattern</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneLoading.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI.cpp">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="CStage01MapPattern.cpp">
       <Filter>GameObject\Stage01\MapPattern</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneLoading.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

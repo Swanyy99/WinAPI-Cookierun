@@ -62,7 +62,6 @@ void CObstacle::Release()
 
 void CObstacle::AnimatorUpdate()
 {
-	//m_pAnimators->Play(obstacleImage, false);
 }
 
 

@@ -31,6 +31,8 @@ enum class GroupScene
 
 	PrePare,
 
+	Loading,
+
 	Stage01,
 
 	Size,

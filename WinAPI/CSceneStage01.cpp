@@ -38,6 +38,7 @@
 
 #include "CStage01MapPattern.h"
 
+#pragma region 변수 및 클래스
 CStage01MapPattern* Stage01;
 
 bool pause;
@@ -64,7 +65,7 @@ extern int choicePet;
 
 int JemADD;
 int CoinADD;
-
+#pragma endregion
 
 CSceneStage01::CSceneStage01()
 {
@@ -125,13 +126,7 @@ void CSceneStage01::Init()
 
 void CSceneStage01::Enter()
 {
-	/*LoadingImage = new CUnderUI();
-	LoadingImage->SetImageName(L"Loading.png");
-	LoadingImage->SetPos(-100, 0);
-	LoadingImage->SetScale(WINSIZEX + 100, WINSIZEY);
-	AddGameObject(LoadingImage);*/
-
-
+	// 펫 생성
 	if (choicePet == 1)			// 하프물범 선택
 	{
 		pPet = new CPet();
@@ -163,6 +158,8 @@ void CSceneStage01::Enter()
 	isMagnet = false;
 	isDebugMode = false;
 
+	#pragma region 버튼 생성
+
 	// ESC 계속하기 && FAIL 부활하기 버튼
 	auto ResumeButtonClicked = [](DWORD_PTR button, DWORD_PTR param) {
 		CButton* ResumeButton = (CButton*)(button);
@@ -190,7 +187,6 @@ void CSceneStage01::Enter()
 	ResumeButton->SetLayer(Layer::Ui);
 	ResumeButton->SetPos(540, 250);	// 689 296
 	ResumeButton->SetScale(0, 0);
-	//ResumeButton->SetImage(L"Idle_jump.png");
 	ResumeButton->SetText(L"", 32, Color(0, 0, 0, 1));
 	ResumeButton->SetClickedCallback(ResumeButtonClicked, (DWORD_PTR)ResumeButton, (DWORD_PTR)1);
 	AddGameObject(ResumeButton);
@@ -255,14 +251,9 @@ void CSceneStage01::Enter()
 	pPlayer = new CPlayer();
 	pPlayer->SetPos(300, WINSIZEY * 0.65f);
 	AddGameObject(pPlayer);
+	#pragma endregion
 
-	
-
-	CCameraController* pCamController = new CCameraController;
-	AddGameObject(pCamController);
-
-	
-
+	#pragma region UI생성
 	// 슬라이드 버튼 이미지
 	SlideButtonImage = new CUnderUI();
 	SlideButtonImage->SetImageName(L"Idle_Slide.png");
@@ -335,12 +326,11 @@ void CSceneStage01::Enter()
 	HPIcon->SetScale(90, 100);
 	AddGameObject(HPIcon);
 
-
 	JemAcquire = RESOURCE->LoadImg(L"JemScreen", L"Image\\Jem.png");
 	CoinAcquire = RESOURCE->LoadImg(L"CoinScreen", L"Image\\Coin.png");
+	#pragma endregion
 
-
-
+	#pragma region 맵 배경 및 발판 생성
 	CFloor* pFloor2 = new CFloor();
 	pFloor2->SetPos(0, WINSIZEY * 0.9);
 	pFloor2->SetDir(Vector(1, 0));
@@ -397,7 +387,11 @@ void CSceneStage01::Enter()
 	pBottomBackground3->SetPos(WINSIZEX + 1280, WINSIZEY * 0.85);
 	pBottomBackground3->SetDir(Vector(1, 0));
 	AddGameObject(pBottomBackground3);
+	#pragma endregion
 
+
+	CCameraController* pCamController = new CCameraController;
+	AddGameObject(pCamController);
 
 	CAMERA->FadeIn(0.1f);
 
@@ -409,6 +403,7 @@ void CSceneStage01::Enter()
 void CSceneStage01::Update()
 {
 
+	#pragma region 버튼 UI 열기/닫기
 
 	if (pause == true && isDead == false)
 	{
@@ -446,6 +441,8 @@ void CSceneStage01::Update()
 		QuitButton->SetText(L"", 32, Color(0, 0, 0, 1));
 	}
 
+	#pragma endregion
+
 	ScreenScore = to_wstring(score);
 	ScreenJem = to_wstring(JemADD);
 	ScreenCoin = to_wstring(CoinADD);
@@ -461,7 +458,6 @@ void CSceneStage01::Update()
 		pause = false;
 	}
 
-	
 
 	if (BUTTONDOWN('G') && isDebugMode == false)
 	{
@@ -582,20 +578,21 @@ void CSceneStage01::Render()
 	HPEffect->SetPos(60 + 500 * playerHp / 100, 68);
 	HPEffect->SetScale(80 + 500 * playerHp / 100, 87);
 
+	// 획득 코인
 	RENDER->Image(
 		CoinAcquire,
 		50, 130, 80, 160);
-
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 	RENDER->Text(ScreenCoin, 90, 130, 250, 160, Color(255, 255, 255, 1.f), 20);
 
+	// 획득 다이아
 	RENDER->Image(
 		JemAcquire,
 		50, 170, 80, 200);
-	
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 	RENDER->Text(ScreenJem, 90, 170, 250, 200, Color(255, 255, 255, 1.f), 20);
 	RENDER->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+
 
 
 	// 일시정지 UI
@@ -609,6 +606,8 @@ void CSceneStage01::Render()
 		PauseImage->SetScale(0, 0);
 	}
 
+
+
 	// 사망 UI
 	if (isDead == true)
 	{
@@ -620,6 +619,8 @@ void CSceneStage01::Render()
 		FailImage->SetScale(0, 0);
 	}
 	
+
+
 	if (BUTTONSTAY(VK_DOWN) || BUTTONSTAY(VK_CONTROL))
 	{
 		SlideButtonImage->SetImageName(L"Pushed_Slide.png");

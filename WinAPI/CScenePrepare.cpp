@@ -647,7 +647,7 @@ void CScenePrepare::Enter()
 
 		Logger::Debug(stage1Start->GetName() + L" 이 " + to_wstring(paramInt) + L"를 호출함");
 		CAMERA->FadeOut(0.25f);
-		DELAYCHANGESCENE(GroupScene::Stage01, 0.25f);
+		DELAYCHANGESCENE(GroupScene::Loading, 0.25f);
 	};
 
 	stage1Start = new CButton;
