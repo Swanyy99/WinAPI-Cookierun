@@ -269,20 +269,6 @@ void CSceneStage01::Enter()
 	JumpButtonImage->SetScale(1250, 680);
 	AddGameObject(JumpButtonImage);
 
-	// 일시정지 화면 반투명효과 + 일시정지 글자
-	PauseImage = new CUnderUI();
-	PauseImage->SetImageName(L"Pause.png");
-	PauseImage->SetPos(0, 0);
-	PauseImage->SetScale(0, 0);
-	AddGameObject(PauseImage);
-
-	// 사망 화면 반투명효과 + 으앙주금 글자
-	FailImage = new CUnderUI();
-	FailImage->SetImageName(L"Fail.png");
-	FailImage->SetPos(0, 0);
-	FailImage->SetScale(0, 0);
-	AddGameObject(FailImage);
-
 
 	// CookierRun title 이미지
 	CookierunTitle = new CUnderUI();
@@ -325,6 +311,21 @@ void CSceneStage01::Enter()
 	HPIcon->SetPos(40, 50);
 	HPIcon->SetScale(90, 100);
 	AddGameObject(HPIcon);
+
+	// 일시정지 화면 반투명효과 + 일시정지 글자
+	PauseImage = new CUnderUI();
+	PauseImage->SetImageName(L"Pause.png");
+	PauseImage->SetPos(0, 0);
+	PauseImage->SetScale(0, 0);
+	AddGameObject(PauseImage);
+
+	// 사망 화면 반투명효과 + 으앙주금 글자
+	FailImage = new CUnderUI();
+	FailImage->SetImageName(L"Fail.png");
+	FailImage->SetPos(0, 0);
+	FailImage->SetScale(0, 0);
+	AddGameObject(FailImage);
+
 
 	JemAcquire = RESOURCE->LoadImg(L"JemScreen", L"Image\\Jem.png");
 	CoinAcquire = RESOURCE->LoadImg(L"CoinScreen", L"Image\\Coin.png");
@@ -451,11 +452,13 @@ void CSceneStage01::Update()
 	if (BUTTONDOWN(VK_ESCAPE) && pause == false && isDead == false)
 	{
 		pause = true;
+		SOUND->Pause(pSound);
 	}
 
 	else if (BUTTONDOWN(VK_ESCAPE) && pause == true && isDead == false)
 	{
 		pause = false;
+		SOUND->Resume(pSound);
 	}
 
 
